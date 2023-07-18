@@ -138,8 +138,11 @@ def test_bake_app_and_check_cli_scripts(cookies):
 
         assert result.project.isdir()
         pyproject_path = result.project.join("pyproject.toml")
-        assert '''[tool.poetry.scripts]
-pythonboilerplate = "pythonboilerplate.cli:cli"''' in pyproject_path.read()
+        assert (
+            '''[tool.poetry.scripts]
+pythonboilerplate = "pythonboilerplate.cli:cli"'''
+            in pyproject_path.read()
+        )
 
 
 @pytest.mark.parametrize(
