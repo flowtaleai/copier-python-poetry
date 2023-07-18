@@ -84,7 +84,6 @@ default_context:
 | license                     | MIT                         | Project license                                              |                             |
 | app_or_lib                  | app                         | If `app` generate cli module with argument parser and  cli entrypoint |                             |
 | python_version              | 3.9                         | Define the python version to use for `pyenv` and `gitlab-ci` |                             |
-| debian_version              | bullseye                    | Define the debian version for `gitlab-ci`                    |                             |
 | testing_framework           | unittest                    | Python testing framework                                     |                             |
 | max_line_length             | 100                         | Code max line length                                         |                             |
 | use_flake8_strict_plugins   | y                           | If `y` install flake8 plugins that allow to catch bugs, security vulnerabilities and apply more strict rules. They can be a bit overwhelming. |                             |
