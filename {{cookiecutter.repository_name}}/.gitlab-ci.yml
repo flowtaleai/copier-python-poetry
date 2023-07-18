@@ -8,9 +8,6 @@ stages:
 
 before_script:
   - pip install poetry
-  {% if cookiecutter.use_gitlab_package_registry == "y" and cookiecutter.is_gitlab_auth_required == "y" -%}
-  - poetry config http-basic.gitlab-{{ cookiecutter.gitlab_group_slug }} gitlab-ci-token ${CI_JOB_TOKEN}
-  {% endif -%}
   - poetry install
 
 test:
@@ -22,14 +19,3 @@ pre-commit:
   stage: linting
   script:
     - poetry run pre-commit run --all-files
-{% if cookiecutter.use_gitlab_package_registry == "y" %}
-publish:
-  stage: publish
-  script:
-    - poetry config repositories.gitlab-pub https://{{ cookiecutter.gitlab_hostname }}/api/v4/projects/${CI_PROJECT_ID}/packages/pypi
-    - poetry config http-basic.gitlab-pub gitlab-ci-token ${CI_JOB_TOKEN}
-    - poetry publish --build --repository gitlab-pub
-  rules:
-    # Execute only on official SemVer 2.0 tags
-    - if: $CI_COMMIT_TAG =~ /^(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)(?:-((?:0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*)(?:\.(?:0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*))*))?(?:\+([0-9a-zA-Z-]+(?:\.[0-9a-zA-Z-]+)*))?$/
-{% endif -%}

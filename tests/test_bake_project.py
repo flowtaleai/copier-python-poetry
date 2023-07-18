@@ -169,19 +169,3 @@ def test_bake_and_run_pre_commit(cookies):
             run_inside_dir("poetry run pre-commit run --all-files", str(result.project))
             == 0
         )
-
-
-@pytest.mark.parametrize(
-    ["is_gitlab_auth_required", "poetry_config_present"], [("y", True), ("n", False)]
-)
-def test_gitlab_auth_option(is_gitlab_auth_required, poetry_config_present, cookies):
-    with bake_in_temp_dir(
-        cookies, extra_context={"is_gitlab_auth_required": is_gitlab_auth_required}
-    ) as result:
-        assert result.exit_code == 0
-        assert result.exception is None
-
-        gitlab_ci_file = result.project / ".gitlab-ci.yml"
-        assert (
-            "poetry config http-basic.gitlab-flowtale" in gitlab_ci_file.read()
-        ) == poetry_config_present

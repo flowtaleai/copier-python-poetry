@@ -89,10 +89,6 @@ default_context:
 | max_line_length             | 100                         | Code max line length                                         |                             |
 | use_flake8_strict_plugins   | y                           | If `y` install flake8 plugins that allow to catch bugs, security vulnerabilities and apply more strict rules. They can be a bit overwhelming. |                             |
 | ide                         | vscode                      | Define the IDE(s) used by the developers.                    |                             |
-| use_gitlab_package_registry | y                           | If `y` configure the `gitlab-ci` to publish the package in the gitlab package registry and poetry to search dependencies in the gitlab package registry (note `poetry install` will require an active connection to the package registry). |                             |
-| gitlab_hostname             | git.mycompany.com           | Domain of the gitlab where the package registry lives        | use_gitlab_package_registry |
-| gitlab_group_slug           | faboulous                   | Slug of the gitlab group. Usually match the gitlab_username. Used to configure the python package group registry. | use_gitlab_package_registry |
-| is_gitlab_auth_required     | n                           | If `y` either the project or its dependencies live in private project so they require an authentication. | use_gitlab_package_registry |
 
 ## Project initialization
 

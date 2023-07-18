@@ -21,9 +21,5 @@
   "testing_framework": ["unittest", "pytest"],
   "max_line_length": 100,
   "use_flake8_strict_plugins": "y",
-  "ide": ["vscode+pycharm", "vscode", "pycharm", "other"],
-  "use_gitlab_package_registry": "y",
-  "gitlab_hostname": "gitlab.flowtale.ai",
-  "gitlab_group_slug": "flowtale",
-  "is_gitlab_auth_required": "n"
+  "ide": ["vscode+pycharm", "vscode", "pycharm", "other"]
 }
