@@ -20,5 +20,5 @@
   "testing_framework": ["unittest", "pytest"],
   "max_line_length": 100,
   "use_flake8_strict_plugins": "y",
-  "ide": ["vscode+pycharm", "vscode", "pycharm", "other"]
+  "ide": ["vscode"]
 }

@@ -98,11 +98,10 @@ ENV/
 # mypy
 .mypy_cache/
 
-{%- if 'pycharm' in cookiecutter.ide -%}
 # IDE settings
+### PyCharm
 .idea/
 
-{%- endif %}
 {%- if 'vscode' in cookiecutter.ide -%}
 ### VisualStudioCode
 .vscode/*

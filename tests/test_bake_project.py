@@ -96,34 +96,6 @@ def test_bake_with_ide_vscode(cookies):
         assert ".idea" not in found_toplevel_files
 
 
-def test_bake_with_ide_pycharm(cookies):
-    with bake_in_temp_dir(cookies, extra_context={"ide": "pycharm"}) as result:
-        assert result.exit_code == 0
-        assert result.exception is None
-
-        found_toplevel_files = [f.basename for f in result.project.listdir()]
-        assert ".vscode" not in found_toplevel_files
-
-
-def test_bake_with_ide_vscode_and_pycharm(cookies):
-    with bake_in_temp_dir(cookies, extra_context={"ide": "vscode+pycharm"}) as result:
-        assert result.exit_code == 0
-        assert result.exception is None
-
-        found_toplevel_files = [f.basename for f in result.project.listdir()]
-        assert ".vscode" in found_toplevel_files
-
-
-def test_bake_with_ide_other(cookies):
-    with bake_in_temp_dir(cookies, extra_context={"ide": "other"}) as result:
-        assert result.exit_code == 0
-        assert result.exception is None
-
-        found_toplevel_files = [f.basename for f in result.project.listdir()]
-        assert ".vscode" not in found_toplevel_files
-        assert ".idea" not in found_toplevel_files
-
-
 def test_bake_app_and_check_cli_scripts(cookies):
     with bake_in_temp_dir(
         cookies,
