@@ -1,0 +1,55 @@
+[tool.poetry]
+name = "{{ cookiecutter.project_slug }}"
+version = "{{ cookiecutter.version }}"
+description = "{{ cookiecutter.project_short_description }}"
+authors = ["{{ cookiecutter.full_name }} <{{ cookiecutter.email }}>"]
+license = "{{ cookiecutter.license }}"
+readme = "README.md"
+repository = "https://github.com/{{ cookiecutter.gitlab_username }}/{{ cookiecutter.repository_name }}"
+
+[tool.poetry.dependencies]
+python = "^{{ cookiecutter.python_version }}"
+
+[tool.poetry.group.dev.dependencies]
+pytest = "6.2.5"
+pytest-mock = "^3.7.0"
+flake8 = "^5.0.0"
+flake8-builtins = "^2.1.0"
+pep8-naming = "^0.13.3"
+{% if cookiecutter.testing_framework == "pytest" -%}
+flake8-pytest-style = "^1.7.2"
+{%- endif %}
+{% if cookiecutter.use_flake8_strict_plugins == "y" -%}
+flake8-print = "^5.0.0"
+flake8-return = "^1.2.0"
+flake8-eradicate = "^1.4.0"
+flake8-bugbear = "^23.2.13"
+flake8-bandit = "^4.1.1"
+{%- endif %}
+black = "^22.1.0"
+isort = "^5.10.1"
+pre-commit = "^2.17.0"
+bump2version = "^1.0.1"
+
+[build-system]
+requires = ["poetry>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+{% if cookiecutter.use_gitlab_package_registry == "y" -%}
+[[tool.poetry.source]]
+name = "gitlab-{{ cookiecutter.gitlab_group_slug }}"
+url = "https://{{ cookiecutter.gitlab_hostname }}/api/v4/groups/{{ cookiecutter.gitlab_group_slug }}/-/packages/pypi/simple/"
+default = false
+secondary = false
+{%- endif %}
+
+{% if cookiecutter.app_or_lib == "application" -%}
+[tool.poetry.scripts]
+{{ cookiecutter.project_slug }} = "{{ cookiecutter.project_slug }}.cli:cli"
+{%- endif %}
+
+[tool.black]
+line-length = {{ cookiecutter.max_line_length }}
+
+[tool.isort]
+profile = "black"

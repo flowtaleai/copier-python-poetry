@@ -1,0 +1,7 @@
+---
+- name: provision app machine
+  hosts: all
+  become: true
+  roles:
+    - become_user
+    - pipx

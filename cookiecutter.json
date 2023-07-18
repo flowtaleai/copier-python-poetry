@@ -1,0 +1,33 @@
+{
+  "full_name": "Your Name",
+  "email": "initials@flowtale.ai",
+  "gitlab_username": "username",
+  "project_name": "Python Boilerplate",
+  "project_slug": "{{ cookiecutter.project_name.lower().replace(' ', '').replace('-', '') }}",
+  "repository_name": "{{ cookiecutter.project_name.lower().replace(' ', '-').replace('_', '') }}",
+  "project_short_description": "Python project boilerplate to create a Python package.",
+  "version": "0.1.0",
+  "license": [
+    "Proprietary",
+    "MIT license",
+    "BSD license",
+    "ISC license",
+    "Apache Software License 2.0",
+    "GNU General Public License v3"
+  ],
+  "app_or_lib": ["application", "library"],
+  "python_version": ["3.9", "3.10"],
+  "debian_version": ["bullseye", "buster"],
+  "testing_framework": ["unittest", "pytest"],
+  "max_line_length": 100,
+  "use_flake8_strict_plugins": "y",
+  "ide": ["vscode+pycharm", "vscode", "pycharm", "other"],
+  "use_gitlab_package_registry": "y",
+  "gitlab_hostname": "gitlab.flowtale.ai",
+  "gitlab_group_slug": "flowtale",
+  "is_gitlab_auth_required": "n",
+  "use_ansible": "y",
+  "remote_machine_pro": "bt7pdmymachine",
+  "remote_machine_lab": "gidebmymachine",
+  "remote_user": "xpuser"
+}

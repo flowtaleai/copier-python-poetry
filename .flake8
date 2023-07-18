@@ -1,0 +1,8 @@
+[flake8]
+max-line-length = 88
+extend-ignore =
+    # See https://github.com/PyCQA/pycodestyle/issues/373
+    E203,
+per-file-ignores =
+    tests/*: S101,T201
+    tests/test_bake_project.py: S101,T201,S404,S603

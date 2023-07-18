@@ -1,0 +1,20 @@
+image: "python:3.9-bullseye"
+
+stages:
+  - .pre
+  - test
+  - linting
+
+before_script:
+  - pip install poetry
+  - poetry install
+
+test:
+  stage: test
+  script:
+    - poetry run pytest
+
+pre-commit:
+  stage: linting
+  script:
+    - poetry run pre-commit run --all-files
