@@ -25,9 +25,5 @@
   "use_gitlab_package_registry": "y",
   "gitlab_hostname": "gitlab.flowtale.ai",
   "gitlab_group_slug": "flowtale",
-  "is_gitlab_auth_required": "n",
-  "use_ansible": "y",
-  "remote_machine_pro": "bt7pdmymachine",
-  "remote_machine_lab": "gidebmymachine",
-  "remote_user": "xpuser"
+  "is_gitlab_auth_required": "n"
 }

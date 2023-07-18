@@ -8,10 +8,6 @@ REMOVE_PATHS = [
     {%- if cookiecutter.license == "Proprietary" %}
     "LICENSE",
     {%- endif %}
-    {%- if cookiecutter.use_ansible != "y" %}
-    "Vagrantfile",
-    "ansible",
-    {%- endif %}
 ]
 
 for path in REMOVE_PATHS:

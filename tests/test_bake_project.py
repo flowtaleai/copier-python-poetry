@@ -67,10 +67,6 @@ def test_bake_with_defaults(cookies):
 
         assert "Pipfile" not in found_toplevel_files
 
-        assert "Vagrantfile" in found_toplevel_files
-
-        assert "ansible" in found_toplevel_files
-
 
 def test_bake_and_run_tests_with_pytest_framework(cookies):
     with bake_in_temp_dir(
@@ -143,21 +139,6 @@ def test_bake_app_and_check_cli_scripts(cookies):
 pythonboilerplate = "pythonboilerplate.cli:cli"'''
             in pyproject_path.read()
         )
-
-
-@pytest.mark.parametrize(
-    ["use_ansible", "ansible_files_present"], [("y", True), ("n", False)]
-)
-def test_bake_without_ansible(use_ansible, ansible_files_present, cookies):
-    with bake_in_temp_dir(
-        cookies, extra_context={"use_ansible": use_ansible}
-    ) as result:
-        assert result.exit_code == 0
-        assert result.exception is None
-
-        found_toplevel_files = [f.basename for f in result.project.listdir()]
-        assert ("Vagrantfile" in found_toplevel_files) == ansible_files_present
-        assert ("ansible" in found_toplevel_files) == ansible_files_present
 
 
 @pytest.mark.slow

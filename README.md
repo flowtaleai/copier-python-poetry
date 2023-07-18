@@ -93,10 +93,6 @@ default_context:
 | gitlab_hostname             | git.mycompany.com           | Domain of the gitlab where the package registry lives        | use_gitlab_package_registry |
 | gitlab_group_slug           | faboulous                   | Slug of the gitlab group. Usually match the gitlab_username. Used to configure the python package group registry. | use_gitlab_package_registry |
 | is_gitlab_auth_required     | n                           | If `y` either the project or its dependencies live in private project so they require an authentication. | use_gitlab_package_registry |
-| use_ansible                 | y                           | If `y` an ansible configuration for provisioning remote machines and local vagrant VM is generated. An ansible config for deploying the project is also generated. |                             |
-| remote_machine_pro          | mymachine.pro.tunnel        | Production remote machine hostname where the project should be deployed | use_ansible                 |
-| remote_machine_lab          | mymachine.lab.tunnel        | Lab remote machine hostname where the project should be deployed | use_ansible                 |
-| remote_user                 | appuser                     | Remote user that will run the app                            | use_ansible                 |
 
 ## Project initialization
 

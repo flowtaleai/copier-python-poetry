@@ -1,9 +1,0 @@
----
-- hosts: all
-  tasks:
-    - name: Install {{ cookiecutter.project_slug }}
-      community.general.pipx:
-        source: {{ cookiecutter.project_slug }}
-        state: latest
-  become: true
-  become_user: "{{ "{{ app_user }}" }}"
