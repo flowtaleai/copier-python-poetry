@@ -33,7 +33,10 @@ def create_argument_parser() -> ArgumentParser:
         "--verbose",
         action="count",
         default=0,
-        help="increase the verbosity of messages: -v for more verbose output and -vv for debug",
+        help=(
+            "increase the verbosity of messages: -v for more verbose output and -vv for"
+            " debug"
+        ),
     )
     arg_parser.add_argument(
         "-V",
