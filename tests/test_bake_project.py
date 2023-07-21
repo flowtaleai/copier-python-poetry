@@ -115,9 +115,7 @@ pythonboilerplate = "pythonboilerplate.cli:cli"'''
 
 @pytest.mark.slow()
 def test_bake_and_run_cli(cookies):
-    with bake_in_temp_dir(
-        cookies, extra_context={"use_gitlab_package_registry": False}
-    ) as result:
+    with bake_in_temp_dir(cookies) as result:
         assert result.exit_code == 0
         assert result.project_path.is_dir()
         assert run_inside_dir("poetry install --only-root", result.project_path) == 0
@@ -126,9 +124,7 @@ def test_bake_and_run_cli(cookies):
 
 @pytest.mark.slow()
 def test_bake_and_run_pre_commit(cookies):
-    with bake_in_temp_dir(
-        cookies, extra_context={"use_gitlab_package_registry": False}
-    ) as result:
+    with bake_in_temp_dir(cookies) as result:
         assert result.exit_code == 0
         assert result.project_path.is_dir()
 
