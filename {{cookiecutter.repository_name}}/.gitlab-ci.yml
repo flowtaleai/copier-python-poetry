@@ -1,4 +1,4 @@
-image: "python:{{ cookiecutter.python_version }}-slim"
+image: "python:{{ cookiecutter.python_version }}"
 
 stages:
   - .pre
