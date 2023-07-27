@@ -8,7 +8,7 @@ REMOVE_PATHS = [
     {%- if cookiecutter.license == "Proprietary" %}
     "LICENSE",
     {%- endif %}
-    {%- if cookiecutter.app_or_lib != "application" %}
+    {%- if cookiecutter.package_type != "cli" %}
     Path("{{ cookiecutter.package_name }}") / "cli.py",
     {%- endif %}
 ]

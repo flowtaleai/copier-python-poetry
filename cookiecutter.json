@@ -15,7 +15,7 @@
     "Apache Software License 2.0",
     "GNU General Public License v3"
   ],
-  "app_or_lib": [ "application", "library" ],
+  "package_type": [ "cli", "library" ],
   "python_version": [ "3.10", "3.9", "3.11" ],
   "testing_framework": [ "pytest", "unittest" ],
   "max_line_length": 88,

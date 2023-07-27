@@ -82,7 +82,7 @@ default_context:
 | project_short_description   | A fantastic new project     | Description of the project. Also used in the CLI help.       |                             |
 | version                     | 0.1.0                       | SemVer 2.0 version                                           |                             |
 | license                     | MIT                         | Project license                                              |                             |
-| app_or_lib                  | app                         | If `app` generate cli module with argument parser and  cli entrypoint |                             |
+| package_type                | app                         | If `app` generate cli module with argument parser and  cli entrypoint |                             |
 | python_version              | 3.10                        | Define the python version to use for `pyenv` and `gitlab-ci` |                             |
 | testing_framework           | pytest                      | Python testing framework                                     |                             |
 | max_line_length             | 88                          | Code max line length                                         |                             |

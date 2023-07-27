@@ -97,9 +97,7 @@ def test_bake_with_ide_vscode(cookies):
 
 
 def test_bake_cli_application(cookies):
-    with bake_in_temp_dir(
-        cookies, extra_context={"app_or_lib": "application"}
-    ) as result:
+    with bake_in_temp_dir(cookies, extra_context={"package_type": "cli"}) as result:
         assert result.exit_code == 0
         assert result.exception is None
 
@@ -108,7 +106,7 @@ def test_bake_cli_application(cookies):
 
 
 def test_bake_library(cookies):
-    with bake_in_temp_dir(cookies, extra_context={"app_or_lib": "library"}) as result:
+    with bake_in_temp_dir(cookies, extra_context={"package_type": "library"}) as result:
         assert result.exit_code == 0
         assert result.exception is None
 
@@ -119,7 +117,7 @@ def test_bake_library(cookies):
 def test_bake_app_and_check_cli_scripts(cookies):
     with bake_in_temp_dir(
         cookies,
-        extra_context={"app_or_lib": "application"},
+        extra_context={"package_type": "cli"},
     ) as result:
         assert result.exit_code == 0
         assert result.exception is None
