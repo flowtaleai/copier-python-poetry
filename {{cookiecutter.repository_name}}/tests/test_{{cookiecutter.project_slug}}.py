@@ -2,7 +2,7 @@
 import unittest
 
 {% endif -%}
-from {{cookiecutter.project_slug}}.{{cookiecutter.project_slug}} import a_function
+from {{cookiecutter.package_name}}.{{cookiecutter.package_name}} import a_function
 
 
 {% if cookiecutter.testing_framework == "pytest" -%}

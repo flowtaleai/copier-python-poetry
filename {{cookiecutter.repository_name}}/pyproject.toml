@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "{{ cookiecutter.project_slug }}"
+name = "{{ cookiecutter.package_name }}"
 version = "{{ cookiecutter.version }}"
 description = "{{ cookiecutter.project_short_description }}"
 authors = ["{{ cookiecutter.full_name }} <{{ cookiecutter.email }}>"]
@@ -12,33 +12,37 @@ python = "^{{ cookiecutter.python_version }}"
 click = "8.1.6"
 
 [tool.poetry.group.dev.dependencies]
+
+{% if cookiecutter.testing_framework == "pytest" -%}
+
+{%- endif %}
+{% if cookiecutter.use_flake8_strict_plugins == "y" -%}
+
+{%- endif %}
 pytest = "6.2.5"
 pytest-mock = "^3.7.0"
 flake8 = "^5.0.0"
 flake8-builtins = "^2.1.0"
 pep8-naming = "^0.13.3"
-{% if cookiecutter.testing_framework == "pytest" -%}
 flake8-pytest-style = "^1.7.2"
-{%- endif %}
-{% if cookiecutter.use_flake8_strict_plugins == "y" -%}
 flake8-print = "^5.0.0"
 flake8-return = "^1.2.0"
 flake8-eradicate = "^1.4.0"
 flake8-bugbear = "^23.2.13"
 flake8-bandit = "^4.1.1"
-{%- endif %}
 black = "^22.1.0"
 isort = "^5.10.1"
 pre-commit = "^2.17.0"
 bump2version = "^1.0.1"
 
 [build-system]
-requires = ["poetry>=1.0.0"]
-build-backend = "poetry.core.masonry.api"
+
 
 {% if cookiecutter.app_or_lib == "application" -%}
+requires = ["poetry>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
 [tool.poetry.scripts]
-{{ cookiecutter.project_slug }} = "{{ cookiecutter.project_slug }}.cli:cli"
+{{ cookiecutter.package_name }} = "{{ cookiecutter.package_name }}.cli:cli"
 {%- endif %}
 
 [tool.black]

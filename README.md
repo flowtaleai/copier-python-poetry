@@ -77,7 +77,7 @@ default_context:
 | email                       | teamfaboulous@mycompany.com |                                                              |                             |
 | gitlab_username             | faboulous                   | Username of the user/group owning the gitlab project         |                             |
 | project_name                | Awsome Project              | Name of the project                                          |                             |
-| project_slug                | awsomeproject               | Used to define the name of the python package                |                             |
+| package_name                | awsomeproject               | Used to define the name of the python package                |                             |
 | repository_name             | awsome-project              | Name of the project repository                               |                             |
 | project_short_description   | A fantastic new project     | Description of the project. Also used in the CLI help.       |                             |
 | version                     | 0.1.0                       | SemVer 2.0 version                                           |                             |

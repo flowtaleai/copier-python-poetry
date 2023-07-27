@@ -3,7 +3,7 @@
   "email": "initials@flowtale.ai",
   "gitlab_username": "username",
   "project_name": "Python Boilerplate",
-  "project_slug": "{{ cookiecutter.project_name.lower().replace(' ', '').replace('-', '') }}",
+  "package_name": "{{ cookiecutter.project_name.lower().replace(' ', '').replace('-', '') }}",
   "repository_name": "{{ cookiecutter.project_name.lower().replace(' ', '-').replace('_', '') }}",
   "project_short_description": "Python project boilerplate to create a Python package.",
   "version": "0.1.0",

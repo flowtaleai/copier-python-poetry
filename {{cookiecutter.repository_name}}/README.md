@@ -57,11 +57,11 @@ make deploy
 Se fosse necessario effettuare un rollback di emergenza su un ambiente di produzione, è possibile collegarsi alla macchina ed installare una versione specifica del pacchetto
 
 ```bash
-pipx install --force {{ cookiecutter.project_slug }}==x.x.x
+pipx install --force {{ cookiecutter.package_name }}==x.x.x
 ```
 
 Le versioni disponibili possono essere trovate con il comando (pip >=20.3)
 
 ```bash
-pip install --use-deprecated=legacy-resolver {{ cookiecutter.project_slug }}==
+pip install --use-deprecated=legacy-resolver {{ cookiecutter.package_name }}==
 ```
