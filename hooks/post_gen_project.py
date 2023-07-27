@@ -8,10 +8,13 @@ REMOVE_PATHS = [
     {%- if cookiecutter.license == "Proprietary" %}
     "LICENSE",
     {%- endif %}
+    {%- if cookiecutter.app_or_lib != "application" %}
+    Path("{{ cookiecutter.project_slug }}") / "cli.py",
+    {%- endif %}
 ]
 
 for path in REMOVE_PATHS:
-    path = Path(path.strip())
+    path = Path(path)
     if path and path.exists():
         if path.is_dir():
             shutil.rmtree(path)

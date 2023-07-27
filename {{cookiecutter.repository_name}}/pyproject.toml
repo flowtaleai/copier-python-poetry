@@ -9,6 +9,7 @@ repository = "https://github.com/{{ cookiecutter.gitlab_username }}/{{ cookiecut
 
 [tool.poetry.dependencies]
 python = "^{{ cookiecutter.python_version }}"
+click = "8.1.6"
 
 [tool.poetry.group.dev.dependencies]
 pytest = "6.2.5"

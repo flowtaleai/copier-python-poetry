@@ -96,6 +96,26 @@ def test_bake_with_ide_vscode(cookies):
         assert ".idea" not in found_toplevel_files
 
 
+def test_bake_cli_application(cookies):
+    with bake_in_temp_dir(
+        cookies, extra_context={"app_or_lib": "application"}
+    ) as result:
+        assert result.exit_code == 0
+        assert result.exception is None
+
+        found_cli_script = [f.name for f in result.project_path.glob("**/cli.py")]
+        assert found_cli_script
+
+
+def test_bake_library(cookies):
+    with bake_in_temp_dir(cookies, extra_context={"app_or_lib": "library"}) as result:
+        assert result.exit_code == 0
+        assert result.exception is None
+
+        found_cli_script = [f.name for f in result.project_path.glob("**/cli.py")]
+        assert not found_cli_script
+
+
 def test_bake_app_and_check_cli_scripts(cookies):
     with bake_in_temp_dir(
         cookies,
@@ -113,12 +133,15 @@ pythonboilerplate = "pythonboilerplate.cli:cli"'''
         )
 
 
+@pytest.mark.skip(
+    "poetry is run in the poetry env of the outer project creating interferences"
+)
 @pytest.mark.slow()
 def test_bake_and_run_cli(cookies):
     with bake_in_temp_dir(cookies) as result:
         assert result.exit_code == 0
         assert result.project_path.is_dir()
-        assert run_inside_dir("poetry install --only-root", result.project_path) == 0
+        assert run_inside_dir("poetry install --only main", result.project_path) == 0
         assert run_inside_dir("poetry run pythonboilerplate", result.project_path) == 0
 
 
