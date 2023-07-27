@@ -151,12 +151,8 @@ def test_bake_and_run_pre_commit(cookies):
         assert result.exit_code == 0
         assert result.project_path.is_dir()
 
-        run_inside_dir("poetry install", result.project_path)
         run_inside_dir("git init", result.project_path)
         run_inside_dir("git add .", result.project_path)
         run_inside_dir("git commit -m init", result.project_path)
 
-        assert (
-            run_inside_dir("poetry run pre-commit run --all-files", result.project_path)
-            == 0
-        )
+        assert run_inside_dir("pre-commit run --all-files", result.project_path) == 0
