@@ -6,7 +6,7 @@ help: ## Show this help
 	@echo ""
 .PHONY: help
 
-init:  ## Initialize the development environment
+setup:  ## Setup the development environment
 	-@pyenv install --skip-existing
 	@poetry install
 	@poetry run pre-commit install

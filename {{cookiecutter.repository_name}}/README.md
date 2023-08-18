@@ -13,7 +13,7 @@
 ## Development Environment Configuration
 
  ```bash
- make init
+ make setup
  ```
 
 - Open VSCode and install the suggested extensions
