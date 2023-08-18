@@ -2,66 +2,18 @@
 
 {{ cookiecutter.project_short_description }}
 
-## Dipendenze
+## Dependencies
 
 - python
 - poetry [pip]
-- make (opzionale)
-- pytest (opzionale, installata da poetry ma è più comodo averla installata nel sistema) [pip]
-- pre-commit (opzionale, installata da poetry ma è più comodo averla installata nel sistema) [pip]
-- vagrant e VirtualBox (opzionale)
-- pipx (remote machine) [pip]
+- make (optional)
+- pytest (optional, installed by poetry but it's more convenient to have it installed on the system) [pip]
+- pre-commit (optional, installed by poetry but it's more convenient to have it installed on the system) [pip]
 
-## Configurazione ambiente di sviluppo
+## Development Environment Configuration
 
  ```bash
  make init
  ```
 
-- Aprire VSCode e installare le estensioni suggerite
-
-## Packaging
-
-- Aggiornare la versione del progetto con uno dei seguenti comandi (mai aggiornare a mano la versione):
-
-  ```bash
-  make bump
-  ```
-
-- Pushare i tag per pubblicare il pacchetto nel registry di gitlab
-
-  ```bash
-  git push --tags
-  ```
-
-## Provision e Deploy
-
-### Dev
-
-```bash
-vagrant up      # start the local VM
-make provision  # type vagrant
-make deploy     # type vagrant
-vagrant ssh     # connect to the local VM
-```
-
-### Lab/Pro
-
-```bash
-make provision
-make deploy
-```
-
-### Rollback
-
-Se fosse necessario effettuare un rollback di emergenza su un ambiente di produzione, è possibile collegarsi alla macchina ed installare una versione specifica del pacchetto
-
-```bash
-pipx install --force {{ cookiecutter.package_name }}==x.x.x
-```
-
-Le versioni disponibili possono essere trovate con il comando (pip >=20.3)
-
-```bash
-pip install --use-deprecated=legacy-resolver {{ cookiecutter.package_name }}==
-```
+- Open VSCode and install the suggested extensions
