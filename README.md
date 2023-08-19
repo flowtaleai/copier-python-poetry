@@ -75,7 +75,6 @@ default_context:
 | --------------------------- | --------------------------- | ------------------------------------------------------------ | --------------------------- |
 | author_name                 | Team Faboulous              |                                                              |                             |
 | author_email                | teamfaboulous@mycompany.com |                                                              |                             |
-| gitlab_username             | faboulous                   | Username of the user/group owning the gitlab project         |                             |
 | project_name                | Awsome Project              | Name of the project                                          |                             |
 | package_name                | awsomeproject               | Used to define the name of the python package                |                             |
 | repository_name             | awsome-project              | Name of the project repository                               |                             |
