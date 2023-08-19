@@ -1,5 +1,5 @@
 """Main module."""
-from {{cookiecutter.package_name}} import logs
+from {{package_name}} import logs
 
 logger = logs.get_logger(__name__)
 

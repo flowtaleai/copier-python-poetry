@@ -1,21 +1,21 @@
 [tool.poetry]
-name = "{{ cookiecutter.package_name }}"
-version = "{{ cookiecutter.version }}"
-description = "{{ cookiecutter.project_short_description }}"
-authors = ["{{ cookiecutter.author_name }} <{{ cookiecutter.author_email }}>"]
-license = "{{ cookiecutter.license }}"
+name = "{{ package_name }}"
+version = "{{ version }}"
+description = "{{ project_short_description }}"
+authors = ["{{ author_name }} <{{ author_email }}>"]
+license = "{{ license }}"
 readme = "README.md"
 
 [tool.poetry.dependencies]
-python = "^{{ cookiecutter.python_version }}"
+python = "^{{ python_version }}"
 click = "8.1.6"
 
 [tool.poetry.group.dev.dependencies]
 
-{% if cookiecutter.testing_framework == "pytest" -%}
+{% if testing_framework == "pytest" -%}
 
 {%- endif %}
-{% if cookiecutter.use_flake8_strict_plugins == "y" -%}
+{% if use_flake8_strict_plugins == "y" -%}
 
 {%- endif %}
 pytest = "6.2.5"
@@ -37,15 +37,15 @@ bump2version = "^1.0.1"
 [build-system]
 
 
-{% if cookiecutter.package_type == "cli" -%}
+{% if package_type == "cli" -%}
 requires = ["poetry>=1.0.0"]
 build-backend = "poetry.core.masonry.api"
 [tool.poetry.scripts]
-{{ cookiecutter.package_name }} = "{{ cookiecutter.package_name }}.cli:cli"
+{{ package_name }} = "{{ package_name }}.cli:cli"
 {%- endif %}
 
 [tool.black]
-line-length = {{ cookiecutter.max_line_length }}
+line-length = {{ max_line_length }}
 
 [tool.isort]
 profile = "black"

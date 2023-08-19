@@ -1,7 +1,7 @@
 import re
 import sys
 
-module_name = "{{ cookiecutter.package_name}}"
+module_name = "{{ package_name}}"
 
 MODULE_REGEX = r"^[_a-zA-Z][_a-zA-Z0-9]+$"
 if not re.match(MODULE_REGEX, module_name):

@@ -2,14 +2,14 @@ import shutil
 from pathlib import Path
 
 REMOVE_PATHS = [
-    {%- if "vscode" not in cookiecutter.ide %}
+    {%- if "vscode" not in ide %}
     ".vscode",
     {%- endif %}
-    {%- if cookiecutter.license == "Proprietary" %}
+    {%- if license == "Proprietary" %}
     "LICENSE",
     {%- endif %}
-    {%- if cookiecutter.package_type != "cli" %}
-    Path("{{ cookiecutter.package_name }}") / "cli.py",
+    {%- if package_type != "cli" %}
+    Path("{{ package_name }}") / "cli.py",
     {%- endif %}
 ]
 
