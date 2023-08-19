@@ -15,7 +15,7 @@ click = "8.1.6"
 {% if testing_framework == "pytest" -%}
 
 {%- endif %}
-{% if use_flake8_strict_plugins == "y" -%}
+{% if use_flake8_strict_plugins -%}
 
 {%- endif %}
 pytest = "6.2.5"

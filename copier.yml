@@ -67,8 +67,8 @@ max_line_length:
   help: "Maximum code line length (default to black standard line length)"
 
 use_flake8_strict_plugins:
-  type: str
-  default: y
+  type: bool
+  default: true
   help: "Include flake8 advanced plugins that makes code cleaner and safer but require more coding skills"
 
 ide:
