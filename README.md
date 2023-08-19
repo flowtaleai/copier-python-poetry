@@ -65,16 +65,16 @@ Create `~/.cookiecutterrc` to specify customized default values for new projects
 
 ```ini
 default_context:
-  full_name: "Your Name"
-  email: "initials@flowtale.ai"
+  author_name: "Your Name"
+  author_email: "initials@flowtale.ai"
 ```
 
 ## Cookiecutter parameters
 
 | Name                        | Example                     | Description                                                  | Depends on                  |
 | --------------------------- | --------------------------- | ------------------------------------------------------------ | --------------------------- |
-| full_name                   | Team Faboulous              |                                                              |                             |
-| email                       | teamfaboulous@mycompany.com |                                                              |                             |
+| author_name                 | Team Faboulous              |                                                              |                             |
+| author_email                | teamfaboulous@mycompany.com |                                                              |                             |
 | gitlab_username             | faboulous                   | Username of the user/group owning the gitlab project         |                             |
 | project_name                | Awsome Project              | Name of the project                                          |                             |
 | package_name                | awsomeproject               | Used to define the name of the python package                |                             |

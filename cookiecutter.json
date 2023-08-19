@@ -1,6 +1,6 @@
 {
-  "full_name": "Your Name",
-  "email": "initials@flowtale.ai",
+  "author_name": "Your Name",
+  "author_email": "initials@flowtale.ai",
   "gitlab_username": "username",
   "project_name": "Python Boilerplate",
   "package_name": "{{ cookiecutter.project_name.lower().replace(' ', '').replace('-', '') }}",

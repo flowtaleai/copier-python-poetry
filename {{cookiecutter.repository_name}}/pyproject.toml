@@ -2,7 +2,7 @@
 name = "{{ cookiecutter.package_name }}"
 version = "{{ cookiecutter.version }}"
 description = "{{ cookiecutter.project_short_description }}"
-authors = ["{{ cookiecutter.full_name }} <{{ cookiecutter.email }}>"]
+authors = ["{{ cookiecutter.author_name }} <{{ cookiecutter.author_email }}>"]
 license = "{{ cookiecutter.license }}"
 readme = "README.md"
 repository = "https://github.com/{{ cookiecutter.gitlab_username }}/{{ cookiecutter.repository_name }}"
