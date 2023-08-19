@@ -48,10 +48,10 @@ package_type:
 python_version:
   type: str
   choices:
-    - 3.9
-    - 3.10
-    - 3.11
-  default: 3.10
+    - "3.9"
+    - "3.10"
+    - "3.11"
+  default: "3.10"
   help: "Python version to use"
 
 testing_framework:
