@@ -23,5 +23,5 @@
       ]
     }
   },
-  "postCreateCommand": "make init"
+  "postCreateCommand": "make setup"
 }
