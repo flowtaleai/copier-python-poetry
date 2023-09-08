@@ -53,6 +53,15 @@ def test_bake_and_run_tests_with_unittest_framework(copier, required_answers):
     assert ".idea" not in found_toplevel_files
 
 
+def test_bake_with_proprietary_license(copier, required_answers):
+    custom_answers = {"license": "Proprietary"}
+    answers = {**required_answers, **custom_answers}
+    project = copier.copy(**answers)
+
+    found_toplevel_files = [f.name for f in project.path.glob("*")]
+    assert "LICENSE" not in found_toplevel_files
+
+
 def test_bake_cli_application(copier, required_answers):
     custom_answers = {"package_type": "cli"}
     answers = {**required_answers, **custom_answers}
