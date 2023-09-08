@@ -75,5 +75,5 @@ ide:
   choices:
     - none
     - vscode
-  default: none
+  default: vscode
   help: "Preferred IDE"
