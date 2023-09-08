@@ -1,4 +1,5 @@
 import pytest
+from prompt_toolkit.validation import ValidationError
 
 
 @pytest.fixture
@@ -60,6 +61,13 @@ def test_bake_with_proprietary_license(copier, required_answers):
 
     found_toplevel_files = [f.name for f in project.path.glob("*")]
     assert "LICENSE" not in found_toplevel_files
+
+
+def test_bake_with_invalid_package_name(copier, required_answers):
+    custom_answers = {"package_name": "1invalid"}
+    answers = {**required_answers, **custom_answers}
+    with pytest.raises(ValidationError):
+        copier.copy(**answers)
 
 
 def test_bake_cli_application(copier, required_answers):
