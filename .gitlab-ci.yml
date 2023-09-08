@@ -6,6 +6,7 @@ stages:
   - linting
 
 before_script:
+  - apt-get install -y git
   - pip install poetry
   - poetry install
 
