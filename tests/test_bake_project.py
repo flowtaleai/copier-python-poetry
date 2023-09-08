@@ -2,8 +2,9 @@ import pytest
 from prompt_toolkit.validation import ValidationError
 
 
-@pytest.fixture
-def required_answers():
+@pytest.fixture()
+def copier_defaults() -> dict[str, str]:
+    """This fixture is auto-used by pytest-copier."""
     return {
         "author_email": "user@example.com",
         "author_name": "The User",
@@ -14,8 +15,8 @@ def required_answers():
     }
 
 
-def test_bake_with_defaults(copier, required_answers):
-    project = copier.copy(**required_answers)
+def test_bake_with_defaults(copier):
+    project = copier.copy()
 
     found_toplevel_files = [f.name for f in project.path.glob("*")]
     assert ".bumpversion.cfg" in found_toplevel_files
@@ -36,62 +37,55 @@ def test_bake_with_defaults(copier, required_answers):
     assert "Pipfile" not in found_toplevel_files
 
 
-def test_bake_and_run_tests_with_pytest_framework(copier, required_answers):
+def test_bake_and_run_tests_with_pytest_framework(copier):
     custom_answers = {"testing_framework": "pytest"}
-    answers = {**required_answers, **custom_answers}
-    project = copier.copy(**answers)
+    project = copier.copy(**custom_answers)
 
     project.run("pytest")
 
 
-def test_bake_and_run_tests_with_unittest_framework(copier, required_answers):
+def test_bake_and_run_tests_with_unittest_framework(copier):
     custom_answers = {"testing_framework": "unittest"}
-    answers = {**required_answers, **custom_answers}
-    project = copier.copy(**answers)
+    project = copier.copy(**custom_answers)
 
     found_toplevel_files = [f.name for f in project.path.glob("*")]
     assert ".vscode" in found_toplevel_files
     assert ".idea" not in found_toplevel_files
 
 
-def test_bake_with_proprietary_license(copier, required_answers):
+def test_bake_with_proprietary_license(copier):
     custom_answers = {"license": "Proprietary"}
-    answers = {**required_answers, **custom_answers}
-    project = copier.copy(**answers)
+    project = copier.copy(**custom_answers)
 
     found_toplevel_files = [f.name for f in project.path.glob("*")]
     assert "LICENSE" not in found_toplevel_files
 
 
-def test_bake_with_invalid_package_name(copier, required_answers):
+def test_bake_with_invalid_package_name(copier):
     custom_answers = {"package_name": "1invalid"}
-    answers = {**required_answers, **custom_answers}
     with pytest.raises(ValidationError):
-        copier.copy(**answers)
+        copier.copy(**custom_answers)
 
 
-def test_bake_cli_application(copier, required_answers):
+def test_bake_cli_application(copier):
     custom_answers = {"package_type": "cli"}
-    answers = {**required_answers, **custom_answers}
-    project = copier.copy(**answers)
+    project = copier.copy(**custom_answers)
 
     found_cli_script = [f.name for f in project.path.glob("**/cli.py")]
     assert found_cli_script
 
 
-def test_bake_library(copier, required_answers):
+def test_bake_library(copier):
     custom_answers = {"package_type": "library"}
-    answers = {**required_answers, **custom_answers}
-    project = copier.copy(**answers)
+    project = copier.copy(**custom_answers)
 
     found_cli_script = [f.name for f in project.path.glob("**/cli.py")]
     assert not found_cli_script
 
 
-def test_bake_app_and_check_cli_scripts(copier, required_answers):
+def test_bake_app_and_check_cli_scripts(copier):
     custom_answers = {"package_type": "cli"}
-    answers = {**required_answers, **custom_answers}
-    project = copier.copy(**answers)
+    project = copier.copy(**custom_answers)
 
     assert project.path.is_dir()
     pyproject_path = project.path / "pyproject.toml"
@@ -106,20 +100,18 @@ pythonboilerplate = "pythonboilerplate.cli:cli"'''
     "poetry is run in the poetry env of the outer project creating interferences"
 )
 @pytest.mark.slow()
-def test_bake_and_run_cli(copier, required_answers):
+def test_bake_and_run_cli(copier):
     custom_answers = {"package_type": "cli"}
-    answers = {**required_answers, **custom_answers}
-    project = copier.copy(**answers)
+    project = copier.copy(**custom_answers)
 
     project.run("poetry install --only main")
     project.run("poetry run pythonboilerplate")
 
 
 @pytest.mark.slow()
-def test_bake_and_run_pre_commit(copier, required_answers):
+def test_bake_and_run_pre_commit(copier):
     custom_answers = {"package_type": "cli"}
-    answers = {**required_answers, **custom_answers}
-    project = copier.copy(**answers)
+    project = copier.copy(**custom_answers)
 
     project.run("git init")
     project.run("git add .")
