@@ -1,4 +1,4 @@
-image: "python:{{ cookiecutter.python_version }}"
+image: "python:{{ python_version }}"
 
 stages:
   - .pre

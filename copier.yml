@@ -1,0 +1,83 @@
+_templates_suffix: ""
+_subdirectory: template
+
+# ====== QUESTIONS ======
+author_name:
+  type: str
+  help: "Your Name"
+
+author_email:
+  type: str
+  help: "Email of the author of the project"
+
+project_name:
+  type: str
+  placeholder: Python Boilerplate
+  help: "Human friendly project name"
+
+package_name:
+  type: str
+  default: "{{ project_name | lower | replace(' ', '') | replace('-', '') }}"
+  validator: >-
+    {% if not (package_name | regex_search('^[_a-zA-Z][_a-zA-Z0-9]+$')) %}
+    package_name must start with a letter, followed by one or more letters, digits or dashes all lowercase.
+    {% endif %}
+
+project_short_description:
+  type: str
+  placeholder: Python project boilerplate to create a Python package.
+  help: "A short description describing what the project is"
+
+version:
+  type: str
+  default: "0.1.0"
+  help: "Initial project version"
+
+license:
+  type: str
+  choices:
+    - Proprietary
+    - MIT license
+    - BSD license
+    - ISC license
+    - Apache Software License 2.0
+    - GNU General Public License v3
+
+package_type:
+  choices:
+    - cli
+    - library
+  help: "If the package is an executable a CLI is generated"
+
+python_version:
+  type: str
+  choices:
+    - "3.9"
+    - "3.10"
+    - "3.11"
+  default: "3.10"
+  help: "Python version to use"
+
+testing_framework:
+  choices:
+    - pytest
+    - unittest
+  default: pytest
+  help: "Python testing framework"
+
+max_line_length:
+  type: int
+  default: 88
+  help: "Maximum code line length (default to black standard line length)"
+
+use_flake8_strict_plugins:
+  type: bool
+  default: true
+  help: "Include flake8 advanced plugins that makes code cleaner and safer but require more coding skills"
+
+ide:
+  choices:
+    - none
+    - vscode
+  default: vscode
+  help: "Preferred IDE"

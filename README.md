@@ -85,7 +85,7 @@ default_context:
 | python_version              | 3.10                        | Define the python version to use for `pyenv` and `gitlab-ci` |                             |
 | testing_framework           | pytest                      | Python testing framework                                     |                             |
 | max_line_length             | 88                          | Code max line length                                         |                             |
-| use_flake8_strict_plugins   | y                           | If `y` install flake8 plugins that allow to catch bugs, security vulnerabilities and apply more strict rules. They can be a bit overwhelming. |                             |
+| use_flake8_strict_plugins   | true                  | If `true` install flake8 plugins that allow to catch bugs, security vulnerabilities and apply more strict rules. They can be a bit overwhelming. |                             |
 | ide                         | vscode                      | Define the IDE(s) used by the developers.                    |                             |
 
 ## Project initialization

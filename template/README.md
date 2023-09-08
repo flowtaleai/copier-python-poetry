@@ -1,6 +1,6 @@
-# {{ cookiecutter.project_name }}
+# {{ project_name }}
 
-{{ cookiecutter.project_short_description }}
+{{ project_short_description }}
 
 ## Dependencies
 
