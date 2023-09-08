@@ -35,3 +35,16 @@ def copier_template(
     run("git", "tag", "99.99.99", cwd=src)
 
     return src
+
+
+@pytest.fixture()
+def copier_defaults() -> dict[str, str]:
+    """This fixture is auto-used by pytest-copier."""
+    return {
+        "author_email": "user@example.com",
+        "author_name": "The User",
+        "project_name": "Python Boilerplate",
+        "project_short_description": "An very nice project",
+        "license": "MIT license",
+        "package_type": "cli",
+    }

@@ -2,19 +2,6 @@ import pytest
 from prompt_toolkit.validation import ValidationError
 
 
-@pytest.fixture()
-def copier_defaults() -> dict[str, str]:
-    """This fixture is auto-used by pytest-copier."""
-    return {
-        "author_email": "user@example.com",
-        "author_name": "The User",
-        "project_name": "Python Boilerplate",
-        "project_short_description": "An very nice project",
-        "license": "MIT license",
-        "package_type": "cli",
-    }
-
-
 def test_bake_with_defaults(copier):
     project = copier.copy()
 
