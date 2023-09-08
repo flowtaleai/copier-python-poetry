@@ -73,5 +73,7 @@ use_flake8_strict_plugins:
 
 ide:
   choices:
+    - none
     - vscode
+  default: none
   help: "Preferred IDE"
