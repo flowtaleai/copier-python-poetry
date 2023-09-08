@@ -12,7 +12,7 @@ repos:
     hooks:
       - id: flake8
         name: flake8
-        exclude: "(hooks|template)"
+        exclude: "template"
         language: system
         entry: poetry run flake8
         require_serial: true
@@ -21,7 +21,7 @@ repos:
     hooks:
       - id: black
         name: black
-        exclude: "(hooks|template)"
+        exclude: "template"
         language: system
         entry: poetry run black --preview
         require_serial: true
@@ -30,7 +30,7 @@ repos:
     hooks:
       - id: isort
         name: isort
-        exclude: "(hooks|template)"
+        exclude: "template"
         language: system
         entry: poetry run isort --filter-files
         require_serial: true
