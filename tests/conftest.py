@@ -31,7 +31,7 @@ def copier_template(
 
     run("git", "init", cwd=src)
     run("git", "add", "-A", ".", cwd=src)
-    run("git", "commit", "-m", "test", cwd=src)
+    run("git", "-c", "user.name='User Name'", "-c", "user.email='user@email.org'", "commit", "-m", "test", cwd=src)
     run("git", "tag", "99.99.99", cwd=src)
 
     return src
