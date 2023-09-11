@@ -29,6 +29,7 @@ def copier_template(
     )
     shutil.copyfile(copier_template_root / "copier.yml", src / "copier.yml")
 
+    run("git", "config", "--global", "init.defaultBranch", "main", cwd=src)
     run("git", "init", cwd=src)
     run("git", "add", "-A", ".", cwd=src)
     run("git", "-c", "user.name='User Name'", "-c", "user.email='user@email.org'", "commit", "-m", "test", cwd=src)
