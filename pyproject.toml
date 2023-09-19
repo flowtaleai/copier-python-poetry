@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "cookiecutter-python"
-version = "0.1.0"
+version = "0.2.0"
 description = "Opinionated cookiecutter for python projects"
 authors = ["Simone Gaiarin <simone.gaiarin@trovaprezzi.it>"]
 readme = "README.md"
