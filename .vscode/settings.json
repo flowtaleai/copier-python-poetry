@@ -21,4 +21,5 @@
   ],
   "flake8.importStrategy": "fromEnvironment",
   "json.format.keepLines": true,
+  "autoDocstring.docstringFormat": "google-notypes",
 }

@@ -32,3 +32,11 @@ repos:
         entry: poetry run isort --filter-files
         require_serial: true
         types_or: [python, pyi, cython]
+  - repo: local
+    hooks:
+      - id: pydocstyle
+        name: pydocstyle
+        language: system
+        entry: poetry run pydocstyle --add-ignore=D103
+        require_serial: true
+        types_or: [python, pyi]
