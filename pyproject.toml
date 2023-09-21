@@ -20,6 +20,7 @@ isort = "^5.11.2"
 pre-commit = "^2.20.0"
 flake8 = "^6.0.0"
 pytest-copier = "^0.1.0"
+detect-secrets = "^1.4.0"
 
 [build-system]
 requires = ["poetry-core"]
