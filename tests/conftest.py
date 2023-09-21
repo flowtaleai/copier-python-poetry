@@ -53,7 +53,7 @@ def copier_template(
 
 @pytest.fixture()
 def copier_defaults() -> dict[str, str]:
-    """Provide default Copier project configs.
+    """Provide default Copier project configurations.
 
     This his fixture provides a dictionary containing default configuration values
     commonly used in Copier project generation. These values can be used as a
