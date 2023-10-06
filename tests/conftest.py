@@ -20,7 +20,7 @@ def copier_template(
     tmp_path_factory: pytest.TempPathFactory,
     copier_template_root: Path,
 ) -> Path:
-    """Copy temporary directories and configures git.
+    """Copies temporary directories and configures git.
 
     This fixture is auto-used by pytest-copier.
     Overriding this fixture is necessary to avoid copying all the files in the root of
@@ -53,7 +53,7 @@ def copier_template(
 
 @pytest.fixture()
 def copier_defaults() -> dict[str, str]:
-    """Provide default Copier project configurations.
+    """Provides default Copier project configurations.
 
     This his fixture provides a dictionary containing default configuration values
     commonly used in Copier project generation. These values can be used as a

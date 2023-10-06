@@ -41,6 +41,6 @@ repos:
         name: pydocstyle
         exclude: "template"
         language: system
-        entry: poetry run pydocstyle --add-ignore=D100,D103,D104 --convention=google
+        entry: poetry run pydocstyle
         require_serial: true
         types_or: [python, pyi]
