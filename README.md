@@ -1,55 +1,60 @@
-# Cookiecutter template for python
+# Copier template for python
 
-Opinionated cookiecutter for Flowtale python projects.
+Opinionated copier template for Flowtale python projects.
 
 ## Features
 
-| Task                 | Tool                                                    |
-| -------------------- | ------------------------------------------------------- |
-| Testing framework    | pytest, unittest                                        |
-| Test mocking         | pytest-mock                                             |
-| Pre-commit hooks     | pre-commit                                              |
-| Version management   | bump2version                                            |
-| Common style         | EditorConfig                                            |
-| Editor configuration | vscode with suggested extensions                        |
-| Autoformatter        | black with experimental string processing (`--preview`) |
-| Linter               | flake8                                                  |
-| Test and packaging   | gitlab-ci                                               |
-| Run common commands  | make                                                    |
+| Task                 | Tool                                                         |
+| -------------------- | ------------------------------------------------------------ |
+| Testing framework    | pytest, unittest                                             |
+| Test mocking         | pytest-mock                                                  |
+| Pre-commit hooks     | pre-commit                                                   |
+| Version management   | bump2version                                                 |
+| Common style         | EditorConfig                                                 |
+| Editor configuration | vscode with suggested extensions                             |
+| Autoformatters       | black with experimental string processing (`--preview`), pydocstyle |
+| Linters              | flake8, pydocstyle                                           |
+| Test and packaging   | gitlab-ci                                                    |
+| Run common commands  | make                                                         |
 
-## Dependencies
+## Install
+### Dependencies
 
-Dependencies to create the project template with cookiecutter
+Dependencies to create the project template with copier
 
-- python
-- cookiecutter [pip]
+- python (suggested install method: system)
+- copier [suggested install method: pipx]
 
 Dependencies for the project
 
 - [poetry](https://python-poetry.org/docs#installation)
 - [pyenv](https://github.com/pyenv/pyenv#getting-pyenv) (recommended)
 
-## Development environment configuration
+### Development environment configuration
 
 These configurations are required to setup the development environment and need to be performed only once.
 
-### poetry
+#### poetry
 
-To make poetry use the python interpreter of pyenv (defined in the `.python-version` file inside the project)
+(Recommended) To make poetry use the python interpreter of pyenv (defined in the `.python-version` file inside the project)
 
 ```bash
 poetry config virtualenvs.prefer-active-python true
 ```
 
-To create the virtual envs within the project folder (easier to rename the project folder and makes vscode happier)
+(Optional) To create the virtual envs within the project folder
 
 ```bash
 poetry config virtualenvs.in-project true
 ```
 
-### pyenv (recommended)
+This setting allows to easier to rename the project folder without having to recreated the virtual environment. It
+also makes vscode automatically detected the poetry virtual environment (see [VScode](#vscode))
 
-This step can be skipped if the system python version always matches the version specified in the `.python-version` of the project.
+#### pyenv (recommended)
+
+This step can be skipped if the system python version always matches the version specified in the `.python-version` of
+the project (very unlikely).
 
 Add the following to `~/.bashrc` or `~/.zshrc` to initialize `pyenv`
 
@@ -59,44 +64,19 @@ command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
 eval "$(pyenv init -)"
 ```
 
-### cookiecutter (optional)
+## Usage
 
-Create `~/.cookiecutterrc` to specify customized default values for new projects:
+### Project initialization
 
-```ini
-default_context:
-  author_name: "Your Name"
-  author_email: "initials@flowtale.ai"
-```
-
-## Cookiecutter parameters
-
-| Name                        | Example                     | Description                                                  | Depends on                  |
-| --------------------------- | --------------------------- | ------------------------------------------------------------ | --------------------------- |
-| author_name                 | Team Faboulous              |                                                              |                             |
-| author_email                | teamfaboulous@mycompany.com |                                                              |                             |
-| project_name                | Awsome Project              | Name of the project                                          |                             |
-| package_name                | awsomeproject               | Used to define the name of the python package                |                             |
-| repository_name             | awsome-project              | Name of the project repository                               |                             |
-| project_short_description   | A fantastic new project     | Description of the project. Also used in the CLI help.       |                             |
-| version                     | 0.1.0                       | SemVer 2.0 version                                           |                             |
-| license                     | MIT                         | Project license                                              |                             |
-| package_type                | app                         | If `app` generate cli module with argument parser and  cli entrypoint |                             |
-| python_version              | 3.10                        | Define the python version to use for `pyenv` and `gitlab-ci` |                             |
-| testing_framework           | pytest                      | Python testing framework                                     |                             |
-| max_line_length             | 88                          | Code max line length                                         |                             |
-| use_flake8_strict_plugins   | true                  | If `true` install flake8 plugins that allow to catch bugs, security vulnerabilities and apply more strict rules. They can be a bit overwhelming. |                             |
-| ide                         | vscode                      | Define the IDE(s) used by the developers.                    |                             |
-
-## Project initialization
-
-1. Create a new project based on this cookiecutter template
+1. Create a new project based on this copier template (it can also be applied to existing projects)
 
    ```bash
-   cookiecutter https://gitlab.flowtale.ai/flowtale/cookiecutter-python
+   copier copy https://gitlab.flowtale.ai/flowtale/cookiecutter-python project-folder
    ```
 
-2. Answer all the questions to configure the project (see [cookiecutter parameters](#cookiecutter-parameters))
+   The template version used corresponds to the most recent tag of the template repository.
+
+2. Answer all the questions to configure the project (see [Copier parameters](#copier-parameters))
 
 3. Commit all the files
 
@@ -117,21 +97,52 @@ default_context:
 
    ```bash
    git add poetry.lock
-   git commit -m "Rigenerato poetry lock file"
+   git commit -m "Poetry lock file regenerated"
    ```
 
    (Opinion) It is always better to commit the lock file by itself given that reverting a commit with an update to the lock file is complicated.
 
 6. Follow the project `README` to configure the project development environment
 
+### Project update
 
-## Developing
+1. From within a project folder that has already been initialized with the template run
+
+   ```bash
+   copier update --defaults
+   ```
+
+   This will update our project with the version corresponding to the most recent tag of the template. It will perform a three way merge between out project and the newest changes introduced by the template.
+
+   Do not provide the `--defaults` flag if you want to change some of the original answers.
+
+### Copier parameters
+
+| Name                        | Example                     | Description                                                  |
+| --------------------------- | --------------------------- | ------------------------------------------------------------ |
+| author_name                 | Team Faboulous              |                                                              |
+| author_email                | teamfaboulous@mycompany.com |                                                              |
+| project_name                | Awsome Project              | Name of the project                                          |
+| package_name                | awsomeproject               | Used to define the name of the python package                |
+| repository_name             | awsome-project              | Name of the project repository                               |
+| project_short_description   | A fantastic new project     | Description of the project. Also used in the CLI help.       |
+| version                     | 0.1.0                       | SemVer 2.0 version                                           |
+| license                     | MIT                         | Project license                                              |
+| package_type                | cli                      | If `cli` generate cli module with argument parser and  cli entrypoint |
+| python_version              | 3.10                        | Define the python version to use for `pyenv` and the CI pipelines |
+| testing_framework           | pytest                      | Python testing framework                                     |
+| max_line_length             | 88                          | Code max line length                                         |
+| use_flake8_strict_plugins   | true                  | If `true` install flake8 plugins that allow to catch bugs, security vulnerabilities and apply more strict rules. They can be a bit overwhelming. |
+| ide                         | vscode                      | Define the IDE(s) used by the developers.                    |
+
+
+## Usage
 
 ### VSCode
 
 - VSCode should automatically detect the virtual environment if poetry is configured to store the venv in a subfolder of the project.
-- Otherwise manually select the interpreter with `Select python interpreter...`
-    - Run `poetry run poetry env info` to discover where it is located
+- Otherwise manually select the interpreter with `Python: Select interpreter`
+    - Run `poetry run poetry env info -p` to discover where it is located
 
 ### Shell
 
@@ -158,6 +169,8 @@ default_context:
 
 ### On commit
 
+pre-commit is executed automatically before each commit in order to prevent code that does not follow the project guidelines.
+
 Some pre-commit hooks modify the files. Re-stage them after the modification.
 
 Checks
@@ -168,6 +181,7 @@ Checks
 - `flake8` linter executed
 - `black` formatter executed
 - `isort` import sorted executed
+- `pydocstyle` docstring checker executed
 
 #### Linter plugins
 
@@ -184,7 +198,7 @@ Checks
 
 ### On push
 
-- Tests executed on the CI
+- Tests and pre-commit on all files executed on the CI
 
 ## Style suggestions
 
