@@ -17,4 +17,3 @@ pipelines:
             - pip install poetry
             - poetry install
             - poetry run pre-commit run --all-files
-
