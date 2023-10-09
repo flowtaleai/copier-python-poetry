@@ -202,4 +202,6 @@ Checks
 
 ## Style suggestions
 
-- TBD
+- Docstrings convention is `google` without types (types are specified using standard python typing)
+- Use `pathlib.Path` instead of `str` for file names
+- Use `pathlib.Path` to process files instead of `os`
