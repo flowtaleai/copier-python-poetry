@@ -45,3 +45,7 @@ line-length = {{ max_line_length }}
 
 [tool.isort]
 profile = "black"
+
+[tool.pydocstyle]
+add_ignore = "D100,D103,D104"
+convention = "google"
