@@ -1,0 +1,25 @@
+#  Template python-build
+
+#  This template allows you to validate your python code.
+#  The workflow allows running tests and code linting on the default branch.
+
+image: python:3.8
+
+pipelines:
+  default:
+    - parallel:
+      - step:
+          name: Test
+          caches:
+            - pip
+          script:
+            - pip install poetry
+            - poetry install
+            - poetry run pytest
+      - step:
+          name: Lint code
+          script:
+            - pip install poetry
+            - poetry install
+            - poetry run pre-commit run --all-files
+
