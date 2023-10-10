@@ -17,7 +17,48 @@ Opinionated copier template for Flowtale python projects.
 | Test and packaging   | gitlab-ci                                                    |
 | Run common commands  | make                                                         |
 
+### Automatisms
+
+#### On save (vscode)
+
+- Code formatted with `black`
+- Import sorted with `isort`
+
+#### On commit
+
+pre-commit is executed automatically before each commit in order to prevent code that does not follow the project guidelines.
+
+Some pre-commit hooks modify the files. Re-stage them after the modification.
+
+Checks
+
+- Trailing whitespaces removed
+- Add newline at the end of the file
+- Check for big file added to commit
+- `flake8` linter executed
+- `black` formatter executed
+- `isort` import sorted executed
+- `pydocstyle` docstring checker executed
+
+#### Linter plugins
+
+| Name                | Description                                                  | strict |
+| ------------------- | ------------------------------------------------------------ | ------ |
+| flake8-builtins     | Check for python builtins being used as variables or parameters. |        |
+| pep8-naming         | Check your code against [PEP 8](https://www.python.org/dev/peps/pep-0008/) naming conventions. |        |
+| flake8-pytest-style | Check for common style issues or inconsistencies with `pytest`-based tests. |        |
+| flake8-print        | Forbids print in the code besides `cli.py` (use `logging`!)  | x      |
+| flake8-return       | Flake8 plugin that checks return values.                     | x      |
+| flake8-eradicate    | Find commented out (or so called "dead") code.               | x      |
+| flake8-bugbear      | Find likely bugs and design problems in your program         | x      |
+| flake8-bandit       | Automated security testing built right into your workflow!   | x      |
+
+#### On push
+
+- Tests and pre-commit on all files executed on the CI
+
 ## Install
+
 ### Dependencies
 
 Dependencies to create the project template with copier
@@ -137,16 +178,15 @@ eval "$(pyenv init -)"
 | ide                         | vscode                      | Define the IDE(s) used by the developers.                    |
 | git_hosting                 | gitlab                      | Define GIT hosting that will be used.                        |
 
+### Project usage
 
-## Usage
-
-### VSCode
+#### VSCode
 
 - VSCode should automatically detect the virtual environment if poetry is configured to store the venv in a subfolder of the project.
 - Otherwise manually select the interpreter with `Python: Select interpreter`
     - Run `poetry run poetry env info -p` to discover where it is located
 
-### Shell
+#### Shell
 
 - To perform actions in the shell
 
@@ -162,51 +202,23 @@ eval "$(pyenv init -)"
       poetry run COMMAND
       ```
 
-### Automatisms
-
-#### On save (vscode)
-
-- Code formatted with `black`
-- Import sorted with `isort`
-
-#### On commit
-
-pre-commit is executed automatically before each commit in order to prevent code that does not follow the project guidelines.
-
-Some pre-commit hooks modify the files. Re-stage them after the modification.
-
-Checks
-
-- Trailing whitespaces removed
-- Add newline at the end of the file
-- Check for big file added to commit
-- `flake8` linter executed
-- `black` formatter executed
-- `isort` import sorted executed
-- `pydocstyle` docstring checker executed
-
-#### Linter plugins
-
-| Name                | Description                                                  | strict |
-| ------------------- | ------------------------------------------------------------ | ------ |
-| flake8-builtins     | Check for python builtins being used as variables or parameters. |        |
-| pep8-naming         | Check your code against [PEP 8](https://www.python.org/dev/peps/pep-0008/) naming conventions. |        |
-| flake8-pytest-style | Check for common style issues or inconsistencies with `pytest`-based tests. |        |
-| flake8-print        | Forbids print in the code besides `cli.py` (use `logging`!)  | x      |
-| flake8-return       | Flake8 plugin that checks return values.                     | x      |
-| flake8-eradicate    | Find commented out (or so called "dead") code.               | x      |
-| flake8-bugbear      | Find likely bugs and design problems in your program         | x      |
-| flake8-bandit       | Automated security testing built right into your workflow!   | x      |
-
-#### On push
-
-- Tests and pre-commit on all files executed on the CI
-
 ## Style suggestions
 
 - Docstrings convention is `google` without types (types are specified using standard python typing)
 - Use `pathlib.Path` instead of `str` for file names
 - Use `pathlib.Path` to process files instead of `os`
+
+## Contributing
+
+- The python dependencies in the template should be update periodically
+
+- A note to the [Rationale][#rationale] section should be added if it helps explaining non-obvious choice
+
+- This project is tagged with versions according to [SemVer](https://semver.org/). To bump the project version:
+
+  ```bash
+  make bump
+  ```
 
 ## Rationale
 
