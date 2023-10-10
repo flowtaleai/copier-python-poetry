@@ -20,7 +20,7 @@
   ```
 - Open VSCode and install the suggested extensions
 
-## Contribute
+## Contributing
 
 This project is tagged with versions according to [SemVer](https://semver.org/). To bump the project version:
 
