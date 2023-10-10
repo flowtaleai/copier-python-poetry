@@ -20,8 +20,10 @@ def test_bake_with_defaults(copier):
 
     assert "pythonboilerplate" in found_toplevel_files
     assert ".vscode" in found_toplevel_files
+    assert ".gitlab-ci.yml" in found_toplevel_files
 
     assert "Pipfile" not in found_toplevel_files
+    assert "bitbucket-pipelines.yml" not in found_toplevel_files
 
 
 def test_bake_and_run_tests_with_pytest_framework(copier):
@@ -81,6 +83,15 @@ def test_bake_app_and_check_cli_scripts(copier):
 pythonboilerplate = "pythonboilerplate.cli:cli"'''
         in pyproject_path.read_text()
     )
+
+
+def test_bake_bitbucket(copier):
+    custom_answers = {"git_hosting": "bitbucket"}
+    project = copier.copy(**custom_answers)
+
+    found_toplevel_files = [f.name for f in project.path.glob("*")]
+    assert "bitbucket-pipelines.yml" in found_toplevel_files
+    assert ".gitlab-ci.yml" not in found_toplevel_files
 
 
 @pytest.mark.skip(

@@ -1,0 +1,19 @@
+image: "python:{{ python_version }}"
+
+pipelines:
+  default:
+    - parallel:
+      - step:
+          name: Test
+          caches:
+            - pip
+          script:
+            - pip install poetry
+            - poetry install
+            - poetry run pytest
+      - step:
+          name: Lint code
+          script:
+            - pip install poetry
+            - poetry install
+            - poetry run pre-commit run --all-files
