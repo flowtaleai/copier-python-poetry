@@ -2,7 +2,9 @@
 name = "{{ package_name }}"
 version = "{{ version }}"
 description = "{{ project_short_description }}"
-authors = ["{{ author_name }} <{{ author_email }}>"]
+authors = [
+  "{{ author_name }} <{{ author_email }}>"
+]
 license = "{{ license }}"
 readme = "README.md"
 
