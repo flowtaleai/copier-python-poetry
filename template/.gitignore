@@ -159,7 +159,7 @@ cython_debug/
 #  option (not recommended) you can uncomment the following to ignore the entire idea folder.
 #.idea/
 
-{%- if 'vscode' in ide -%}
+{% if 'vscode' in ide -%}
 ### VisualStudioCode
 .vscode/*
 !.vscode/settings.json
