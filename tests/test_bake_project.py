@@ -20,6 +20,7 @@ def test_bake_with_defaults(copier):
 
     assert "pythonboilerplate" in found_toplevel_files
     assert ".vscode" in found_toplevel_files
+    assert ".gitlab-ci.yml" in found_toplevel_files
 
     assert "Pipfile" not in found_toplevel_files
     assert "bitbucket-pipelines.yml" not in found_toplevel_files
@@ -90,7 +91,7 @@ def test_bake_bitbucket(copier):
 
     found_toplevel_files = [f.name for f in project.path.glob("*")]
     assert "bitbucket-pipelines.yml" in found_toplevel_files
-
+    assert ".gitlab-ci.yml" not in found_toplevel_files
 
 
 @pytest.mark.skip(
