@@ -151,12 +151,12 @@ eval "$(pyenv init -)"
 1. From within a project folder that has already been initialized with the template run
 
    ```bash
-   copier update --defaults
+   copier update --skip-answered
    ```
 
    This will update our project with the version corresponding to the most recent tag of the template. It will perform a three way merge between out project and the newest changes introduced by the template.
 
-   Do not provide the `--defaults` flag if you want to change some of the original answers.
+   Do not provide the `--skip-answered` flag if you want to change some of the original answers.
 
 ### Copier parameters
 
