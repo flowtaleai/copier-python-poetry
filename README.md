@@ -162,14 +162,14 @@ eval "$(pyenv init -)"
       poetry run COMMAND
       ```
 
-## Automatisms
+### Automatisms
 
-### On save (vscode)
+#### On save (vscode)
 
 - Code formatted with `black`
 - Import sorted with `isort`
 
-### On commit
+#### On commit
 
 pre-commit is executed automatically before each commit in order to prevent code that does not follow the project guidelines.
 
@@ -198,7 +198,7 @@ Checks
 | flake8-bugbear      | Find likely bugs and design problems in your program         | x      |
 | flake8-bandit       | Automated security testing built right into your workflow!   | x      |
 
-### On push
+#### On push
 
 - Tests and pre-commit on all files executed on the CI
 
@@ -207,3 +207,18 @@ Checks
 - Docstrings convention is `google` without types (types are specified using standard python typing)
 - Use `pathlib.Path` instead of `str` for file names
 - Use `pathlib.Path` to process files instead of `os`
+
+## Rationale
+
+- [2023-10-10] We pass the `--preview` flag to black 23.x in particular to format long strings. The effects of `--preview` should be re-evaluated at each major version update of black.
+
+  ```python
+  # before formatting
+  myvar = "Loooong ... string"
+
+  # after formatting
+  myvar = (
+      "Loooong ..."
+      "... string"
+  )
+  ```

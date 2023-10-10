@@ -9,28 +9,28 @@ readme = "README.md"
 [tool.poetry.dependencies]
 python = "^{{ python_version }}"
 {% if package_type == "cli" -%}
-click = "8.1.6"
+click = "8.1.7"
 {%- endif %}
 
 [tool.poetry.group.dev.dependencies]
-pytest = "6.2.5"
-flake8 = "^5.0.0"
+pytest = "^7.4.2"
+flake8 = "^6.1.0"
 flake8-builtins = "^2.1.0"
 pep8-naming = "^0.13.3"
 {% if testing_framework == "pytest" -%}
-pytest-mock = "^3.7.0"
+pytest-mock = "^3.11.1"
 flake8-pytest-style = "^1.7.2"
 {%- endif %}
 {% if use_flake8_strict_plugins -%}
 flake8-print = "^5.0.0"
 flake8-return = "^1.2.0"
-flake8-eradicate = "^1.4.0"
-flake8-bugbear = "^23.2.13"
+flake8-eradicate = "^1.5.0"
+flake8-bugbear = "^23.9.16"
 flake8-bandit = "^4.1.1"
 {%- endif %}
 black = "^22.1.0"
-isort = "^5.10.1"
-pre-commit = "^2.17.0"
+isort = "^5.12.0"
+pre-commit = "3.4.0"
 bump2version = "^1.0.1"
 
 [build-system]
