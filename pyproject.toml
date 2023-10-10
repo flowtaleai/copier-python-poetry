@@ -3,7 +3,11 @@ name = "copierpythontemplate"
 version = "0.4.0"
 description = "Opinionated copier template for python projects"
 authors = [
-  "Simone Gaiarin <sg@flowtale.ai>"
+  "Anders Stendevad <as@flowtale.ai>",
+  "Nikita Pekarchuk <np@flowtale.ai>",
+  "Rasmus Jones <rj@flowtale.ai>",
+  "Simone Gaiarin <sg@flowtale.ai>",
+  "Tobias Rehfeldt <tc@flowtale.ai>",
 ]
 license = "MIT license"
 readme = "README.md"
