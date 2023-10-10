@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "copierpythontemplate"
-version = "0.3.0"
+version = "0.4.0"
 description = "Opinionated copier template for python projects"
 authors = ["Simone Gaiarin <sg@flowtale.ai>"]
 license = "MIT license"
