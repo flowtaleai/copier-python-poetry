@@ -87,6 +87,7 @@ default_context:
 | max_line_length             | 88                          | Code max line length                                         |                             |
 | use_flake8_strict_plugins   | true                  | If `true` install flake8 plugins that allow to catch bugs, security vulnerabilities and apply more strict rules. They can be a bit overwhelming. |                             |
 | ide                         | vscode                      | Define the IDE(s) used by the developers.                    |                             |
+| git_hosting                 | gitlab                      | Define GIT hosting that will be used.                        |                             |
 
 ## Project initialization
 

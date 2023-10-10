@@ -81,3 +81,11 @@ ide:
     - vscode
   default: vscode
   help: "Preferred IDE"
+
+git_hosting:
+  type: str
+  choices:
+    - "gitlab"
+    - "bitbucket"
+  default: "gitlab"
+  help: "Git hosting provider"
