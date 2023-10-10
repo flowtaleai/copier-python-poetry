@@ -1,8 +1,9 @@
 [tool.poetry]
-name = "cookiecutter-python"
+name = "copierpythontemplate"
 version = "0.3.0"
 description = "Opinionated copier template for python projects"
-authors = ["Simone Gaiarin <simone.gaiarin@trovaprezzi.it>"]
+authors = ["Simone Gaiarin <sg@flowtale.ai>"]
+license = "MIT license"
 readme = "README.md"
 
 [tool.poetry.dependencies]
@@ -10,18 +11,23 @@ python = "^3.10"
 
 
 [tool.poetry.group.dev.dependencies]
-pytest = "^7.2.0"
-flake8 = "^6.0.0"
-black = "^22.12.0"
-isort = "^5.11.2"
-pre-commit = "^2.20.0"
 pydocstyle = "^6.3.0"
+pytest = "^7.4.2"
+flake8 = "^6.1.0"
+flake8-builtins = "^2.1.0"
+pep8-naming = "^0.13.3"
+pytest-mock = "^3.11.1"
+flake8-pytest-style = "^1.7.2"
+
+black = "^22.1.0"
+isort = "^5.12.0"
+pre-commit = "3.4.0"
 bump2version = "^1.0.1"
 copier = "^8.1.0"
 pytest-copier = "^0.1.0"
 
 [build-system]
-requires = ["poetry-core"]
+requires = ["poetry>=1.0.0"]
 build-backend = "poetry.core.masonry.api"
 
 [tool.pytest.ini_options]
@@ -32,6 +38,9 @@ testpaths = [
 markers = [
     "slow: slow tests",
 ]
+
+[tool.black]
+line-length = 88
 
 [tool.isort]
 profile = "black"
