@@ -4,7 +4,6 @@ stages:
   - .pre
   - test
   - linting
-  - publish
 
 before_script:
   - pip install poetry

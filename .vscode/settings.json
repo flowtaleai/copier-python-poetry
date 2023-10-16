@@ -1,5 +1,6 @@
 {
   "[json]": {
+    "editor.formatOnSave": true,
     "editor.defaultFormatter": "vscode.json-language-features"
   },
   "[python]": {
@@ -21,4 +22,5 @@
   ],
   "flake8.importStrategy": "fromEnvironment",
   "json.format.keepLines": true,
+  "autoDocstring.docstringFormat": "google-notypes",
 }

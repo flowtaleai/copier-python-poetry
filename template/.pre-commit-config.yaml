@@ -39,3 +39,12 @@ repos:
         entry: poetry run detect-secrets-hook
         language: system
         files: .*
+  - repo: local
+    hooks:
+      - id: pydocstyle
+        name: pydocstyle
+        exclude: "template"
+        language: system
+        entry: poetry run pydocstyle
+        require_serial: true
+        types_or: [ python, pyi ]

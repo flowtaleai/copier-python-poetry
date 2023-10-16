@@ -7,21 +7,5 @@
     "ghcr.io/devcontainers-contrib/features/poetry:2": { },
     "ghcr.io/devcontainers-contrib/features/pre-commit": { },
   },
-  "customizations": {
-    "vscode": {
-      "extensions": [
-        "editorconfig.editorconfig",
-        "ms-python.python",
-        "ms-python.vscode-pylance",
-        "ms-python.black-formatter",
-        "ms-python.isort",
-        "ms-python.flake8",
-        "matangover.mypy",
-        "njpwerner.autodocstring",
-        "hbenl.vscode-test-explorer",
-        "littlefoxteam.vscode-python-test-adapter",
-      ]
-    }
-  },
   "postCreateCommand": "make setup"
 }
