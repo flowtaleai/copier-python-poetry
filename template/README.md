@@ -7,8 +7,8 @@
 - python
 - poetry [pip]
 - make (optional)
-- pytest (optional, installed by poetry but it's more convenient to have it installed on the system) [pip]
-- pre-commit (optional, installed by poetry but it's more convenient to have it installed on the system) [pip]
+- pytest (optional, installed by poetry, but it's more convenient to have it installed on the system) [pip]
+- pre-commit (optional, installed by poetry, but it's more convenient to have it installed on the system) [pip]
 
 ## Development Environment Configuration
 

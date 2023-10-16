@@ -168,6 +168,8 @@ Checks
 - `flake8` linter executed
 - `black` formatter executed
 - `isort` import sorted executed
+- `pydocstyle` docstring style checked
+- `detect-secrets` secrets detection executed
 
 #### Linter plugins
 

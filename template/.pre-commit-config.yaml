@@ -32,3 +32,10 @@ repos:
         entry: poetry run isort --filter-files
         require_serial: true
         types_or: [python, pyi, cython]
+  - repo: local
+    hooks:
+      - id: detect-secrets
+        name: Secret detection
+        entry: poetry run detect-secrets-hook
+        language: system
+        files: .*
