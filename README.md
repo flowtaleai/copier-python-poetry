@@ -52,6 +52,7 @@ Checks
 | flake8-eradicate    | Find commented out (or so called "dead") code.               | x      |
 | flake8-bugbear      | Find likely bugs and design problems in your program         | x      |
 | flake8-bandit       | Automated security testing built right into your workflow!   | x      |
+| flake8-annotations  | Find missing type annotations                                | x      |
 
 #### On push
 
