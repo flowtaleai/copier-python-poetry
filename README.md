@@ -202,7 +202,6 @@ eval "$(pyenv init -)"
       poetry run COMMAND
       ```
 
-<<<<<<< HEAD
 ## Automatisms
 
 ### On save (vscode)
