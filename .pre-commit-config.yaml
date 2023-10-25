@@ -35,12 +35,10 @@ repos:
         entry: poetry run isort --filter-files
         require_serial: true
         types_or: [python, pyi, cython]
-  - repo: local
-    hooks:
-      - id: pydocstyle
-        name: pydocstyle
-        exclude: "template"
+  -   repo: local
+      hooks:
+      - id: detect-secrets
+        name: Secret detection
+        entry: detect-secrets-hook
         language: system
-        entry: poetry run pydocstyle
-        require_serial: true
-        types_or: [python, pyi]
+        files: .*
