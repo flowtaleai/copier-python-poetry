@@ -39,6 +39,6 @@ repos:
       hooks:
       - id: detect-secrets
         name: Secret detection
-        entry: detect-secrets-hook
+        entry: poetry run detect-secrets-hook
         language: system
         files: .*

@@ -40,3 +40,10 @@ repos:
         entry: poetry run pydocstyle
         require_serial: true
         types_or: [python, pyi]
+  - repo: local
+    hooks:
+      - id: detect-secrets
+        name: Secret detection
+        entry: poetry run detect-secrets-hook
+        language: system
+        files: .*
