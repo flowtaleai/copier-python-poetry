@@ -202,44 +202,6 @@ eval "$(pyenv init -)"
       poetry run COMMAND
       ```
 
-## Automatisms
-
-### On save (vscode)
-
-- Code formatted with `black`
-- Import sorted with `isort`
-
-### On commit
-
-Some pre-commit hooks modify the files. Re-stage them after the modification.
-
-Checks
-
-- Trailing whitespaces removed
-- Add newline at the end of the file
-- Check for big file added to commit
-- `flake8` linter executed
-- `black` formatter executed
-- `isort` import sorted executed
-- `pydocstyle` docstring style checked
-- `detect-secrets` secrets detection executed
-
-#### Linter plugins
-
-| Name                | Description                                                  | strict |
-| ------------------- | ------------------------------------------------------------ | ------ |
-| flake8-builtins     | Check for python builtins being used as variables or parameters. |        |
-| pep8-naming         | Check your code against [PEP 8](https://www.python.org/dev/peps/pep-0008/) naming conventions. |        |
-| flake8-pytest-style | Check for common style issues or inconsistencies with `pytest`-based tests. |        |
-| flake8-print        | Forbids print in the code besides `cli.py` (use `logging`!)  | x      |
-| flake8-return       | Flake8 plugin that checks return values.                     | x      |
-| flake8-eradicate    | Find commented out (or so called "dead") code.               | x      |
-| flake8-bugbear      | Find likely bugs and design problems in your program         | x      |
-| flake8-bandit       | Automated security testing built right into your workflow!   | x      |
-
-### On push
-
-- Tests executed on the CI
 
 ## Style suggestions
 
