@@ -40,9 +40,11 @@ def copier_template(
     )
     shutil.copyfile(copier_template_root / "copier.yml", src / "copier.yml")
 
-    run("git", "config", "user.name", "'User Name'", cwd=src)
-    run("git", "config", "user.email", "'user@email.org'", cwd=src)
+    # This commands are run on the src copier template in the temp test folder,
+    # not in the created project folder
     run("git", "init", cwd=src)
+    run("git", "config", "user.name", "User Name", cwd=src)
+    run("git", "config", "user.email", "user@email.org", cwd=src)
     run("git", "add", "-A", ".", cwd=src)
     run("git", "commit", "-m", "test", cwd=src)
     run("git", "tag", "99.99.99", cwd=src)
