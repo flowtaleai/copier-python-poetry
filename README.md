@@ -202,6 +202,7 @@ eval "$(pyenv init -)"
       poetry run COMMAND
       ```
 
+
 ## Style suggestions
 
 - Docstrings convention is `google` without types (types are specified using standard python typing)
