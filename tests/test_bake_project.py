@@ -113,6 +113,8 @@ def test_bake_and_run_pre_commit(copier):
 
     project.run("git init")
     project.run("git add .")
+    project.run("git config user.name 'User Name'")
+    project.run("git config user.email 'user@email.org'")
     project.run("git commit -m init")
 
     project.run("pre-commit run --all-files")
