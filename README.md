@@ -159,6 +159,9 @@ eval "$(pyenv init -)"
 
    Do not provide the `--skip-answered` flag if you want to change some of the original answers.
 
+2. Run `poetry lock` to regenerate the poetry lock file given that the `pyproject.toml` may have been updated
+3. Run `poetry install --sync`  to update the project dependencies
+
 ### Copier parameters
 
 | Name                        | Example                     | Description                                                  |
@@ -180,6 +183,10 @@ eval "$(pyenv init -)"
 | git_hosting                 | gitlab                      | Define GIT hosting that will be used.                        |
 
 ### Project usage
+
+### python dependencies
+
+- Do not manually change the [dependency specification](https://python-poetry.org/docs/dependency-specification/) of the python packages related to the cookiecutter (i.e. do not change the version in pyproject.toml). These will be automatically updated when we apply an update of the cookiecutter.
 
 #### VSCode
 
@@ -213,14 +220,30 @@ eval "$(pyenv init -)"
 ## Contributing
 
 - The python dependencies in the template should be update periodically
+  - Updating the major version of black may require reformatting large portions of a project codebase to make the CI lint stage pass
 
-- A note to the [Rationale][#rationale] section should be added if it helps explaining non-obvious choice
+- A note to the [Rationale][#rationale] section should be added if it helps explaining non-obvious choices
 
-- This project is tagged with versions according to [SemVer](https://semver.org/). To bump the project version:
+### Bumping the version
+
+- This project is tagged with versions according to [SemVer](https://semver.org/).
+
+- The version has a format `MAJOR.MINOR.PATCH`, which in the context of this project means:
+
+  - Major: Changes that modify the generated project structure or components significantly in a way that is not backward-compatible.
+    - e.g. updating the black major version
+    - e.g. add a required flake8 plugin that may cause the CI pipeline of an existing project to fail
+  - Minor: Additions or enhancements to the template that do not alter the existing structure in a backward-incompatible way.
+    - e.g. add support for generating the documentation
+  - Patch: Fixes to issues or bugs in the template that do not affect the generated project's structure or compatibility.
+
+-  To bump the project version:
 
   ```bash
   make bump
   ```
+
+​		and select the part of the version to bump
 
 ## Rationale
 
@@ -236,3 +259,5 @@ eval "$(pyenv init -)"
       "... string"
   )
   ```
+
+- The versions of python dependencies of the tools (black, flake, ...) are managed by the cookiecutter and should not be changed manually in the generated projects. This allows to keep the various projects aligned and have a consistent behavior when we develop on multiple projects. Sometimes a newer cookiecutter version may be applied to a project before the others, so there is a period where there is a disalignment, but at least is a controlled one.
