@@ -18,12 +18,13 @@ def test_bake_with_defaults(copier):
     assert ".gitattributes" in found_toplevel_files
     assert "tests" in found_toplevel_files
 
-    assert "pythonboilerplate" in found_toplevel_files
     assert ".vscode" in found_toplevel_files
     assert ".gitlab-ci.yml" in found_toplevel_files
 
     assert "Pipfile" not in found_toplevel_files
     assert "bitbucket-pipelines.yml" not in found_toplevel_files
+
+    assert (project.path / "src" / "pythonboilerplate").exists()
 
 
 def test_bake_and_run_tests_with_pytest_framework(copier):
