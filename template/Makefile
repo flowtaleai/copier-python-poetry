@@ -14,7 +14,12 @@ help: ## Show this help
 setup:  ## Setup the development environment
 	-@pyenv install --skip-existing
 	@poetry install
+	@cp .pre-commit-config.standard.yaml .pre-commit-config.yaml
 	@poetry run pre-commit install
+
+setup-strict: setup
+	@echo "Appending strict pre-commit rules..."
+	@cat .pre-commit-config.addon.strict.yaml >> .pre-commit-config.yaml
 
 test:  ## Run the project tests
 	@poetry run pytest

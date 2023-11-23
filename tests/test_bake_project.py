@@ -1,3 +1,5 @@
+import shutil
+
 import pytest
 from prompt_toolkit.validation import ValidationError
 
@@ -14,7 +16,6 @@ def test_bake_with_defaults(tmp_path, copier):
     assert "README.md" in found_toplevel_files
     assert "LICENSE" in found_toplevel_files
     assert ".flake8" in found_toplevel_files
-    assert ".pre-commit-config.yaml" in found_toplevel_files
     assert ".gitattributes" in found_toplevel_files
     assert "tests" in found_toplevel_files
 
@@ -125,5 +126,12 @@ def test_bake_and_run_pre_commit(tmp_path, copier):
     project.run("git config user.name 'User Name'")
     project.run("git config user.email 'user@email.org'")
     project.run("git commit -m init")
+
+    std_pre_commit_path = project.path / ".pre-commit-config.standard.yaml"
+    strict_pre_commit_path = project.path / ".pre-commit-config.addon.strict.yaml"
+    dst_pre_commit_path = project.path / ".pre-commit-config.yaml"
+    shutil.copy(std_pre_commit_path, dst_pre_commit_path)
+    with std_pre_commit_path.open("a") as f:
+        f.write(strict_pre_commit_path.read_text())
 
     project.run("pre-commit run --all-files")

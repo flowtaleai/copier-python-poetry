@@ -18,6 +18,10 @@
   ```bash
   make setup
   ```
+  or to have more strict pre-commit rules:
+  ```bash
+  make setup-strict
+  ```
 - Open VSCode and install the suggested extensions
 
 ## Contributing

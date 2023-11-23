@@ -1,17 +1,13 @@
-# See https://pre-commit.com for more information
-# See https://pre-commit.com/hooks.html for more hooks
----
-repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v3.2.0
     hooks:
       - id: trailing-whitespace
       - id: end-of-file-fixer
-      - id: check-added-large-files
   - repo: local
     hooks:
       - id: flake8
         name: flake8
+        exclude: "template"
         language: system
         entry: poetry run flake8
         require_serial: true
@@ -20,6 +16,7 @@ repos:
     hooks:
       - id: black
         name: black
+        exclude: "template"
         language: system
         entry: poetry run black --preview
         require_serial: true
@@ -28,17 +25,11 @@ repos:
     hooks:
       - id: isort
         name: isort
+        exclude: "template"
         language: system
         entry: poetry run isort --filter-files
         require_serial: true
         types_or: [python, pyi, cython]
-  - repo: local
-    hooks:
-      - id: detect-secrets
-        name: Secret detection
-        entry: poetry run detect-secrets-hook
-        language: system
-        files: .*
   - repo: local
     hooks:
       - id: pydocstyle
