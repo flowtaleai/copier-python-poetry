@@ -8,48 +8,12 @@ For more details and the source code, visit:
 https://github.com/noirbizarre/pytest-copier/blob/main/src/pytest_copier/plugin.py
 """
 
-import shutil
-from pathlib import Path
-
 import pytest
-from pytest_copier.plugin import run
 
 
 @pytest.fixture(scope="session")
-def copier_template(
-    tmp_path_factory: pytest.TempPathFactory,
-    copier_template_root: Path,
-) -> Path:
-    """Copies temporary directories and configures git.
-
-    This fixture is auto-used by pytest-copier.
-    Overriding this fixture is necessary to avoid copying all the files in the root of
-    the project, in particular .pre-commit-config.yaml that messes up the tests.
-
-    Args:
-        tmp_path_factory: Pytest fixture for creating temporary directories.
-        copier_template_root: The root directory of the Copier template.
-
-    Returns:
-        Path: The path to the temporary Copier template directory.
-    """
-    src = tmp_path_factory.mktemp("src", False)
-
-    shutil.copytree(
-        copier_template_root / "template", src / "template", dirs_exist_ok=True
-    )
-    shutil.copyfile(copier_template_root / "copier.yml", src / "copier.yml")
-
-    # This commands are run on the src copier template in the temp test folder,
-    # not in the created project folder
-    run("git", "init", cwd=src)
-    run("git", "config", "user.name", "User Name", cwd=src)
-    run("git", "config", "user.email", "user@email.org", cwd=src)
-    run("git", "add", "-A", ".", cwd=src)
-    run("git", "commit", "-m", "test", cwd=src)
-    run("git", "tag", "99.99.99", cwd=src)
-
-    return src
+def copier_template_paths() -> list[str]:
+    return ["copier.yml", "template"]
 
 
 @pytest.fixture()
