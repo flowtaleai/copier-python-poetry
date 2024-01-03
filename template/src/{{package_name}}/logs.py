@@ -28,17 +28,11 @@ LOGGING_CONFIG = {
             "level": "INFO",
             "propagate": False,
         },
-        "__main__": {
-            "handlers": ["default"],
-            "level": "INFO",
-            "propagate": False,
-        },  # if __name__ == '__main__'
     },
 }
 
 
 def set_level(level: int):
-    LOGGING_CONFIG["loggers"]["__main__"]["level"] = level
     LOGGING_CONFIG["loggers"][TOP_LEVEL_LOGGER]["level"] = level
     logging.config.dictConfig(LOGGING_CONFIG)
 
