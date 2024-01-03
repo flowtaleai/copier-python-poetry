@@ -53,4 +53,5 @@ def handle_log_flags(verbose: bool, quiet: bool = False):
 
 
 def get_logger(name: str):
+    logging.config.dictConfig(LOGGING_CONFIG)
     return logging.getLogger(name)
