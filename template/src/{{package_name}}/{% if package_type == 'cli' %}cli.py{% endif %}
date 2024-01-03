@@ -1,12 +1,15 @@
 """{{package_name}} CLI."""
 import click
 
-from {{package_name}} import __version__
+from {{package_name}} import __version__, logs
 from {{package_name}}.{{package_name}} import a_function
 
 
 @click.command()
 @click.version_option(__version__)
-def cli():
+@click.option("-v", "--verbose", is_flag=True, help="Set log level to DEBUG.")
+@click.option("-q", "--quiet", is_flag=True, help="Set log level to WARNING.")
+def cli(verbose, quiet):
     """Engage with {{package_name}} using this cli."""
+    logs.handle_log_flags(verbose, quiet)
     print(a_function())
