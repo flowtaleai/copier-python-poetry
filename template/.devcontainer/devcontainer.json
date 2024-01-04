@@ -6,6 +6,7 @@
   "features": {
     "ghcr.io/devcontainers-contrib/features/poetry:2": { },
     "ghcr.io/devcontainers-contrib/features/pre-commit": { },
+    "ghcr.io/christophermacgown/devcontainer-features/direnv:1": {},
   },
-  "postCreateCommand": "make setup"
+  "postCreateCommand": "make setup && echo 'eval \"$(direnv hook bash)\"' >> ~/.bashrc"
 }
