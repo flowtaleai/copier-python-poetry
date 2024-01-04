@@ -85,7 +85,8 @@ ide:
 git_hosting:
   type: str
   choices:
+    - "none"
     - "gitlab"
     - "bitbucket"
-  default: "gitlab"
-  help: "Git hosting provider"
+  default: "none"
+  help: "Git hosting provider for CI pipeline configuration"
