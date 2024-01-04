@@ -19,7 +19,9 @@ def test_bake_with_defaults(copier):
     assert "tests" in found_toplevel_files
 
     assert ".vscode" in found_toplevel_files
-    assert ".gitlab-ci.yml" in found_toplevel_files
+
+    assert ".gitlab-ci.yml" not in found_toplevel_files
+    assert "bitbucket-pipelines.yml" not in found_toplevel_files
 
     assert "Pipfile" not in found_toplevel_files
     assert "bitbucket-pipelines.yml" not in found_toplevel_files
