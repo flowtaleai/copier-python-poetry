@@ -89,3 +89,4 @@ git_hosting:
     - "gitlab"
     - "bitbucket"
   default: "none"
+  help: "Git hosting provider for CI pipeline configuration"
