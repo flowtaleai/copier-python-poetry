@@ -49,7 +49,7 @@ def pytest_collection_modifyitems(config, items):
     skip_venv = pytest.mark.skip(
         reason=(
             "Might interfere with the virtual environment. Should be run with tox. Use"
-            " --run-all option to run force run it."
+            " --run-all option to force run it."
         )
     )
     for item in items:
