@@ -35,3 +35,23 @@ def copier_defaults() -> dict[str, str]:
         "license": "MIT license",
         "package_type": "cli",
     }
+
+
+def pytest_addoption(parser):
+    parser.addoption(
+        "--run-all", action="store_true", default=False, help="run all tests."
+    )
+
+
+def pytest_collection_modifyitems(config, items):
+    if config.getoption("--run-all"):
+        return
+    skip_venv = pytest.mark.skip(
+        reason=(
+            "Might interfere with the virtual environment. Should be run with tox. Use"
+            " --run-all option to force run it."
+        )
+    )
+    for item in items:
+        if "venv" in item.keywords:
+            item.add_marker(skip_venv)

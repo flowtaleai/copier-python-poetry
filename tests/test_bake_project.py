@@ -97,10 +97,8 @@ def test_bake_bitbucket(copier):
     assert ".gitlab-ci.yml" not in found_toplevel_files
 
 
-@pytest.mark.skip(
-    "poetry is run in the poetry env of the outer project creating interferences"
-)
 @pytest.mark.slow()
+@pytest.mark.venv()
 def test_bake_and_run_cli(copier):
     custom_answers = {"package_type": "cli"}
     project = copier.copy(**custom_answers)

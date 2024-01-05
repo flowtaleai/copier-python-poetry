@@ -44,6 +44,7 @@ testpaths = [
 ]
 markers = [
     "slow: slow tests",
+    "venv: tests that modify the virtual environment possibly causing interferences; should be run with tox",
 ]
 
 [tool.black]
