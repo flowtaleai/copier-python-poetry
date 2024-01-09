@@ -14,7 +14,7 @@ from {{package_name}}.{{package_name}} import a_function
     "--verbosity",
     type=click.Choice(["ERROR", "WARNING", "INFO", "DEBUG"]),
     default=os.getenv("VERBOSITY", "INFO"),
-    help="Set log verbosity level.",
+    help="Set log verbosity level [default: .env:VERBOSITY or INFO]",
 )
 def cli(verbosity):
     """Engage with {{package_name}} using this cli."""
