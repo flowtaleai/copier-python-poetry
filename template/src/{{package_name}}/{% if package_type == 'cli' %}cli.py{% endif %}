@@ -10,12 +10,11 @@ from {{package_name}}.{{package_name}} import a_function
 @click.command()
 @click.version_option(__version__)
 @click.option(
-    "-v",
-    "--verbosity",
+    "--log-level",
     type=click.Choice(["error", "warning", "info", "debug"]),
-    help="Log verbosity level [default: .env:VERBOSITY or info]",
+    help="Log level [default: .env:VERBOSITY or info]",
 )
-def cli(verbosity: Optional[str]):
+def cli(log_level: Optional[str]):
     """Engage with {{package_name}} using this cli."""
-    logs.set_level(verbosity)
+    logs.set_level(log_level)
     print(a_function())
