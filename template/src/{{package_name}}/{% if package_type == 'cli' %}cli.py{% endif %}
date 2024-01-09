@@ -1,4 +1,6 @@
 """{{package_name}} CLI."""
+import os
+
 import click
 
 from {{package_name}} import __version__, logs
@@ -11,7 +13,7 @@ from {{package_name}}.{{package_name}} import a_function
     "-v",
     "--verbosity",
     type=click.Choice(["ERROR", "WARNING", "INFO", "DEBUG"]),
-    default="INFO",
+    default=os.getenv("VERBOSITY", "INFO"),
     help="Set log verbosity level.",
 )
 def cli(verbosity):
