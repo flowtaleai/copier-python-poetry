@@ -32,18 +32,9 @@ LOGGING_CONFIG = {
 }
 
 
-def set_level(level: int):
+def set_level(level: str):
     LOGGING_CONFIG["loggers"][TOP_LEVEL_LOGGER]["level"] = level
     logging.config.dictConfig(LOGGING_CONFIG)
-
-
-def handle_log_flags(verbose: bool, quiet: bool = False):
-    if verbose and quiet:
-        raise ValueError("--verbose and --quiet cannot be set together.")
-    elif verbose:
-        set_level(logging.DEBUG)
-    elif quiet:
-        set_level(logging.WARNING)
 
 
 def get_logger(name: str):

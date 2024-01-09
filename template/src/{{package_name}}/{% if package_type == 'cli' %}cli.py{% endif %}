@@ -7,9 +7,14 @@ from {{package_name}}.{{package_name}} import a_function
 
 @click.command()
 @click.version_option(__version__)
-@click.option("-v", "--verbose", is_flag=True, help="Set log level to DEBUG.")
-@click.option("-q", "--quiet", is_flag=True, help="Set log level to WARNING.")
-def cli(verbose, quiet):
+@click.option(
+    "-v",
+    "--verbosity",
+    type=click.Choice(["ERROR", "WARNING", "INFO", "DEBUG"]),
+    default="INFO",
+    help="Set log verbosity level.",
+)
+def cli(verbosity):
     """Engage with {{package_name}} using this cli."""
-    logs.handle_log_flags(verbose, quiet)
+    logs.set_level(verbosity)
     print(a_function())
