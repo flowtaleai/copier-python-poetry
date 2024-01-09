@@ -1,5 +1,5 @@
 """{{package_name}} CLI."""
-import os
+from typing import Optional
 
 import click
 
@@ -13,10 +13,9 @@ from {{package_name}}.{{package_name}} import a_function
     "-v",
     "--verbosity",
     type=click.Choice(["error", "warning", "info", "debug"]),
-    default=os.getenv("VERBOSITY", "info"),
     help="Log verbosity level [default: .env:VERBOSITY or info]",
 )
-def cli(verbosity):
+def cli(verbosity: Optional[str]):
     """Engage with {{package_name}} using this cli."""
     logs.set_level(verbosity)
     print(a_function())

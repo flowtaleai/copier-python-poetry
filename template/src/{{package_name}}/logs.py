@@ -1,5 +1,7 @@
 import logging
 import logging.config
+import os
+from typing import Optional
 
 TOP_LEVEL_LOGGER = __name__.split(".")[0]
 
@@ -25,16 +27,17 @@ LOGGING_CONFIG = {
         },  # root logger
         TOP_LEVEL_LOGGER: {
             "handlers": ["default"],
-            "level": "INFO",
+            "level": os.getenv("VERBOSITY", "INFO").upper(),
             "propagate": False,
         },
     },
 }
 
 
-def set_level(level: str):
-    LOGGING_CONFIG["loggers"][TOP_LEVEL_LOGGER]["level"] = level.upper()
-    logging.config.dictConfig(LOGGING_CONFIG)
+def set_level(level: Optional[str]):
+    if level is not None:
+        LOGGING_CONFIG["loggers"][TOP_LEVEL_LOGGER]["level"] = level.upper()
+        logging.config.dictConfig(LOGGING_CONFIG)
 
 
 def get_logger(name: str):
