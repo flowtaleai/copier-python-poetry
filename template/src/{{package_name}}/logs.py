@@ -27,7 +27,7 @@ LOGGING_CONFIG = {
         },  # root logger
         TOP_LEVEL_LOGGER: {
             "handlers": ["default"],
-            "level": os.getenv("VERBOSITY", "INFO").upper(),
+            "level": os.getenv("LOG_LEVEL", "INFO").upper(),
             "propagate": False,
         },
     },
