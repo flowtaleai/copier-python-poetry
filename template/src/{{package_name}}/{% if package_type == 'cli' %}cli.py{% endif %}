@@ -12,9 +12,9 @@ from {{package_name}}.{{package_name}} import a_function
 @click.option(
     "-v",
     "--verbosity",
-    type=click.Choice(["ERROR", "WARNING", "INFO", "DEBUG"]),
-    default=os.getenv("VERBOSITY", "INFO"),
-    help="Set log verbosity level [default: .env:VERBOSITY or INFO]",
+    type=click.Choice(["error", "warning", "info", "debug"]),
+    default=os.getenv("VERBOSITY", "info"),
+    help="Set log verbosity level [default: .env:VERBOSITY or info]",
 )
 def cli(verbosity):
     """Engage with {{package_name}} using this cli."""

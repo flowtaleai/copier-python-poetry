@@ -33,7 +33,7 @@ LOGGING_CONFIG = {
 
 
 def set_level(level: str):
-    LOGGING_CONFIG["loggers"][TOP_LEVEL_LOGGER]["level"] = level
+    LOGGING_CONFIG["loggers"][TOP_LEVEL_LOGGER]["level"] = level.upper()
     logging.config.dictConfig(LOGGING_CONFIG)
 
 
