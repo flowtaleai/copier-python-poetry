@@ -1,7 +1,9 @@
 import logging
 import logging.config
+import os
+from typing import Optional
 
-TOP_LEVEL_LOGGER = __name__.split(".")[0]
+PACKAGE_LOGGER = __name__.split(".")[0]
 
 LOGGING_CONFIG = {
     "version": 1,
@@ -23,27 +25,21 @@ LOGGING_CONFIG = {
             "level": "WARNING",
             "propagate": False,
         },  # root logger
-        TOP_LEVEL_LOGGER: {
+        PACKAGE_LOGGER: {
             "handlers": ["default"],
-            "level": "INFO",
+            "level": os.getenv("LOG_LEVEL", "INFO").upper(),
             "propagate": False,
         },
-        "__main__": {
-            "handlers": ["default"],
-            "level": "INFO",
-            "propagate": False,
-        },  # if __name__ == '__main__'
     },
 }
 
 
-def configure_logging(verbosity_level: int = 0):
-    levels = [logging.WARNING, logging.INFO, logging.DEBUG]
-    level = levels[min(verbosity_level, len(levels) - 1)]
-    LOGGING_CONFIG["loggers"]["__main__"]["level"] = level
-    LOGGING_CONFIG["loggers"][TOP_LEVEL_LOGGER]["level"] = level
-    logging.config.dictConfig(LOGGING_CONFIG)
+def set_level(level: Optional[str]):
+    if level is not None:
+        LOGGING_CONFIG["loggers"][PACKAGE_LOGGER]["level"] = level.upper()
+        logging.config.dictConfig(LOGGING_CONFIG)
 
 
 def get_logger(name: str):
+    logging.config.dictConfig(LOGGING_CONFIG)
     return logging.getLogger(name)
