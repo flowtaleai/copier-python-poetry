@@ -17,6 +17,6 @@ setup:  ## Setup the development environment
 	@cp .pre-commit-config.standard.yaml .pre-commit-config.yaml
 	@poetry run pre-commit install
 
-setup-strict: setup
+setup-strict: setup  ## Setup the development environment with strict pre-commit rules
 	@echo "Appending strict pre-commit rules..."
 	@cat .pre-commit-config.addon.strict.yaml >> .pre-commit-config.yaml
