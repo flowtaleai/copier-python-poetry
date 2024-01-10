@@ -25,7 +25,6 @@
     hooks:
       - id: isort
         name: isort
-        exclude: "template"
         language: system
         entry: poetry run isort --filter-files
         require_serial: true
