@@ -131,7 +131,7 @@ def test_bake_and_run_pre_commit(tmp_path, copier):
     strict_pre_commit_path = project.path / ".pre-commit-config.addon.strict.yaml"
     dst_pre_commit_path = project.path / ".pre-commit-config.yaml"
     shutil.copy(std_pre_commit_path, dst_pre_commit_path)
-    with std_pre_commit_path.open("a") as f:
+    with dst_pre_commit_path.open("a") as f:
         f.write(strict_pre_commit_path.read_text())
 
     project.run("pre-commit run --all-files")
