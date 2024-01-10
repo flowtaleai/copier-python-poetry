@@ -14,7 +14,7 @@ from {{package_name}}.{{package_name}} import a_function
     type=click.Choice(["error", "warning", "info", "debug"]),
     help="Log level [default: .env:LOG_LEVEL or info]",
 )
-def cli(log_level: Optional[str]):
+def cli(log_level: Optional[str]) -> None:
     """Engage with {{package_name}} using this cli."""
     logs.set_level(log_level)
     print(a_function())
