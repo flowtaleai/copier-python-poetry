@@ -7,7 +7,6 @@ from {{package_name}}.{{package_name}} import a_function
 
 {% if testing_framework == "pytest" -%}
 def test_a_function():
-    """Sample test."""
     assert a_function() == "Hello World!"
 {%- elif testing_framework == "unittest" -%}
 class TestAFunction(unittest.TestCase):
