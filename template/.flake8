@@ -2,14 +2,16 @@
 max-line-length = {{ max_line_length }}
 max-complexity = 10
 import-order-style = google
-select = ANN,B,B9,BLK,C,E,F,I,W
 ignore = ANN101,ANN102,ANN401,D100,D104,E203,W503
 per-file-ignores =
+    src/mypack/cli.py: T
     tests/*: S101,T20
 
 # ANN101: Missing type annotation for self in method
 # ANN102: Missing type annotation for cls in method
 # ANN401: Dynamically typed expressions (typing.Any) are disallowed
+# D100: Missing docstring in public module
+# D104: Missing docstring in public package
 # E203: whitespace before ':';
 # E501: line too long;
 # W503: line break before binary operator
