@@ -4,7 +4,7 @@ max-complexity = 10
 import-order-style = google
 ignore = ANN101,ANN102,ANN401,D100,D104,E203,W503
 per-file-ignores =
-    src/mypack/cli.py: T
+    src/{{ package_name }}/cli.py: T
     tests/*: S101,T20
 
 # ANN101: Missing type annotation for self in method
