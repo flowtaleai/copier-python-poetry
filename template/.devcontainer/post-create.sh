@@ -1,2 +1,2 @@
 make setup
-echo 'eval \"$(direnv hook bash)\"' >> ~/.bashrc
+echo 'eval "$(direnv hook bash)"' >> ~/.bashrc
