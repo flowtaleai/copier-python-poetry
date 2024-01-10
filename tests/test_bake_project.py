@@ -112,7 +112,6 @@ def test_bake_and_bump_version(tmp_path, copier):
     custom_answers = {"package_type": "cli"}
     project = copier.copy(tmp_path, **custom_answers)
 
-    project.run("poetry install --only main")
     project.run("poetry run bump2version minor")
 
 
