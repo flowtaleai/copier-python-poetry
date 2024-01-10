@@ -117,6 +117,7 @@ def test_bake_and_bump_version(tmp_path, copier):
 
 
 @pytest.mark.slow()
+@pytest.mark.venv()
 def test_bake_and_run_pre_commit(tmp_path, copier):
     custom_answers = {"package_type": "cli"}
     project = copier.copy(tmp_path, **custom_answers)
@@ -134,4 +135,5 @@ def test_bake_and_run_pre_commit(tmp_path, copier):
     with dst_pre_commit_path.open("a") as f:
         f.write(strict_pre_commit_path.read_text())
 
+    project.run("poetry install")
     project.run("poetry run pre-commit run --all-files")
