@@ -134,4 +134,4 @@ def test_bake_and_run_pre_commit(tmp_path, copier):
     with dst_pre_commit_path.open("a") as f:
         f.write(strict_pre_commit_path.read_text())
 
-    project.run("pre-commit run --all-files")
+    project.run("poetry run pre-commit run --all-files")
