@@ -107,6 +107,14 @@ def test_bake_and_run_cli(tmp_path, copier):
     project.run("poetry run pythonboilerplate")
 
 
+@pytest.mark.venv()
+def test_bake_and_bump_version(tmp_path, copier):
+    custom_answers = {"package_type": "cli"}
+    project = copier.copy(tmp_path, **custom_answers)
+
+    project.run("poetry run bump2version minor")
+
+
 @pytest.mark.slow()
 def test_bake_and_run_pre_commit(tmp_path, copier):
     custom_answers = {"package_type": "cli"}
