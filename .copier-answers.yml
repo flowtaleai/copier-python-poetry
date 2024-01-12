@@ -1,7 +1,7 @@
-_commit: 0.4.0
+_commit: 0.5.0
 _src_path: git@gitlab.flowtale.ai:flowtale/internal/cookiecutter-python.git
-author_email: sg@flowtale.ai
-author_name: Simone Gaiarin
+author_email: mtn@flowtale.ai
+author_name: Flowtale
 git_hosting: gitlab
 ide: vscode
 license: MIT license

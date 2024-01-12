@@ -20,3 +20,7 @@ setup:  ## Setup the development environment
 setup-strict: setup  ## Setup the development environment with strict pre-commit rules
 	@echo "Appending strict pre-commit rules..."
 	@cat .pre-commit-config.addon.strict.yaml >> .pre-commit-config.yaml
+
+test:  ## Run the project tests
+	@poetry run pytest
+.PHONY: test
