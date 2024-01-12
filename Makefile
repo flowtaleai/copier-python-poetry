@@ -22,5 +22,5 @@ setup-strict: setup  ## Setup the development environment with strict pre-commit
 	@cat .pre-commit-config.addon.strict.yaml >> .pre-commit-config.yaml
 
 test:  ## Run the project tests
-	@poetry run pytest
+	@poetry run tox
 .PHONY: test
