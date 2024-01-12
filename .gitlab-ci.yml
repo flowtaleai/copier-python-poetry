@@ -6,8 +6,9 @@ stages:
   - linting
 
 before_script:
+  - apt-get update && apt-get install -y make
   - pip install poetry
-  - poetry install
+  - make setup-strict
 
 test:
   stage: test

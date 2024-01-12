@@ -26,15 +26,19 @@ Opinionated copier template for Flowtale python projects.
 
 #### On commit
 
-pre-commit is executed automatically before each commit in order to prevent code that does not follow the project guidelines.
+pre-commit is executed automatically before each commit in order to prevent code that does not follow the project guidelines. Depending on the user configuration either only the standard checks or all the checks are run on commit.
 
 Some pre-commit hooks modify the files. Re-stage them after the modification.
 
-Checks
+Standard checks:
+
+- Check for big file added to commit
+- Check for committed secrets
+
+Strict checks:
 
 - Trailing whitespaces removed
 - Add newline at the end of the file
-- Check for big file added to commit
 - `flake8` linter executed
 - `black` formatter executed
 - `isort` import sorted executed
@@ -48,15 +52,13 @@ Checks
 | pep8-naming         | Check your code against [PEP 8](https://www.python.org/dev/peps/pep-0008/) naming conventions. |        |
 | flake8-pytest-style | Check for common style issues or inconsistencies with `pytest`-based tests. |        |
 | flake8-print        | Forbids print in the code besides `cli.py` (use `logging`!)  | x      |
-| flake8-return       | Flake8 plugin that checks return values.                     | x      |
 | flake8-eradicate    | Find commented out (or so called "dead") code.               | x      |
 | flake8-bugbear      | Find likely bugs and design problems in your program         | x      |
-| flake8-bandit       | Automated security testing built right into your workflow!   | x      |
 | flake8-annotations  | Find missing type annotations                                | x      |
 
 #### On push
 
-- Tests and pre-commit on all files executed on the CI
+- Tests and run all the pre-commit checks on all files executed on the CI
 
 ## Install
 
@@ -261,3 +263,5 @@ eval "$(pyenv init -)"
   ```
 
 - The versions of python dependencies of the tools (black, flake, ...) are managed by the cookiecutter and should not be changed manually in the generated projects. This allows to keep the various projects aligned and have a consistent behavior when we develop on multiple projects. Sometimes a newer cookiecutter version may be applied to a project before the others, so there is a period where there is a disalignment, but at least is a controlled one.
+
+- typing annotations are not checked in the tests because tests do not need to be perfect and we want to be able to write them fast.

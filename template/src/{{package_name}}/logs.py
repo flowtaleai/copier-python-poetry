@@ -34,12 +34,12 @@ LOGGING_CONFIG = {
 }
 
 
-def set_level(level: Optional[str]):
+def set_level(level: Optional[str]) -> None:
     if level is not None:
         LOGGING_CONFIG["loggers"][PACKAGE_LOGGER]["level"] = level.upper()
         logging.config.dictConfig(LOGGING_CONFIG)
 
 
-def get_logger(name: str):
+def get_logger(name: str) -> logging.Logger:
     logging.config.dictConfig(LOGGING_CONFIG)
     return logging.getLogger(name)
