@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "template"
-version = "0.4.0"
+version = "0.5.0"
 description = "Opinionated copier template for python projects"
 authors = [
   "Anders Stendevad <as@flowtale.ai>",
