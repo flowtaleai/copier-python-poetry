@@ -2,7 +2,11 @@
 
 {{ project_short_description }}
 
-## Install
+## Usage
+
+TBW
+
+## Setup
 
 ### Dependencies
 
@@ -24,7 +28,7 @@
   ```
 - Open VSCode and install the suggested extensions
 
-## Contributing
+## Versioning
 
 This project is tagged with versions according to [SemVer](https://semver.org/). To bump the project version:
 

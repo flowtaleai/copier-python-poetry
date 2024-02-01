@@ -67,7 +67,7 @@ Strict checks:
 Dependencies to create the project template with copier
 
 - python (suggested install method: system)
-- copier [suggested install method: pipx]
+- copier (suggested install method: pipx)
 
 Dependencies for the project
 
@@ -84,12 +84,6 @@ These configurations are required to setup the development environment and need 
 
 ```bash
 poetry config virtualenvs.prefer-active-python true
-```
-
-(Optional) To create the virtual envs within the project folder
-
-```bash
-poetry config virtualenvs.in-project true
 ```
 
 This setting allows to easier to rename the project folder without having to recreated the virtual environment. It
@@ -116,7 +110,7 @@ eval "$(pyenv init -)"
 1. Create a new project based on this copier template (it can also be applied to existing projects)
 
    ```bash
-   copier copy https://gitlab.flowtale.ai/flowtale/cookiecutter-python project-folder
+   copier copy https://github.com/flowtaleai/copier-python-poetry.git project-folder
    ```
 
    The template version used corresponds to the most recent tag of the template repository.
@@ -188,11 +182,11 @@ eval "$(pyenv init -)"
 
 ### python dependencies
 
-- Do not manually change the [dependency specification](https://python-poetry.org/docs/dependency-specification/) of the python packages related to the cookiecutter (i.e. do not change the version in pyproject.toml). These will be automatically updated when we apply an update of the cookiecutter.
+- Do not manually change the [dependency specification](https://python-poetry.org/docs/dependency-specification/) of the python packages related to the copier template (i.e. do not change the version in pyproject.toml). These will be automatically updated when we apply an update of the copier template.
 
 #### VSCode
 
-- VSCode should automatically detect the virtual environment if poetry is configured to store the venv in a subfolder of the project.
+- VSCode should automatically detect the virtual environment if poetry is configured to store the venv in a subfolder of the project (it is by default).
 - Otherwise manually select the interpreter with `Python: Select interpreter`
     - Run `poetry run poetry env info -p` to discover where it is located
 
@@ -262,6 +256,6 @@ eval "$(pyenv init -)"
   )
   ```
 
-- The versions of python dependencies of the tools (black, flake, ...) are managed by the cookiecutter and should not be changed manually in the generated projects. This allows to keep the various projects aligned and have a consistent behavior when we develop on multiple projects. Sometimes a newer cookiecutter version may be applied to a project before the others, so there is a period where there is a disalignment, but at least is a controlled one.
+- The versions of python dependencies of the tools (black, flake, ...) are managed by the copier template and should not be changed manually in the generated projects. This allows to keep the various projects aligned and have a consistent behavior when we develop on multiple projects. Sometimes a newer copier template version may be applied to a project before the others, so there is a period where there is a disalignment, but at least is a controlled one.
 
 - typing annotations are not checked in the tests because tests do not need to be perfect and we want to be able to write them fast.
