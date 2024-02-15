@@ -14,6 +14,11 @@ project_name:
   type: str
   placeholder: Python Boilerplate
   help: "Human friendly project name"
+  validator: >-
+    {% if project_name | length == 0 %}
+    The project name cannot be empty.
+    {% endif %}
+
 
 package_name:
   type: str
