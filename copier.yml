@@ -28,7 +28,7 @@ package_name:
   default: "{{ project_name | lower | replace(' ', '') | replace('-', '_') }}"
   validator: >-
     {% if not (package_name | regex_search('^[a-z][a-z0-9_]*$')) %}
-    package_name must start with a lowercase letter and can only contain lowercase letters, numbers, or dashes.
+    package_name must start with a lowercase letter and can only contain lowercase letters, numbers, or underscores.
     {% endif %}
 
 project_short_description:
