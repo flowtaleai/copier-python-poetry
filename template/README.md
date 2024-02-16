@@ -36,7 +36,7 @@ Project specific environment variables are defined in the `.env` file. This file
 
 ##### Production
 
-For production it is not recommended to use a `.env` file or direnv but instead ensure that any secrets are retrieved from a secrets manager or key-value store in your CI/CD pipeline.
+For production it is not recommended to use a `.envrc` file or direnv.
 
 ## Versioning
 
