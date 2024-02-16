@@ -1,61 +1,68 @@
-import re
-
-
-# Function to validate project_name
-def validate_project_name(project_name):
-    return len(project_name.strip()) > 0
-
-
-# Function to validate package_name
-def validate_package_name(package_name):
-    return bool(re.match(r"^[a-z][a-z0-9-]*$", package_name))
-
-
-# Function to validate email
-def validate_email(email):
-    if len(email) == 0 or "@" in email:
-        return True
-    else:
-        return False
-
-
-# Function to validate version
-def validate_version(version):
-    if re.match(r"^\d+(\.\d+)*$", version):
-        return True
-    else:
-        return False
+import pytest
+from prompt_toolkit.validation import ValidationError
 
 
 # Tests for validate_project_name
-def test_validate_project_name():
-    assert validate_project_name("Python Boilerplate")
-    assert not validate_project_name(" ")
-    assert not validate_project_name("")
+def test_validate_project_name(tmp_path, copier):
+    test_project_names = ["Test project", " ", ""]
+    test_valid_respons = [True, False, False]
+    for (name, valid) in zip(test_project_names, test_valid_respons, strict=True):
+        custom_answers = {"project_name": name}
+        if valid:
+            project = copier.copy(tmp_path, **custom_answers)
+            project.run("pytest")
+        else:
+            with pytest.raises(ValidationError):
+                copier.copy(tmp_path, **custom_answers)
 
 
-# Tests for validate_package_name
-def test_validate_package_name():
-    assert validate_package_name("validpackagename")
-    assert validate_package_name("valid-package-name")
-    assert not validate_package_name("2invalidpackagename")
-    assert not validate_package_name("invalidPackageName")
-    assert not validate_package_name("invalid_package_name")
-    assert not validate_package_name("-invalidpackagename")
-    assert not validate_package_name("")
+def test_validate_package_name(tmp_path, copier):
+    test_package_names = [
+        "validpackagename",
+        "valid_package_name",
+        "invalid-package-name",
+        "2invalidpackagename",
+        "invalidPackageName",
+        "_invalidpackagename",
+        "",
+    ]
+    test_valid_responses = [True, True, False, False, False, False, False]
+    for (name, valid) in zip(test_package_names, test_valid_responses, strict=True):
+        custom_answers = {"project_name": "test", "package_name": name}
+        print(name, valid)
+        if valid:
+            project = copier.copy(tmp_path, **custom_answers)
+            project.run("pytest")
+        else:
+            with pytest.raises(ValidationError):
+                copier.copy(tmp_path, **custom_answers)
 
 
 # Tests for validate_email
-def test_validate_email():
-    assert validate_email("")
-    assert validate_email("user@example.com")
-    assert not validate_email("userexample.com")
+def test_validate_email(tmp_path, copier):
+    test_emails = ["userexample.com"]
+    test_valid_responses = [False]
+    for (email, valid) in zip(test_emails, test_valid_responses, strict=True):
+        custom_answers = {"author_email": email}
+        print(email, valid)
+        if valid:
+            project = copier.copy(tmp_path, **custom_answers)
+            project.run("pytest")
+        else:
+            with pytest.raises(ValidationError):
+                copier.copy(tmp_path, **custom_answers)
 
 
 # Tests for validate_version
-def test_validate_version():
-    assert validate_version("0.1.0")
-    assert validate_version("1.2.3")
-    assert validate_version("10.20.30")
-    assert not validate_version("invalid_version")
-    assert not validate_version("1.2.3.4.5.6.a")
+def test_validate_version(tmp_path, copier):
+    test_versions = ["0.1.0", "1.2.3", "10.20.30", "invalid_version", "1.2.3.4.5.6.a"]
+    test_valid_responses = [True, True, True, False, False]
+    for (version, valid) in zip(test_versions, test_valid_responses, strict=True):
+        custom_answers = {"version": version}
+        print(version, valid)
+        if valid:
+            project = copier.copy(tmp_path, **custom_answers)
+            project.run("pytest")
+        else:
+            with pytest.raises(ValidationError):
+                copier.copy(tmp_path, **custom_answers)
