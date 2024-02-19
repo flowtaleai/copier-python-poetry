@@ -26,13 +26,13 @@ lint:   ## Runs linting on all project files
 	@echo "Running detect-secrets..."
 	@poetry run detect-secrets-hook
 	@echo "Running flake8"
-	@poetry run flake8 src
+	@poetry run flake8 **/*.py
 	@echo "Running black"
-	@poetry run black --preview src
+	@poetry run black --preview --pyi **/*.py
 	@echo "Running isort"
 	@poetry run isort --filter-files src
 	@echo "Running pydocstyle"
-	@poetry run pydocstyle src
+	@poetry run pydocstyle **/*.py
 .PHONY: lint
 
 test:  ## Run the project tests
