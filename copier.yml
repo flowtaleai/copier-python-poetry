@@ -41,7 +41,7 @@ version:
   default: "0.1.0"
   help: "Initial project version"
   validator: >-
-    {% if not (version | regex_search('^\d+(\.\d+)*$')) %}
+    {% if not (version | regex_search('^\d+(\.\d+){3}$')) %}
     Version must be in the format of 'MAJOR.MINOR.PATCH', where MAJOR, MINOR, and PATCH are non-negative integers without leading zeroes, separated by dots. For example, '1.2.3'.
     {% endif %}
 
