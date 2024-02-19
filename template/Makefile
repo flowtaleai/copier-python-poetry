@@ -22,17 +22,10 @@ setup-strict: setup  ## Setup the development environment with strict pre-commit
 	@cat .pre-commit-config.addon.strict.yaml >> .pre-commit-config.yaml
 
 lint:   ## Runs linting on all project files
-	@echo "Running CI-like linting..."
-	@echo "Running detect-secrets..."
-	@poetry run detect-secrets-hook
-	@echo "Running flake8"
-	@poetry run flake8 **/*.py
-	@echo "Running black"
-	@poetry run black --preview --pyi **/*.py
-	@echo "Running isort"
-	@poetry run isort --filter-files **/*.py
-	@echo "Running pydocstyle"
-	@poetry run pydocstyle **/*.py
+	@tempfile=$$(mktemp) && \
+	trap 'rm -f $$tempfile' EXIT && \
+	cat .pre-commit-config.standard.yaml .pre-commit-config.addon.strict.yaml > $$tempfile && \
+	poetry run pre-commit run --all-files -c $$tempfile
 .PHONY: lint
 
 test:  ## Run the project tests
