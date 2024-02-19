@@ -30,7 +30,7 @@ lint:   ## Runs linting on all project files
 	@echo "Running black"
 	@poetry run black --preview --pyi **/*.py
 	@echo "Running isort"
-	@poetry run isort --filter-files src
+	@poetry run isort --filter-files **/*.py
 	@echo "Running pydocstyle"
 	@poetry run pydocstyle **/*.py
 .PHONY: lint
