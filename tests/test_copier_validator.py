@@ -2,67 +2,66 @@ import pytest
 from prompt_toolkit.validation import ValidationError
 
 
-# Tests for validate_project_name
-def test_validate_project_name(tmp_path, copier):
-    test_project_names = ["Test project", " ", ""]
-    test_valid_respons = [True, False, False]
-    for (name, valid) in zip(test_project_names, test_valid_respons, strict=True):
-        custom_answers = {"project_name": name}
-        if valid:
-            project = copier.copy(tmp_path, **custom_answers)
-            project.run("pytest")
-        else:
-            with pytest.raises(ValidationError):
-                copier.copy(tmp_path, **custom_answers)
+@pytest.mark.parametrize("project_name", ["Test project"])
+def test_validate_project_name_valid(tmp_path, copier, project_name):
+    custom_answers = {"project_name": project_name}
+    project = copier.copy(tmp_path, **custom_answers)
+    project.run("pytest")
 
 
-def test_validate_package_name(tmp_path, copier):
-    test_package_names = [
-        "validpackagename",
-        "valid_package_name",
+@pytest.mark.parametrize("project_name", [" ", ""])
+def test_validate_project_name_invalid(tmp_path, copier, project_name):
+    with pytest.raises(ValidationError):
+        custom_answers = {"project_name": project_name}
+        copier.copy(tmp_path, **custom_answers)
+
+
+@pytest.mark.parametrize("package_name", ["validpackagename", "valid_package_name"])
+def test_validate_package_name_valid(tmp_path, copier, package_name):
+    custom_answers = {"package_name": package_name}
+    project = copier.copy(tmp_path, **custom_answers)
+    project.run("pytest")
+
+
+@pytest.mark.parametrize(
+    "package_name",
+    [
         "invalid-package-name",
         "2invalidpackagename",
         "invalidPackageName",
         "_invalidpackagename",
         "",
-    ]
-    test_valid_responses = [True, True, False, False, False, False, False]
-    for (name, valid) in zip(test_package_names, test_valid_responses, strict=True):
-        custom_answers = {"project_name": "test", "package_name": name}
-        print(name, valid)
-        if valid:
-            project = copier.copy(tmp_path, **custom_answers)
-            project.run("pytest")
-        else:
-            with pytest.raises(ValidationError):
-                copier.copy(tmp_path, **custom_answers)
+    ],
+)
+def test_validate_package_name_invalid(tmp_path, copier, package_name):
+    with pytest.raises(ValidationError):
+        custom_answers = {"package_name": package_name}
+        copier.copy(tmp_path, **custom_answers)
 
 
-# Tests for validate_email
-def test_validate_email(tmp_path, copier):
-    test_emails = ["userexample.com"]
-    test_valid_responses = [False]
-    for (email, valid) in zip(test_emails, test_valid_responses, strict=True):
+@pytest.mark.parametrize("email", ["", "test@test.com"])
+def test_validate_email_valid(tmp_path, copier, email):
+    custom_answers = {"author_email": email}
+    project = copier.copy(tmp_path, **custom_answers)
+    project.run("pytest")
+
+
+@pytest.mark.parametrize("email", ["userexample.com"])
+def test_validate_email_invalid(tmp_path, copier, email):
+    with pytest.raises(ValidationError):
         custom_answers = {"author_email": email}
-        print(email, valid)
-        if valid:
-            project = copier.copy(tmp_path, **custom_answers)
-            project.run("pytest")
-        else:
-            with pytest.raises(ValidationError):
-                copier.copy(tmp_path, **custom_answers)
+        copier.copy(tmp_path, **custom_answers)
 
 
-# Tests for validate_version
-def test_validate_version(tmp_path, copier):
-    test_versions = ["0.1.0", "1.2.3", "10.20.30", "invalid_version", "1.2.3.4.5.6.a"]
-    test_valid_responses = [True, True, True, False, False]
-    for (version, valid) in zip(test_versions, test_valid_responses, strict=True):
+@pytest.mark.parametrize("version", ["0.1.0", "1.2.3", "10.20.30"])
+def test_validate_version_valid(tmp_path, copier, version):
+    custom_answers = {"version": version}
+    project = copier.copy(tmp_path, **custom_answers)
+    project.run("pytest")
+
+
+@pytest.mark.parametrize("version", ["invalid_version", "1.2.3.4.5.6.a"])
+def test_validate_version_invalid(tmp_path, copier, version):
+    with pytest.raises(ValidationError):
         custom_answers = {"version": version}
-        print(version, valid)
-        if valid:
-            project = copier.copy(tmp_path, **custom_answers)
-            project.run("pytest")
-        else:
-            with pytest.raises(ValidationError):
-                copier.copy(tmp_path, **custom_answers)
+        copier.copy(tmp_path, **custom_answers)
