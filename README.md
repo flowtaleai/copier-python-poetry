@@ -4,18 +4,19 @@ Opinionated copier template for Flowtale python projects.
 
 ## Features
 
-| Task                 | Tool                                                         |
-| -------------------- | ------------------------------------------------------------ |
-| Testing framework    | pytest, unittest                                             |
-| Test mocking         | pytest-mock                                                  |
-| Pre-commit hooks     | pre-commit                                                   |
-| Version management   | bump2version                                                 |
-| Common style         | EditorConfig                                                 |
-| Editor configuration | vscode with suggested extensions                             |
-| Autoformatters       | black with experimental string processing (`--preview`), pydocstyle |
-| Linters              | flake8, pydocstyle                                           |
-| Test and packaging   | gitlab-ci                                                    |
-| Run common commands  | make                                                         |
+| Task                   | Tool                                                         |
+| --------------------   | ------------------------------------------------------------ |
+| Testing framework      | pytest, unittest                                             |
+| Test mocking           | pytest-mock                                                  |
+| Pre-commit hooks       | pre-commit                                                   |
+| Version management     | bump2version                                                 |
+| Environment management | direnv                                                       |
+| Common style           | EditorConfig                                                 |
+| Editor configuration   | vscode with suggested extensions                             |
+| Autoformatters         | black with experimental string processing (`--preview`), pydocstyle |
+| Linters                | flake8, pydocstyle                                           |
+| Test and packaging     | gitlab-ci                                                    |
+| Run common commands    | make                                                         |
 
 ### Automatisms
 
@@ -101,6 +102,13 @@ export PYENV_ROOT="$HOME/.pyenv"
 command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
 eval "$(pyenv init -)"
 ```
+
+#### direnv (recommended)
+
+direnv is a tool that enables automatic loading and unloading of directory-specific environment variables. It is useful to automatically activate the virtual environment and load any project specific environment variables when entering a project folder. Because this template expects the use of poetry, the `.envrc` file accompanying the template includes a function to automatically load a poetry virtual environment, and will also load project specific environment variables from any present `.env` file with the dotenv command.
+
+To make use of direnv, make sure it is installed. Go to the project root directory (where the `.envrc` file is located) and run `direnv allow`.
+
 
 ## Usage
 
