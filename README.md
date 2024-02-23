@@ -61,7 +61,7 @@ Strict checks:
 
 - Tests and run all the pre-commit checks on all files executed on the CI
 
-## Install
+## Setup
 
 ### Dependencies
 
@@ -228,7 +228,7 @@ To make use of direnv, make sure it is installed. Go to the project root directo
 
 - A note to the [Rationale][#rationale] section should be added if it helps explaining non-obvious choices
 
-### Bumping the version
+### Versioning
 
 - This project is tagged with versions according to [SemVer](https://semver.org/).
 
