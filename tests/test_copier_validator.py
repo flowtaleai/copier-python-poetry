@@ -53,10 +53,7 @@ def test_validate_email_valid(tmp_path, copier, email):
 
 
 def test_validate_email_invalid(tmp_path, copier):
-    custom_answers = {
-        "author_email": "userexample.com",
-        "distribution_name": "test-name",
-    }
+    custom_answers = {"author_email": "userexample.com"}
     with pytest.raises(ValidationError):
         copier.copy(tmp_path, **custom_answers)
 
