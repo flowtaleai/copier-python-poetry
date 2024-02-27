@@ -14,22 +14,26 @@ author_email:
     Non-empty email address must contain "@".
     {% endif %}
 
-project_name:
+distribution_name:
   type: str
-  placeholder: Python Boilerplate
-  help: "Human friendly project name"
+  help: "The name of the python distribution"
   validator: >-
-    {% if project_name | length == 0 or not project_name | regex_search('^[a-zA-Z]') %}
-    The project name must start with a letter and cannot be empty.
+    {% if not (package_name | regex_search('^[a-z][a-z0-9_-]*$')) %}
+    distribution must start with a lowercase letter and can only contain lowercase letters, numbers, dashes, or underscores.
     {% endif %}
 
 package_name:
   type: str
-  default: "{{ project_name | lower | replace(' ', '')}}"
+  default: "{{ distribution_name | replace('-', '_')}}"
   validator: >-
-    {% if not (package_name | regex_search('^[a-z][a-z0-9_-]*$')) %}
+    {% if not (package_name | regex_search('^[a-z][a-z0-9_]*$')) %}
     package_name must start with a lowercase letter and can only contain lowercase letters, numbers, or underscores.
     {% endif %}
+
+project_name:
+  type: str
+  help: "Human friendly project name [OPTIONAL]"
+
 
 project_short_description:
   type: str
