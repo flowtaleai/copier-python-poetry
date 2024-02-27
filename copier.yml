@@ -18,7 +18,7 @@ distribution_name:
   type: str
   help: "Python distribution name"
   validator: >-
-    {% if not (distribution_name | regex_search('^[a-z][a-z0-9_-]*$')) %}
+    {% if not (distribution_name | regex_search('^[a-z][a-z0-9_-][a-z0-9]*$')) %}
     distribution must start with a lowercase letter and can only contain lowercase letters, numbers, dashes, or underscores.
     {% endif %}
 
