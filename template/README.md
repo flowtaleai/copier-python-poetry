@@ -1,4 +1,4 @@
-# {{ project_name }}
+# {{ project_name | default(distribution_name) }}
 
 {{ project_short_description }}
 
