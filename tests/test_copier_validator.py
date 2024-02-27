@@ -2,9 +2,8 @@ import pytest
 from prompt_toolkit.validation import ValidationError
 
 
-@pytest.mark.parametrize("project_name", ["Test project"])
-def test_validate_project_name_valid(tmp_path, copier, project_name):
-    custom_answers = {"project_name": project_name}
+def test_validate_project_name_valid(tmp_path, copier):
+    custom_answers = {"project_name": "Test project"}
     project = copier.copy(tmp_path, **custom_answers)
     project.run("pytest")
 
@@ -46,9 +45,8 @@ def test_validate_email_valid(tmp_path, copier, email):
     project.run("pytest")
 
 
-@pytest.mark.parametrize("email", ["userexample.com"])
-def test_validate_email_invalid(tmp_path, copier, email):
-    custom_answers = {"author_email": email}
+def test_validate_email_invalid(tmp_path, copier):
+    custom_answers = {"author_email": "userexample.com"}
     with pytest.raises(ValidationError):
         copier.copy(tmp_path, **custom_answers)
 
