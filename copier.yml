@@ -24,6 +24,7 @@ distribution_name:
 
 package_name:
   type: str
+  help: "Python package name"
   default: "{{ distribution_name | replace('-', '_')}}"
   validator: >-
     {% if not (package_name | regex_search('^[a-z][a-z0-9_]*$')) %}
