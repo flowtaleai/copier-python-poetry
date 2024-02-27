@@ -1,4 +1,4 @@
-# {{ project_name | default(distribution_name) }}
+# {{ project_name if project_name else distribution_name }}
 
 {{ project_short_description }}
 
