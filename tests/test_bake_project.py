@@ -99,7 +99,7 @@ def test_bake_app_and_check_cli_scripts(tmp_path, copier):
     pyproject_path = project.path / "pyproject.toml"
     assert (
         '''[tool.poetry.scripts]
-test_name = "test_name.cli:cli"'''
+pythonboilerplate = "pythonboilerplate.cli:cli"'''
         in pyproject_path.read_text()
     )
 
