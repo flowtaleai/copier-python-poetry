@@ -6,8 +6,8 @@ from prompt_toolkit.validation import ValidationError
     "distribution_name",
     ["validpackagename", "valid_package_name", "valid-package-name"],
 )
-def test_validate_distribtuion_name_valid(tmp_path, copier, package_name):
-    custom_answers = {"distribution_name": package_name}
+def test_validate_distribtuion_name_valid(tmp_path, copier, distribution_name):
+    custom_answers = {"distribution_name": distribution_name}
     project = copier.copy(tmp_path, **custom_answers)
     project.run("pytest")
 
@@ -16,8 +16,8 @@ def test_validate_distribtuion_name_valid(tmp_path, copier, package_name):
     "distribution_name",
     ["", "-test", "test-", "distribution name"],
 )
-def test_validate_distribtuion_name_invalid(tmp_path, copier, package_name):
-    custom_answers = {"distribution_name": package_name}
+def test_validate_distribtuion_name_invalid(tmp_path, copier, distribution_name):
+    custom_answers = {"distribution_name": distribution_name}
     with pytest.raises(ValidationError):
         copier.copy(tmp_path, **custom_answers)
 

@@ -22,6 +22,7 @@ distribution_name:
     distribution must start with a lowercase letter and can only contain lowercase letters, numbers, dashes, or underscores.
     {% endif %}
 
+
 package_name:
   type: str
   help: "Python package name"
