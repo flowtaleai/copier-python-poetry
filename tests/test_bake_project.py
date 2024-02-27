@@ -5,7 +5,7 @@ from prompt_toolkit.validation import ValidationError
 
 
 def test_bake_with_defaults(tmp_path, copier):
-    project = copier.copy(tmp_path)
+    project = copier.copy(tmp_path, distribution_name="test-name")
 
     found_toplevel_files = [f.name for f in project.path.glob("*")]
     assert ".bumpversion.cfg" in found_toplevel_files
@@ -27,7 +27,7 @@ def test_bake_with_defaults(tmp_path, copier):
     assert "Pipfile" not in found_toplevel_files
     assert "bitbucket-pipelines.yml" not in found_toplevel_files
 
-    assert (project.path / "src" / "pythonboilerplate").exists()
+    assert (project.path / "src" / "test_name").exists()
 
 
 def test_bake_and_run_tests_with_pytest_framework(tmp_path, copier):
@@ -84,7 +84,7 @@ def test_bake_app_and_check_cli_scripts(tmp_path, copier):
     pyproject_path = project.path / "pyproject.toml"
     assert (
         '''[tool.poetry.scripts]
-pythonboilerplate = "pythonboilerplate.cli:cli"'''
+test_name = "test_name.cli:cli"'''
         in pyproject_path.read_text()
     )
 
