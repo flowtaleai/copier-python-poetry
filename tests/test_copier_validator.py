@@ -2,15 +2,22 @@ import pytest
 from prompt_toolkit.validation import ValidationError
 
 
-def test_validate_project_name_valid(tmp_path, copier):
-    custom_answers = {"project_name": "Test project"}
+@pytest.mark.parametrize(
+    "distribution_name",
+    ["validpackagename", "valid_package_name", "valid-package-name"],
+)
+def test_validate_distribtuion_name_valid(tmp_path, copier, package_name):
+    custom_answers = {"distribution_name": package_name}
     project = copier.copy(tmp_path, **custom_answers)
     project.run("pytest")
 
 
-@pytest.mark.parametrize("project_name", [" ", ""])
-def test_validate_project_name_invalid(tmp_path, copier, project_name):
-    custom_answers = {"project_name": project_name}
+@pytest.mark.parametrize(
+    "distribution_name",
+    ["", "-test", "test-", "distribution name"],
+)
+def test_validate_distribtuion_name_invalid(tmp_path, copier, package_name):
+    custom_answers = {"distribution_name": package_name}
     with pytest.raises(ValidationError):
         copier.copy(tmp_path, **custom_answers)
 
