@@ -31,14 +31,20 @@ def test_bake_with_defaults(tmp_path, copier):
 
 
 def test_bake_and_run_tests_with_pytest_framework(tmp_path, copier):
-    custom_answers = {"testing_framework": "pytest", "distribution_name": "test-name"}
+    custom_answers = {
+        "testing_framework": "pytest",
+        "distribution_name": "pythonboilerplate",
+    }
     project = copier.copy(tmp_path, **custom_answers)
 
     project.run("pytest")
 
 
 def test_bake_and_run_tests_with_unittest_framework(tmp_path, copier):
-    custom_answers = {"testing_framework": "unittest", "distribution_name": "test-name"}
+    custom_answers = {
+        "testing_framework": "unittest",
+        "distribution_name": "pythonboilerplate",
+    }
     project = copier.copy(tmp_path, **custom_answers)
 
     found_toplevel_files = [f.name for f in project.path.glob("*")]
@@ -47,7 +53,10 @@ def test_bake_and_run_tests_with_unittest_framework(tmp_path, copier):
 
 
 def test_bake_with_proprietary_license(tmp_path, copier):
-    custom_answers = {"license": "Proprietary", "distribution_name": "test-name"}
+    custom_answers = {
+        "license": "Proprietary",
+        "distribution_name": "pythonboilerplate",
+    }
     project = copier.copy(tmp_path, **custom_answers)
 
     found_toplevel_files = [f.name for f in project.path.glob("*")]
@@ -55,13 +64,16 @@ def test_bake_with_proprietary_license(tmp_path, copier):
 
 
 def test_bake_with_invalid_package_name(tmp_path, copier):
-    custom_answers = {"package_name": "1invalid", "distribution_name": "test-name"}
+    custom_answers = {
+        "package_name": "1invalid",
+        "distribution_name": "pythonboilerplate",
+    }
     with pytest.raises(ValidationError):
         copier.copy(tmp_path, **custom_answers)
 
 
 def test_bake_cli_application(tmp_path, copier):
-    custom_answers = {"package_type": "cli", "distribution_name": "test-name"}
+    custom_answers = {"package_type": "cli", "distribution_name": "pythonboilerplate"}
     project = copier.copy(tmp_path, **custom_answers)
 
     found_cli_script = [f.name for f in project.path.glob("**/cli.py")]
@@ -69,7 +81,10 @@ def test_bake_cli_application(tmp_path, copier):
 
 
 def test_bake_library(tmp_path, copier):
-    custom_answers = {"package_type": "library", "distribution_name": "test-name"}
+    custom_answers = {
+        "package_type": "library",
+        "distribution_name": "pythonboilerplate",
+    }
     project = copier.copy(tmp_path, **custom_answers)
 
     found_cli_script = [f.name for f in project.path.glob("**/cli.py")]
@@ -77,20 +92,23 @@ def test_bake_library(tmp_path, copier):
 
 
 def test_bake_app_and_check_cli_scripts(tmp_path, copier):
-    custom_answers = {"package_type": "cli", "distribution_name": "test-name"}
+    custom_answers = {"package_type": "cli", "distribution_name": "pythonboilerplate"}
     project = copier.copy(tmp_path, **custom_answers)
 
     assert project.path.is_dir()
     pyproject_path = project.path / "pyproject.toml"
     assert (
         '''[tool.poetry.scripts]
-test_name = "test_name.cli:cli"'''
+pythonboilerplate = "pythonboilerplate.cli:cli"'''
         in pyproject_path.read_text()
     )
 
 
 def test_bake_bitbucket(tmp_path, copier):
-    custom_answers = {"git_hosting": "bitbucket", "distribution_name": "test-name"}
+    custom_answers = {
+        "git_hosting": "bitbucket",
+        "distribution_name": "pythonboilerplate",
+    }
     project = copier.copy(tmp_path, **custom_answers)
 
     found_toplevel_files = [f.name for f in project.path.glob("*")]
@@ -101,7 +119,7 @@ def test_bake_bitbucket(tmp_path, copier):
 @pytest.mark.slow()
 @pytest.mark.venv()
 def test_bake_and_run_cli(tmp_path, copier):
-    custom_answers = {"package_type": "cli", "distribution_name": "test-name"}
+    custom_answers = {"package_type": "cli", "distribution_name": "pythonboilerplate"}
     project = copier.copy(tmp_path, **custom_answers)
 
     project.run("poetry install --only main")
@@ -110,7 +128,7 @@ def test_bake_and_run_cli(tmp_path, copier):
 
 @pytest.mark.venv()
 def test_bake_and_bump_version(tmp_path, copier):
-    custom_answers = {"package_type": "cli", "distribution_name": "test-name"}
+    custom_answers = {"package_type": "cli", "distribution_name": "pythonboilerplate"}
     project = copier.copy(tmp_path, **custom_answers)
 
     project.run("poetry run bump2version minor")
@@ -119,7 +137,7 @@ def test_bake_and_bump_version(tmp_path, copier):
 @pytest.mark.slow()
 @pytest.mark.venv()
 def test_bake_and_run_pre_commit(tmp_path, copier):
-    custom_answers = {"package_type": "cli", "distribution_name": "test-name"}
+    custom_answers = {"package_type": "cli", "distribution_name": "pythonboilerplate"}
     project = copier.copy(tmp_path, **custom_answers)
 
     project.run("git init")
