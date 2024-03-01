@@ -4,19 +4,19 @@ Opinionated copier template for Flowtale python projects.
 
 ## Features
 
-| Task                   | Tool                                                         |
-| --------------------   | ------------------------------------------------------------ |
-| Testing framework      | pytest, unittest                                             |
-| Test mocking           | pytest-mock                                                  |
-| Pre-commit hooks       | pre-commit                                                   |
-| Version management     | bump2version                                                 |
-| Environment management | direnv                                                       |
-| Common style           | EditorConfig                                                 |
-| Editor configuration   | vscode with suggested extensions                             |
+| Task                   | Tool                                                                |
+|------------------------|---------------------------------------------------------------------|
+| Testing framework      | pytest, unittest                                                    |
+| Test mocking           | pytest-mock                                                         |
+| Pre-commit hooks       | pre-commit                                                          |
+| Version management     | bump2version                                                        |
+| Environment management | direnv                                                              |
+| Common style           | EditorConfig                                                        |
+| Editor configuration   | vscode with suggested extensions                                    |
 | Autoformatters         | black with experimental string processing (`--preview`), pydocstyle |
-| Linters                | flake8, pydocstyle                                           |
-| Test and packaging     | gitlab-ci                                                    |
-| Run common commands    | make                                                         |
+| Linters                | flake8, pydocstyle                                                  |
+| Test and packaging     | gitlab-ci                                                           |
+| Run common commands    | make                                                                |
 
 ### Automatisms
 
@@ -48,15 +48,15 @@ Strict checks:
 
 #### Linter plugins
 
-| Name                | Description                                                  | strict |
-| ------------------- | ------------------------------------------------------------ | ------ |
-| flake8-builtins     | Check for python builtins being used as variables or parameters. |        |
+| Name                | Description                                                                                    | strict |
+|---------------------|------------------------------------------------------------------------------------------------|--------|
+| flake8-builtins     | Check for python builtins being used as variables or parameters.                               |        |
 | pep8-naming         | Check your code against [PEP 8](https://www.python.org/dev/peps/pep-0008/) naming conventions. |        |
-| flake8-pytest-style | Check for common style issues or inconsistencies with `pytest`-based tests. |        |
-| flake8-print        | Forbids print in the code besides `cli.py` (use `logging`!)  | x      |
-| flake8-eradicate    | Find commented out (or so called "dead") code.               | x      |
-| flake8-bugbear      | Find likely bugs and design problems in your program         | x      |
-| flake8-annotations  | Find missing type annotations                                | x      |
+| flake8-pytest-style | Check for common style issues or inconsistencies with `pytest`-based tests.                    |        |
+| flake8-print        | Forbids print in the code besides `cli.py` (use `logging`!)                                    | x      |
+| flake8-eradicate    | Find commented out (or so called "dead") code.                                                 | x      |
+| flake8-bugbear      | Find likely bugs and design problems in your program                                           | x      |
+| flake8-annotations  | Find missing type annotations                                                                  | x      |
 
 #### On push
 
@@ -82,7 +82,8 @@ These configurations are required to setup the development environment and need 
 
 #### poetry
 
-(Recommended) To make poetry use the python interpreter of pyenv (defined in the `.python-version` file inside the project)
+(Recommended) To make poetry use the python interpreter of pyenv (defined in the `.python-version` file inside the
+project)
 
 ```bash
 poetry config virtualenvs.prefer-active-python true
@@ -106,10 +107,14 @@ eval "$(pyenv init -)"
 
 #### direnv (recommended)
 
-direnv is a tool that enables automatic loading and unloading of directory-specific environment variables. It is useful to automatically activate the virtual environment and load any project specific environment variables when entering a project folder. Because this template expects the use of poetry, the `.envrc` file accompanying the template includes a function to automatically load a poetry virtual environment, and will also load project specific environment variables from any present `.env` file with the dotenv command.
+direnv is a tool that enables automatic loading and unloading of directory-specific environment variables. It is useful
+to automatically activate the virtual environment and load any project specific environment variables when entering a
+project folder. Because this template expects the use of poetry, the `.envrc` file accompanying the template includes a
+function to automatically load a poetry virtual environment, and will also load project specific environment variables
+from any present `.env` file with the dotenv command.
 
-To make use of direnv, make sure it is installed. Go to the project root directory (where the `.envrc` file is located) and run `direnv allow`.
-
+To make use of direnv, make sure it is installed. Go to the project root directory (where the `.envrc` file is located)
+and run `direnv allow`.
 
 ## Usage
 
@@ -147,7 +152,8 @@ To make use of direnv, make sure it is installed. Go to the project root directo
    git commit -m "Poetry lock file regenerated"
    ```
 
-   (Opinion) It is always better to commit the lock file by itself given that reverting a commit with an update to the lock file is complicated.
+   (Opinion) It is always better to commit the lock file by itself given that reverting a commit with an update to the
+   lock file is complicated.
 
 6. Follow the project `README` to configure the project development environment
 
@@ -159,7 +165,8 @@ To make use of direnv, make sure it is installed. Go to the project root directo
    copier update --skip-answered
    ```
 
-   This will update our project with the version corresponding to the most recent tag of the template. It will perform a three way merge between out project and the newest changes introduced by the template.
+   This will update our project with the version corresponding to the most recent tag of the template. It will perform a
+   three way merge between out project and the newest changes introduced by the template.
 
    Do not provide the `--skip-answered` flag if you want to change some of the original answers.
 
