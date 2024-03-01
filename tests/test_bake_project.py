@@ -5,7 +5,7 @@ from prompt_toolkit.validation import ValidationError
 
 
 def test_bake_with_defaults(tmp_path, copier):
-    project = copier.copy(tmp_path, distribution_name="test-name")
+    project = copier.copy(tmp_path)
 
     found_toplevel_files = [f.name for f in project.path.glob("*")]
     assert ".bumpversion.cfg" in found_toplevel_files
@@ -69,10 +69,7 @@ def test_bake_cli_application(tmp_path, copier):
 
 
 def test_bake_library(tmp_path, copier):
-    custom_answers = {
-        "package_type": "library",
-        "distribution_name": "pythonboilerplate",
-    }
+    custom_answers = {"package_type": "library"}
     project = copier.copy(tmp_path, **custom_answers)
 
     found_cli_script = [f.name for f in project.path.glob("**/cli.py")]
