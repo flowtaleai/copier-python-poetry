@@ -4,19 +4,19 @@ Opinionated copier template for Flowtale python projects.
 
 ## Features
 
-| Task                   | Tool                                                                |
-|------------------------|---------------------------------------------------------------------|
-| Testing framework      | pytest, unittest                                                    |
-| Test mocking           | pytest-mock                                                         |
-| Pre-commit hooks       | pre-commit                                                          |
-| Version management     | bump2version                                                        |
-| Environment management | direnv                                                              |
-| Common style           | EditorConfig                                                        |
-| Editor configuration   | vscode with suggested extensions                                    |
+| Task                   | Tool                                                         |
+| --------------------   | ------------------------------------------------------------ |
+| Testing framework      | pytest, unittest                                             |
+| Test mocking           | pytest-mock                                                  |
+| Pre-commit hooks       | pre-commit                                                   |
+| Version management     | bump2version                                                 |
+| Environment management | direnv                                                       |
+| Common style           | EditorConfig                                                 |
+| Editor configuration   | vscode with suggested extensions                             |
 | Autoformatters         | black with experimental string processing (`--preview`), pydocstyle |
-| Linters                | flake8, pydocstyle                                                  |
-| Test and packaging     | gitlab-ci                                                           |
-| Run common commands    | make                                                                |
+| Linters                | flake8, pydocstyle                                           |
+| Test and packaging     | gitlab-ci                                                    |
+| Run common commands    | make                                                         |
 
 ### Automatisms
 
@@ -48,15 +48,15 @@ Strict checks:
 
 #### Linter plugins
 
-| Name                | Description                                                                                    | strict |
-|---------------------|------------------------------------------------------------------------------------------------|--------|
-| flake8-builtins     | Check for python builtins being used as variables or parameters.                               |        |
+| Name                | Description                                                  | strict |
+| ------------------- | ------------------------------------------------------------ | ------ |
+| flake8-builtins     | Check for python builtins being used as variables or parameters. |        |
 | pep8-naming         | Check your code against [PEP 8](https://www.python.org/dev/peps/pep-0008/) naming conventions. |        |
-| flake8-pytest-style | Check for common style issues or inconsistencies with `pytest`-based tests.                    |        |
-| flake8-print        | Forbids print in the code besides `cli.py` (use `logging`!)                                    | x      |
-| flake8-eradicate    | Find commented out (or so called "dead") code.                                                 | x      |
-| flake8-bugbear      | Find likely bugs and design problems in your program                                           | x      |
-| flake8-annotations  | Find missing type annotations                                                                  | x      |
+| flake8-pytest-style | Check for common style issues or inconsistencies with `pytest`-based tests. |        |
+| flake8-print        | Forbids print in the code besides `cli.py` (use `logging`!)  | x      |
+| flake8-eradicate    | Find commented out (or so called "dead") code.               | x      |
+| flake8-bugbear      | Find likely bugs and design problems in your program         | x      |
+| flake8-annotations  | Find missing type annotations                                | x      |
 
 #### On push
 
@@ -175,24 +175,24 @@ and run `direnv allow`.
 
 ### Copier parameters
 
-| Name                      | Example                     | Description                                                                                                                                      |
-|---------------------------|-----------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------|
-| author_name               | Team Faboulous              |                                                                                                                                                  |
-| author_email              | teamfaboulous@mycompany.com |                                                                                                                                                  |
+| Name                      | Example                     | Description                                                  |
+|---------------------------| --------------------------- | ------------------------------------------------------------ |
+| author_name               | Team Faboulous              |                                                              |
+| author_email              | teamfaboulous@mycompany.com |                                                              |
 | distribution_name         | awsome-project              | Used to define the name of the python distribution                                                                                               |
-| package_name              | awsome_project              | Used to define the name of the python package                                                                                                    |
-| project_name              | Awsome Project              | Name of the project                                                                                                                              |
-| repository_name           | awsome-project              | Name of the project repository                                                                                                                   |
-| project_short_description | A fantastic new project     | Description of the project. Also used in the CLI help.                                                                                           |
-| version                   | 0.1.0                       | SemVer 2.0 version                                                                                                                               |
-| license                   | MIT                         | Project license                                                                                                                                  |
-| package_type              | cli                         | If `cli` generate cli module with argument parser and  cli entrypoint                                                                            |
-| python_version            | 3.10                        | Define the python version to use for `pyenv` and the CI pipelines                                                                                |
-| testing_framework         | pytest                      | Python testing framework                                                                                                                         |
-| max_line_length           | 88                          | Code max line length                                                                                                                             |
-| use_flake8_strict_plugins | true                        | If `true` install flake8 plugins that allow to catch bugs, security vulnerabilities and apply more strict rules. They can be a bit overwhelming. |
-| ide                       | vscode                      | Define the IDE(s) used by the developers.                                                                                                        |
-| git_hosting               | gitlab                      | Define GIT hosting that will be used.                                                                                                            |
+| package_name              | awsomeproject               | Used to define the name of the python package                |
+| project_name              | Awsome Project              | Name of the project                                          |
+| repository_name           | awsome-project              | Name of the project repository                               |
+| project_short_description | A fantastic new project     | Description of the project. Also used in the CLI help.       |
+| version                   | 0.1.0                       | SemVer 2.0 version                                           |
+| license                   | MIT                         | Project license                                              |
+| package_type              | cli                      | If `cli` generate cli module with argument parser and  cli entrypoint |
+| python_version            | 3.10                        | Define the python version to use for `pyenv` and the CI pipelines |
+| testing_framework         | pytest                      | Python testing framework                                     |
+| max_line_length           | 88                          | Code max line length                                         |
+| use_flake8_strict_plugins | true                  | If `true` install flake8 plugins that allow to catch bugs, security vulnerabilities and apply more strict rules. They can be a bit overwhelming. |
+| ide                       | vscode                      | Define the IDE(s) used by the developers.                    |
+| git_hosting               | gitlab                      | Define GIT hosting that will be used.                        |
 
 ### Project usage
 
@@ -286,3 +286,4 @@ make bump
 
 - typing annotations are not checked in the tests because tests do not need to be perfect and we want to be able to
   write them fast.
+
