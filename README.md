@@ -27,8 +27,7 @@ Opinionated copier template for Flowtale python projects.
 
 #### On commit
 
-pre-commit is executed automatically before each commit in order to prevent code that does not follow the project
-guidelines. Depending on the user configuration either only the standard checks or all the checks are run on commit.
+pre-commit is executed automatically before each commit in order to prevent code that does not follow the project guidelines. Depending on the user configuration either only the standard checks or all the checks are run on commit.
 
 Some pre-commit hooks modify the files. Re-stage them after the modification.
 
@@ -82,8 +81,7 @@ These configurations are required to setup the development environment and need 
 
 #### poetry
 
-(Recommended) To make poetry use the python interpreter of pyenv (defined in the `.python-version` file inside the
-project)
+(Recommended) To make poetry use the python interpreter of pyenv (defined in the `.python-version` file inside the project)
 
 ```bash
 poetry config virtualenvs.prefer-active-python true
@@ -107,18 +105,15 @@ eval "$(pyenv init -)"
 
 #### direnv (recommended)
 
-direnv is a tool that enables automatic loading and unloading of directory-specific environment variables. It is useful
-to automatically activate the virtual environment and load any project specific environment variables when entering a
-project folder. Because this template expects the use of poetry, the `.envrc` file accompanying the template includes a
-function to automatically load a poetry virtual environment, and will also load project specific environment variables
-from any present `.env` file with the dotenv command.
+direnv is a tool that enables automatic loading and unloading of directory-specific environment variables. It is useful to automatically activate the virtual environment and load any project specific environment variables when entering a project folder. Because this template expects the use of poetry, the `.envrc` file accompanying the template includes a function to automatically load a poetry virtual environment, and will also load project specific environment variables from any present `.env` file with the dotenv command.
 
-To make use of direnv, make sure it is installed. Go to the project root directory (where the `.envrc` file is located)
-and run `direnv allow`.
+To make use of direnv, make sure it is installed. Go to the project root directory (where the `.envrc` file is located) and run `direnv allow`.
+
 
 ## Usage
 
 ### Project initialization
+
 
 1. Create a new project based on this copier template (it can also be applied to existing projects)
 
@@ -152,8 +147,7 @@ and run `direnv allow`.
    git commit -m "Poetry lock file regenerated"
    ```
 
-   (Opinion) It is always better to commit the lock file by itself given that reverting a commit with an update to the
-   lock file is complicated.
+   (Opinion) It is always better to commit the lock file by itself given that reverting a commit with an update to the lock file is complicated.
 
 6. Follow the project `README` to configure the project development environment
 
@@ -165,8 +159,7 @@ and run `direnv allow`.
    copier update --skip-answered
    ```
 
-   This will update our project with the version corresponding to the most recent tag of the template. It will perform a
-   three way merge between out project and the newest changes introduced by the template.
+   This will update our project with the version corresponding to the most recent tag of the template. It will perform a three way merge between out project and the newest changes introduced by the template.
 
    Do not provide the `--skip-answered` flag if you want to change some of the original answers.
 
@@ -175,55 +168,53 @@ and run `direnv allow`.
 
 ### Copier parameters
 
-| Name                      | Example                     | Description                                                  |
-|---------------------------| --------------------------- | ------------------------------------------------------------ |
-| author_name               | Team Faboulous              |                                                              |
-| author_email              | teamfaboulous@mycompany.com |                                                              |
-| distribution_name         | awsome-project              | Used to define the name of the python distribution                                                                                               |
-| package_name              | awsomeproject               | Used to define the name of the python package                |
-| project_name              | Awsome Project              | Name of the project                                          |
-| repository_name           | awsome-project              | Name of the project repository                               |
-| project_short_description | A fantastic new project     | Description of the project. Also used in the CLI help.       |
-| version                   | 0.1.0                       | SemVer 2.0 version                                           |
-| license                   | MIT                         | Project license                                              |
-| package_type              | cli                      | If `cli` generate cli module with argument parser and  cli entrypoint |
-| python_version            | 3.10                        | Define the python version to use for `pyenv` and the CI pipelines |
-| testing_framework         | pytest                      | Python testing framework                                     |
-| max_line_length           | 88                          | Code max line length                                         |
-| use_flake8_strict_plugins | true                  | If `true` install flake8 plugins that allow to catch bugs, security vulnerabilities and apply more strict rules. They can be a bit overwhelming. |
-| ide                       | vscode                      | Define the IDE(s) used by the developers.                    |
-| git_hosting               | gitlab                      | Define GIT hosting that will be used.                        |
+| Name                        | Example                     | Description                                                  |
+|-----------------------------| --------------------------- | ------------------------------------------------------------ |
+| author_name                 | Team Faboulous              |                                                              |
+| author_email                | teamfaboulous@mycompany.com |                                                              |
+| distribution_name           | awsome-project              | Used to define the name of the python distribution                                                                                               |
+| package_name                | awsomeproject               | Used to define the name of the python package                |
+| project_name                | Awsome Project              | Name of the project                                          |
+| repository_name             | awsome-project              | Name of the project repository                               |
+| project_short_description   | A fantastic new project     | Description of the project. Also used in the CLI help.       |
+| version                     | 0.1.0                       | SemVer 2.0 version                                           |
+| license                     | MIT                         | Project license                                              |
+| package_type                | cli                      | If `cli` generate cli module with argument parser and  cli entrypoint |
+| python_version              | 3.10                        | Define the python version to use for `pyenv` and the CI pipelines |
+| testing_framework           | pytest                      | Python testing framework                                     |
+| max_line_length             | 88                          | Code max line length                                         |
+| use_flake8_strict_plugins   | true                  | If `true` install flake8 plugins that allow to catch bugs, security vulnerabilities and apply more strict rules. They can be a bit overwhelming. |
+| ide                         | vscode                      | Define the IDE(s) used by the developers.                    |
+| git_hosting                 | gitlab                      | Define GIT hosting that will be used.                        |
 
 ### Project usage
 
 ### python dependencies
 
-- Do not manually change the [dependency specification](https://python-poetry.org/docs/dependency-specification/) of the
-  python packages related to the copier template (i.e. do not change the version in pyproject.toml). These will be
-  automatically updated when we apply an update of the copier template.
+- Do not manually change the [dependency specification](https://python-poetry.org/docs/dependency-specification/) of the python packages related to the copier template (i.e. do not change the version in pyproject.toml). These will be automatically updated when we apply an update of the copier template.
 
 #### VSCode
 
-- VSCode should automatically detect the virtual environment if poetry is configured to store the venv in a subfolder of
-  the project (it is by default).
+- VSCode should automatically detect the virtual environment if poetry is configured to store the venv in a subfolder of the project (it is by default).
 - Otherwise manually select the interpreter with `Python: Select interpreter`
-  - Run `poetry run poetry env info -p` to discover where it is located
+    - Run `poetry run poetry env info -p` to discover where it is located
 
 #### Shell
 
 - To perform actions in the shell
 
-  - explicitly activate the virtual environment
+    - explicitly activate the virtual environment
+
+        ```bash
+        poetry shell
+        ```
+
+    - Or run commands in the virtual environment
 
       ```bash
-      poetry shell
+      poetry run COMMAND
       ```
 
-  - Or run commands in the virtual environment
-
-    ```bash
-    poetry run COMMAND
-    ```
 
 ## Style suggestions
 
@@ -234,8 +225,7 @@ and run `direnv allow`.
 ## Contributing
 
 - The python dependencies in the template should be update periodically
-  - Updating the major version of black may require reformatting large portions of a project codebase to make the CI
-    lint stage pass
+  - Updating the major version of black may require reformatting large portions of a project codebase to make the CI lint stage pass
 
 - A note to the [Rationale][#rationale] section should be added if it helps explaining non-obvious choices
 
@@ -245,28 +235,24 @@ and run `direnv allow`.
 
 - The version has a format `MAJOR.MINOR.PATCH`, which in the context of this project means:
 
-  - Major: Changes that modify the generated project structure or components significantly in a way that is not
-    backward-compatible.
+  - Major: Changes that modify the generated project structure or components significantly in a way that is not backward-compatible.
     - e.g. updating the black major version
     - e.g. add a required flake8 plugin that may cause the CI pipeline of an existing project to fail
-  - Minor: Additions or enhancements to the template that do not alter the existing structure in a backward-incompatible
-    way.
+  - Minor: Additions or enhancements to the template that do not alter the existing structure in a backward-incompatible way.
     - e.g. add support for generating the documentation
-  - Patch: Fixes to issues or bugs in the template that do not affect the generated project's structure or
-    compatibility.
+  - Patch: Fixes to issues or bugs in the template that do not affect the generated project's structure or compatibility.
 
-- To bump the project version:
+-  To bump the project version:
 
-```bash
-make bump
-```
+  ```bash
+  make bump
+  ```
 
-​ and select the part of the version to bump
+​		and select the part of the version to bump
 
 ## Rationale
 
-- [2023-10-10] We pass the `--preview` flag to black 23.x in particular to format long strings. The effects
-  of `--preview` should be re-evaluated at each major version update of black.
+- [2023-10-10] We pass the `--preview` flag to black 23.x in particular to format long strings. The effects of `--preview` should be re-evaluated at each major version update of black.
 
   ```python
   # before formatting
@@ -279,11 +265,6 @@ make bump
   )
   ```
 
-- The versions of python dependencies of the tools (black, flake, ...) are managed by the copier template and should not
-  be changed manually in the generated projects. This allows to keep the various projects aligned and have a consistent
-  behavior when we develop on multiple projects. Sometimes a newer copier template version may be applied to a project
-  before the others, so there is a period where there is a disalignment, but at least is a controlled one.
+- The versions of python dependencies of the tools (black, flake, ...) are managed by the copier template and should not be changed manually in the generated projects. This allows to keep the various projects aligned and have a consistent behavior when we develop on multiple projects. Sometimes a newer copier template version may be applied to a project before the others, so there is a period where there is a disalignment, but at least is a controlled one.
 
-- typing annotations are not checked in the tests because tests do not need to be perfect and we want to be able to
-  write them fast.
-
+- typing annotations are not checked in the tests because tests do not need to be perfect and we want to be able to write them fast.
