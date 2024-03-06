@@ -7,7 +7,7 @@ author_name:
   help: "Your Name"
   validator: >-
     {% if author_name | length < 2 %}
-    Author name must be at least 3 characters long.
+    Author name must be at least 2 characters long.
     {% endif %}
 
 author_email:
