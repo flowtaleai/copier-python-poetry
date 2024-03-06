@@ -5,14 +5,19 @@ _subdirectory: template
 author_name:
   type: str
   help: "Your Name"
+  validator: >-
+    {% if author_name | length < 2 %}
+    Author name must be at least 3 characters long.
+    {% endif %}
 
 author_email:
   type: str
   help: "Email of the author of the project"
   validator: >-
-    {% if author_email | length > 0 and not ('@' in author_email) %}
-    Non-empty email address must contain "@".
+    {% if not (author_email | regex_search('.+@.+\..+')) %}
+    Author email must be a valid email address.
     {% endif %}
+
 
 distribution_name:
   type: str
