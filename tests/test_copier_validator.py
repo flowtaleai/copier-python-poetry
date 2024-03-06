@@ -11,7 +11,7 @@ def test_validate_author_name_valid(tmp_path, copier):
     "author_name",
     ["A", "", " "],
 )
-def test_validate_author_name_valid(tmp_path, copier, author_name):
+def test_validate_author_name_invalid(tmp_path, copier, author_name):
     custom_answers = {"author_name": "test user"}
     copier.copy(tmp_path, **custom_answers)
 
