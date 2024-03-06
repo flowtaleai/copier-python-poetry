@@ -88,6 +88,10 @@ max_line_length:
   type: int
   default: 88
   help: "Maximum code line length (default to black standard line length)"
+  validator: >-
+    {% if max_line_length < 0 %}
+    Maximum line length must be positive.
+    {% endif %}
 
 use_flake8_strict_plugins:
   type: bool

@@ -3,7 +3,7 @@ name = "{{ package_name }}"
 version = "{{ version }}"
 description = "{{ project_short_description }}"
 authors = [
-  "{{ author_name }} <{{ author_email }}>"
+  "{{ author_name if author_name else 'name' }} <{{ author_email if author_email else 'email' }}>"
 ]
 license = "{{ license }}"
 readme = "README.md"
