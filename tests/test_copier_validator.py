@@ -2,6 +2,20 @@ import pytest
 from prompt_toolkit.validation import ValidationError
 
 
+def test_validate_author_name_valid(tmp_path, copier):
+    custom_answers = {"author_name": "test user"}
+    copier.copy(tmp_path, **custom_answers)
+
+
+@pytest.mark.parametrize(
+    "author_name",
+    ["A", "", " "],
+)
+def test_validate_author_name_valid(tmp_path, copier, author_name):
+    custom_answers = {"author_name": "test user"}
+    copier.copy(tmp_path, **custom_answers)
+
+
 @pytest.mark.parametrize(
     "distribution_name",
     ["validpackagename", "valid_package_name", "valid-package-name"],
@@ -43,14 +57,15 @@ def test_validate_package_name_invalid(tmp_path, copier, package_name):
         copier.copy(tmp_path, **custom_answers)
 
 
-@pytest.mark.parametrize("email", ["", "test@test.com"])
+@pytest.mark.parametrize("email", ["1@1.2", "test@test.com"])
 def test_validate_email_valid(tmp_path, copier, email):
     custom_answers = {"author_email": email}
     copier.copy(tmp_path, **custom_answers)
 
 
-def test_validate_email_invalid(tmp_path, copier):
-    custom_answers = {"author_email": "userexample.com"}
+@pytest.mark.parametrize("email", ["", " ", "test@test", "test.com"])
+def test_validate_email_invalid(tmp_path, copier, email):
+    custom_answers = {"author_email": email}
     with pytest.raises(ValidationError):
         copier.copy(tmp_path, **custom_answers)
 
