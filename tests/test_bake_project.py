@@ -27,7 +27,7 @@ def test_bake_with_defaults(tmp_path, copier):
     assert "Pipfile" not in found_toplevel_files
     assert "bitbucket-pipelines.yml" not in found_toplevel_files
 
-    assert (project.path / "src" / "pythonboilerplate").exists()
+    assert (project.path / "src" / "python_boilerplate").exists()
 
 
 def test_bake_and_run_tests_with_pytest_framework(tmp_path, copier):
@@ -84,7 +84,7 @@ def test_bake_app_and_check_cli_scripts(tmp_path, copier):
     pyproject_path = project.path / "pyproject.toml"
     assert (
         '''[tool.poetry.scripts]
-pythonboilerplate = "pythonboilerplate.cli:cli"'''
+python_boilerplate = "python_boilerplate.cli:cli"'''
         in pyproject_path.read_text()
     )
 
@@ -105,7 +105,7 @@ def test_bake_and_run_cli(tmp_path, copier):
     project = copier.copy(tmp_path, **custom_answers)
 
     project.run("poetry install --only main")
-    project.run("poetry run pythonboilerplate")
+    project.run("poetry run python_boilerplate")
 
 
 @pytest.mark.venv()

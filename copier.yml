@@ -5,23 +5,43 @@ _subdirectory: template
 author_name:
   type: str
   help: "Your Name"
+  validator: >-
+    {% if author_name | length < 2 %}
+    Author name must be at least 2 characters long.
+    {% endif %}
 
 author_email:
   type: str
   help: "Email of the author of the project"
+  validator: >-
+    {% if not (author_email | regex_search('.+@.+\..+')) %}
+    Author email must be a valid email address.
+    {% endif %}
 
-project_name:
+
+distribution_name:
   type: str
-  placeholder: Python Boilerplate
-  help: "Human friendly project name"
+  placeholder: distribution-name
+  help: "Distribution name of the python package, akin to registries such as PyPI"
+  validator: >-
+    {% if not (distribution_name | regex_search('^[a-z][a-z0-9_-]*(?<![_-])$')) %}
+    distribution must start with a lowercase letter and can only contain lowercase letters, numbers, dashes, or underscores.
+    {% endif %}
+
 
 package_name:
   type: str
-  default: "{{ project_name | lower | replace(' ', '') | replace('-', '') }}"
+  help: "Python package name"
+  default: "{{ distribution_name | replace('-', '_')}}"
   validator: >-
-    {% if not (package_name | regex_search('^[_a-zA-Z][_a-zA-Z0-9]+$')) %}
-    package_name must start with a letter, followed by one or more letters, digits or dashes all lowercase.
+    {% if not (package_name | regex_search('^[a-z][a-z0-9_]*$')) %}
+    package_name must start with a lowercase letter and can only contain lowercase letters, numbers, or underscores.
     {% endif %}
+
+project_name:
+  type: str
+  help: "Human friendly project name [OPTIONAL]"
+
 
 project_short_description:
   type: str
@@ -32,6 +52,10 @@ version:
   type: str
   default: "0.1.0"
   help: "Initial project version"
+  validator: >-
+    {% if not (version | regex_search('^\d+(\.\d+){2}$')) %}
+    Version must be in the format of 'MAJOR.MINOR.PATCH', where MAJOR, MINOR, and PATCH are non-negative integers without leading zeroes, separated by dots. For example, '1.2.3'.
+    {% endif %}
 
 license:
   type: str
@@ -69,6 +93,10 @@ max_line_length:
   type: int
   default: 88
   help: "Maximum code line length (default to black standard line length)"
+  validator: >-
+    {% if max_line_length < 0 %}
+    Maximum line length must be positive.
+    {% endif %}
 
 use_flake8_strict_plugins:
   type: bool

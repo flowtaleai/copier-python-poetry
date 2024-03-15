@@ -169,11 +169,12 @@ To make use of direnv, make sure it is installed. Go to the project root directo
 ### Copier parameters
 
 | Name                        | Example                     | Description                                                  |
-| --------------------------- | --------------------------- | ------------------------------------------------------------ |
+|-----------------------------| --------------------------- | ------------------------------------------------------------ |
 | author_name                 | Team Faboulous              |                                                              |
 | author_email                | teamfaboulous@mycompany.com |                                                              |
-| project_name                | Awsome Project              | Name of the project                                          |
+| distribution_name           | awsome-project              | Used to define the name of the python distribution                                                                                               |
 | package_name                | awsomeproject               | Used to define the name of the python package                |
+| project_name                | Awsome Project              | Name of the project                                          |
 | repository_name             | awsome-project              | Name of the project repository                               |
 | project_short_description   | A fantastic new project     | Description of the project. Also used in the CLI help.       |
 | version                     | 0.1.0                       | SemVer 2.0 version                                           |

@@ -30,6 +30,8 @@ def copier_defaults() -> dict[str, str]:
     return {
         "author_email": "user@example.com",
         "author_name": "The User",
+        "distribution_name": "python-boilerplate",
+        "package_name": "python_boilerplate",
         "project_name": "Python Boilerplate",
         "project_short_description": "An very nice project",
         "license": "MIT license",

@@ -8,6 +8,7 @@ license: MIT license
 max_line_length: 88
 package_name: template
 package_type: library
+distribution_name: copier-python-template
 project_name: Copier python template
 project_short_description: Opinionated copier template for python projects
 python_version: '3.10'
