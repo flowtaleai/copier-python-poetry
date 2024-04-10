@@ -13,3 +13,10 @@ repos:
         entry: poetry run detect-secrets-hook
         language: system
         files: .*
+        exclude: '.*\.ipynb$'
+      - id: detect-secrets-notebook
+        name: Secret detection in notebooks
+        language: system
+        files: '.*ipynb$'
+        entry: poetry run detect-secrets-hook
+        args: ['--exclude-lines', '"(hash|id|image/\w+)":.*']
