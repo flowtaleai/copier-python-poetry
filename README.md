@@ -188,6 +188,7 @@ To make use of direnv, make sure it is installed. Go to the project root directo
 | git_hosting               | gitlab                      | Define GIT hosting that will be used.                                                                                                            |
 | use_jupyter_notebooks     | true                        | If `true` install ipykernel dependency                                                                                                           |
 
+
 ### Project usage
 
 ### python dependencies
