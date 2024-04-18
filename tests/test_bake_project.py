@@ -137,3 +137,25 @@ def test_bake_and_run_pre_commit(tmp_path, copier):
 
     project.run("poetry install")
     project.run("poetry run pre-commit run --all-files")
+
+
+@pytest.mark.slow()
+@pytest.mark.venv()
+def test_make_bump_updates_version_in_selected_files(tmp_path, copier):
+    custom_answers = {"package_name": "mypackage"}
+    project = copier.copy(tmp_path, **custom_answers)
+
+    project.run("git init")
+    project.run("git add .")
+    project.run("git config user.name 'User Name'")
+    project.run("git config user.email 'user@email.org'")
+    project.run("git commit -m init")
+    project.run("poetry run bump2version major")
+
+    copier_answers_path = project.path / ".copier-answers.yml"
+    pyproject_path = project.path / "pyproject.toml"
+    project_init = project.path / "src" / "mypackage" / "__init__.py"
+
+    assert "1.0.0" in copier_answers_path.read_text()
+    assert "1.0.0" in pyproject_path.read_text()
+    assert "1.0.0" in project_init.read_text()
