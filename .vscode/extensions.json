@@ -9,6 +9,7 @@
     "matangover.mypy",
     "njpwerner.autodocstring",
     "hbenl.vscode-test-explorer",
-    "littlefoxteam.vscode-python-test-adapter"
+    "littlefoxteam.vscode-python-test-adapter",
+    "darkriszty.markdown-table-prettify"
   ]
 }
