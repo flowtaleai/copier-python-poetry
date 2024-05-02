@@ -122,4 +122,4 @@ git_hosting:
 use_jupyter_notebook:
   type: bool
   default: false
-  help: ""Enable support for Jupyter notebooks and associated pre-commit hooks"
+  help: "Enable support for Jupyter notebooks and associated pre-commit hooks"
