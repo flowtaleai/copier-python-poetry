@@ -122,4 +122,4 @@ git_hosting:
 use_jupyter_notebook:
   type: bool
   default: false
-  help: "Include ipykernel package and additional pre-commits for ipynb files"
+  help: ""Enable support for Jupyter notebooks and associated pre-commit hooks"
