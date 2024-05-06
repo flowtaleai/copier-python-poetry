@@ -118,3 +118,8 @@ git_hosting:
     - "bitbucket"
   default: "none"
   help: "Git hosting provider for CI pipeline configuration"
+
+use_jupyter_notebook:
+  type: bool
+  default: false
+  help: "Enable support for Jupyter notebooks and associated pre-commit hooks"

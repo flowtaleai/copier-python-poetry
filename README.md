@@ -186,6 +186,8 @@ To make use of direnv, make sure it is installed. Go to the project root directo
 | use_flake8_strict_plugins | true                        | If `true` install flake8 plugins that allow to catch bugs, security vulnerabilities and apply more strict rules. They can be a bit overwhelming. |
 | ide                       | vscode                      | Define the IDE(s) used by the developers.                                                                                                        |
 | git_hosting               | gitlab                      | Define GIT hosting that will be used.                                                                                                            |
+| use_jupyter_notebooks     | true                        | If `true` install ipykernel dependency                                                                                                           |
+
 
 ### Project usage
 
