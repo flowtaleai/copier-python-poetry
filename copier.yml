@@ -67,11 +67,6 @@ license:
     - Apache Software License 2.0
     - GNU General Public License v3
 
-generate_example_code:
-  type: bool
-  help: "Generate example code to demonstrate how to use the template"
-  default: true
-
 package_type:
   choices:
     - cli
@@ -128,3 +123,8 @@ use_jupyter_notebooks:
   type: bool
   default: false
   help: "Enable support for Jupyter notebooks and associated pre-commit hooks"
+
+generate_example_code:
+  type: bool
+  help: "Generate example code to demonstrate how to use the template"
+  default: true
