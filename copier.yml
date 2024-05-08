@@ -141,8 +141,13 @@ generate_example_code:
   default: true
 
 strip_jupyter_outputs:
-    type: bool
-    default: false
-    help: "Strip output from Jupyter notebooks before committing"
-    # Only ask if project uses Jupyter notebooks
-    when: "{{ use_jupyter_notebooks == True }}"
+  type: bool
+  default: false
+  help: "Strip output from Jupyter notebooks before committing"
+  # Only ask if project uses Jupyter notebooks
+  when: "{{ use_jupyter_notebooks == true }}"
+
+generate_example_code:
+  type: bool
+  help: "Generate example code to demonstrate how to use the template"
+  default: true
