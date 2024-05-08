@@ -119,7 +119,7 @@ git_hosting:
   default: "none"
   help: "Git hosting provider for CI pipeline configuration"
 
-use_jupyter_notebook:
+use_jupyter_notebooks:
   type: bool
   default: false
   help: "Enable support for Jupyter notebooks and associated pre-commit hooks"

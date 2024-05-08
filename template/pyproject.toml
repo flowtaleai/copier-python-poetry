@@ -14,7 +14,7 @@ python = "^{{ python_version }}"
 {% if package_type == "cli" -%}
 click = "^8.1.7"
 {%- endif %}
-{% if use_jupyter_notebook -%}
+{% if use_jupyter_notebooks -%}
 ipykernel = "^6.29.4"
 {%- endif %}
 
