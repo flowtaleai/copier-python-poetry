@@ -1,0 +1,31 @@
+{
+ "cells": [
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "# A pretty report with a little wisdom\n",
+    "\n",
+    "> A clever person solves a problem. A wise person avoids it."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "from {{package_name}}.{{package_name}} import a_function\n",
+    "\n",
+    "a_function()"
+   ]
+  }
+ ],
+ "metadata": {
+  "language_info": {
+   "name": "python"
+  }
+ },
+ "nbformat": 4,
+ "nbformat_minor": 2
+}

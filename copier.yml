@@ -67,11 +67,17 @@ license:
     - Apache Software License 2.0
     - GNU General Public License v3
 
+generate_example_code:
+  type: bool
+  help: "Generate example code to demonstrate how to use the template"
+  default: true
+
 package_type:
   choices:
     - cli
     - library
   help: "If the package is an executable a CLI is generated"
+  when: "{{ generate_example_code }}"
 
 python_version:
   type: str
