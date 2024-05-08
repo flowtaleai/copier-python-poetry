@@ -77,7 +77,6 @@ package_type:
     - cli
     - library
   help: "If the package is an executable a CLI is generated"
-  when: "{{ generate_example_code }}"
 
 python_version:
   type: str
