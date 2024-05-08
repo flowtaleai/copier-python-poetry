@@ -67,11 +67,6 @@ license:
     - Apache Software License 2.0
     - GNU General Public License v3
 
-generate_example_code:
-  type: bool
-  help: "Generate example code to demonstrate how to use the template"
-  default: true
-
 package_type:
   choices:
     - cli
@@ -130,8 +125,13 @@ use_jupyter_notebooks:
   help: "Enable support for Jupyter notebooks and associated pre-commit hooks"
 
 strip_jupyter_outputs:
-    type: bool
-    default: false
-    help: "Strip output from Jupyter notebooks before committing"
-    # Only ask if project uses Jupyter notebooks
-    when: "{{ use_jupyter_notebooks == true }}"
+  type: bool
+  default: false
+  help: "Strip output from Jupyter notebooks before committing"
+  # Only ask if project uses Jupyter notebooks
+  when: "{{ use_jupyter_notebooks == true }}"
+
+generate_example_code:
+  type: bool
+  help: "Generate example code to demonstrate how to use the template"
+  default: true
