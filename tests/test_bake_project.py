@@ -159,3 +159,38 @@ def test_make_bump_updates_version_in_selected_files(tmp_path, copier):
     assert "1.0.0" in copier_answers_path.read_text()
     assert "1.0.0" in pyproject_path.read_text()
     assert "1.0.0" in project_init.read_text()
+
+
+def test_bake_with_code_examples(tmp_path, copier):
+    custom_answers = {"use_jupyter_notebook": True, "generate_example_code": True}
+    project = copier.copy(tmp_path, **custom_answers)
+
+    package_name = project.answers["package_name"]
+    main_module_example_path = (
+        project.path / "src" / package_name / f"{package_name}.py"
+    )
+    main_module_test_example_path = project.path / "tests" / f"test_{package_name}.py"
+    jupyter_notebook_example_path = (
+        project.path / "notebooks" / "example_notebook.ipynb"
+    )
+
+    assert main_module_example_path.exists()
+    assert main_module_test_example_path.exists()
+    assert jupyter_notebook_example_path.exists()
+
+
+def test_bake_without_code_examples(tmp_path, copier):
+    custom_answers = {"use_jupyter_notebook": True, "generate_example_code": False}
+    project = copier.copy(tmp_path, **custom_answers)
+
+    package_name = project.answers["package_name"]
+    main_module_example_path = (
+        project.path / "src" / package_name / f"{package_name}.py"
+    )
+    main_module_test_example_path = project.path / "tests" / f"test_{package_name}.py"
+    jupyter_notebook_example_path = (
+        project.path / "notebooks" / "example_notebook.ipynb"
+    )
+    assert not main_module_example_path.exists()
+    assert not main_module_test_example_path.exists()
+    assert not jupyter_notebook_example_path.exists()
