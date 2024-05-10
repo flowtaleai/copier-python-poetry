@@ -162,7 +162,7 @@ def test_make_bump_updates_version_in_selected_files(tmp_path, copier):
 
 
 def test_bake_with_code_examples(tmp_path, copier):
-    custom_answers = {"use_jupyter_notebook": True, "generate_example_code": True}
+    custom_answers = {"use_jupyter_notebooks": True, "generate_example_code": True}
     project = copier.copy(tmp_path, **custom_answers)
 
     package_name = project.answers["package_name"]
@@ -174,13 +174,13 @@ def test_bake_with_code_examples(tmp_path, copier):
         project.path / "notebooks" / "example_notebook.ipynb"
     )
 
-    assert main_module_example_path.exists()
-    assert main_module_test_example_path.exists()
-    assert jupyter_notebook_example_path.exists()
+    assert main_module_example_path.exists() is True
+    assert main_module_test_example_path.exists() is True
+    assert jupyter_notebook_example_path.exists() is True
 
 
 def test_bake_without_code_examples(tmp_path, copier):
-    custom_answers = {"use_jupyter_notebook": True, "generate_example_code": False}
+    custom_answers = {"use_jupyter_notebooks": True, "generate_example_code": False}
     project = copier.copy(tmp_path, **custom_answers)
 
     package_name = project.answers["package_name"]
@@ -191,6 +191,6 @@ def test_bake_without_code_examples(tmp_path, copier):
     jupyter_notebook_example_path = (
         project.path / "notebooks" / "example_notebook.ipynb"
     )
-    assert not main_module_example_path.exists()
-    assert not main_module_test_example_path.exists()
-    assert not jupyter_notebook_example_path.exists()
+    assert main_module_example_path.exists() is False
+    assert main_module_test_example_path.exists() is False
+    assert jupyter_notebook_example_path.exists() is False
