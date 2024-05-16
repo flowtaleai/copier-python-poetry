@@ -3,10 +3,6 @@
     hooks:
       - id: trailing-whitespace
       - id: end-of-file-fixer
-  - repo: https://github.com/kynan/nbstripout
-    rev: 0.7.1
-    hooks:
-      - id: nbstripout
   - repo: local
     hooks:
       - id: flake8
@@ -42,3 +38,13 @@
         entry: poetry run pydocstyle
         require_serial: true
         types_or: [python, pyi]
+  {% if strip_jupyter_outputs %}
+  - repo: local
+    hooks:
+      - id: nbstripout
+        name: nbstripout
+        language: system
+        entry: nbstripout
+        require_serial: true
+        types: [jupyter]
+  {% endif %}
