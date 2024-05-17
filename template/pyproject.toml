@@ -16,7 +16,9 @@ click = "^8.1.7"
 {% endif %}
 {% if use_jupyter_notebooks %}
 ipykernel = "^6.29.4"
-{% endif %}
+jupyterlab=">=4.2"
+notebook=">=7.2.0"
+{%- endif %}
 
 [tool.poetry.group.dev.dependencies]
 pytest = "^7.4.2"
