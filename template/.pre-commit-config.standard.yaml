@@ -18,4 +18,4 @@ repos:
     rev: 0.7.1
     hooks:
       - id: nbstripout
-{%- endif -%}
+  {%- endif -%}
