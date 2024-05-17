@@ -18,7 +18,6 @@ author_email:
     Author email must be a valid email address.
     {% endif %}
 
-
 distribution_name:
   type: str
   placeholder: distribution-name
@@ -27,7 +26,6 @@ distribution_name:
     {% if not (distribution_name | regex_search('^[a-z][a-z0-9_-]*(?<![_-])$')) %}
     distribution must start with a lowercase letter and can only contain lowercase letters, numbers, dashes, or underscores.
     {% endif %}
-
 
 package_name:
   type: str
@@ -41,7 +39,6 @@ package_name:
 project_name:
   type: str
   help: "Human friendly project name [OPTIONAL]"
-
 
 project_short_description:
   type: str
@@ -123,3 +120,8 @@ use_jupyter_notebooks:
   type: bool
   default: false
   help: "Enable support for Jupyter notebooks and associated pre-commit hooks"
+
+generate_example_code:
+  type: bool
+  help: "Generate example code to demonstrate how to use the template"
+  default: true
