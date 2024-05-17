@@ -129,4 +129,4 @@ strip_jupyter_outputs:
     default: false
     help: "Strip output from Jupyter notebooks before committing"
     # Only ask if project uses Jupyter notebooks
-    when: "{{ use_jupyter_notebooks == True }}"
+    when: "{{ use_jupyter_notebooks == true }}"
