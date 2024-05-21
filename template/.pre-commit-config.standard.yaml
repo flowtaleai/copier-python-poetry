@@ -13,7 +13,7 @@ repos:
         entry: poetry run detect-secrets-hook
         language: system
         files: .*
-{% if strip_jupyter_outputs -%}
+{% if strip_jupyter_outputs %}
   - repo: https://github.com/kynan/nbstripout
     rev: 0.7.1
     hooks:
