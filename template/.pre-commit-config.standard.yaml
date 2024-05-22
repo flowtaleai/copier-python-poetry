@@ -25,5 +25,5 @@ repos:
     hooks:
     - id: nbqa-black
     - id: nbqa-isort
-      args: [--fix --profile=black]
+      args: [--profile=black]
   {% endif %}
