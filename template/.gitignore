@@ -170,7 +170,7 @@ cython_debug/
 
 # Local History for Visual Studio Code
 .history/
-{%- endif %}
+{% endif %}
 
 # Pre-commit
 .pre-commit-config.yaml
