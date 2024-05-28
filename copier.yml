@@ -1,5 +1,9 @@
 _templates_suffix: ""
 _subdirectory: template
+_envops:  
+  lstrip_blocks: true
+  trim_blocks: true
+  keep_trailing_newline: true
 
 # ====== QUESTIONS ======
 author_name:
