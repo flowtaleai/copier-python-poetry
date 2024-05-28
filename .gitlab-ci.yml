@@ -2,8 +2,7 @@ image: "python:3.10"
 
 stages:
   - .pre
-  - test
-  - linting
+  - test_and_lint
 
 before_script:
   - apt-get update && apt-get install -y make
@@ -11,11 +10,11 @@ before_script:
   - make setup-strict
 
 test:
-  stage: test
+  stage: test_and_lint
   script:
     - poetry run tox
 
-pre-commit:
-  stage: linting
+linting:
+  stage: test_and_lint
   script:
     - poetry run pre-commit run --all-files
