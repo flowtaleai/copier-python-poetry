@@ -3,11 +3,16 @@ name = "template"
 version = "1.1.0"
 description = "Opinionated copier template for python projects"
 authors = [
+  "Ali Cem <ac@flowtale.ai>",
   "Anders Stendevad <as@flowtale.ai>",
+  "Dmytro Kyrychuk <dmytro@flowtale.ai>",
+  "Franz Maria Heuchel <fmh@flowtale.ai>",
   "Nikita Pekarchuk <np@flowtale.ai>",
   "Rasmus Jones <rj@flowtale.ai>",
+  "Rogvi David Arge <rda@flowtale.ai>",
   "Simone Gaiarin <sg@flowtale.ai>",
   "Tobias Rehfeldt <tc@flowtale.ai>",
+  "Vladyslav Kromkach <vk@flowtale.ai>",
 ]
 license = "MIT license"
 readme = "README.md"
