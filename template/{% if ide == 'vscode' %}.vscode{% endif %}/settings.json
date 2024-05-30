@@ -13,7 +13,6 @@
   "notebook.codeActionsOnSave": {
     "source.organizeImports": "explicit"
   },
-  "python.formatting.provider": "none",
   "black-formatter.importStrategy": "fromEnvironment",
   "black-formatter.args": [
     "--preview"
