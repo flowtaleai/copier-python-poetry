@@ -8,7 +8,10 @@
     "editor.formatOnSave": true,
     "editor.codeActionsOnSave": {
       "source.organizeImports": "explicit"
-    },
+  },
+  "notebook.formatOnSave.enabled": true,
+  "notebook.codeActionsOnSave": {
+    "source.organizeImports": "explicit"
   },
   "python.formatting.provider": "none",
   "black-formatter.importStrategy": "fromEnvironment",
