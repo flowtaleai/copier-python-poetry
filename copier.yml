@@ -33,10 +33,10 @@ distribution_name:
 
 package_name:
   type: str
-  help: "Python package name"
+  help: "Python package name. If '/' is provided as part of the package name, anything prior to the final part of that name is the package namespace."
   default: "{{ distribution_name | replace('-', '_')}}"
   validator: >-
-    {% if not (package_name | regex_search('^[a-z][a-z0-9_]*$')) %}
+    {% if not (package_name | regex_search('^[a-z][a-z0-9_\/]*$')) %}
     package_name must start with a lowercase letter and can only contain lowercase letters, numbers, or underscores.
     {% endif %}
 
