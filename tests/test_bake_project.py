@@ -76,6 +76,19 @@ def test_bake_library(tmp_path, copier):
     assert not found_cli_script
 
 
+def test_bake_namespaced_library(tmp_path, copier):
+    custom_answers = {
+        "package_type": "library",
+        "package_name": "flowtale/copier/template",
+    }
+    project = copier.copy(tmp_path, **custom_answers)
+    package_path = project.path / "src"
+
+    assert list(package_path.iterdir())[0].name == "flowtale"
+    assert list((package_path / "flowtale").iterdir())[0].name == "copier"
+    assert list((package_path / "flowtale" / "copier").iterdir())[0].name == "template"
+
+
 def test_bake_app_and_check_cli_scripts(tmp_path, copier):
     custom_answers = {"package_type": "cli"}
     project = copier.copy(tmp_path, **custom_answers)
