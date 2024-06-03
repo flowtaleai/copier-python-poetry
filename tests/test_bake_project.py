@@ -166,10 +166,17 @@ def test_bake_with_code_examples(tmp_path, copier):
     project = copier.copy(tmp_path, **custom_answers)
 
     package_name = project.answers["package_name"]
-    main_module_example_path = (
-        project.path / "src" / package_name / f"{package_name}.py"
+    if "/" in package_name:
+        *package_namespace, package_name = package_name.split("/")
+        package_namespace = "/".join(package_namespace[:-1])
+        package_test_name = package_name.replace("/", "_")
+    else:
+        package_namespace = package_name
+        package_test_name = package_name
+    main_module_example_path = project.path / "src" / package_namespace / "core.py"
+    main_module_test_example_path = (
+        project.path / "tests" / f"test_{package_test_name}.py"
     )
-    main_module_test_example_path = project.path / "tests" / f"test_{package_name}.py"
     jupyter_notebook_example_path = (
         project.path / "notebooks" / "example_notebook.ipynb"
     )
@@ -184,10 +191,17 @@ def test_bake_without_code_examples(tmp_path, copier):
     project = copier.copy(tmp_path, **custom_answers)
 
     package_name = project.answers["package_name"]
-    main_module_example_path = (
-        project.path / "src" / package_name / f"{package_name}.py"
+    if "/" in package_name:
+        *package_namespace, package_name = package_name.split("/")
+        package_namespace = "/".join(package_namespace[:-1])
+        package_test_name = package_name.replace("/", "_")
+    else:
+        package_namespace = package_name
+        package_test_name = package_name
+    main_module_example_path = project.path / "src" / package_namespace / "core.py"
+    main_module_test_example_path = (
+        project.path / "tests" / f"test_{package_test_name}.py"
     )
-    main_module_test_example_path = project.path / "tests" / f"test_{package_name}.py"
     jupyter_notebook_example_path = (
         project.path / "notebooks" / "example_notebook.ipynb"
     )
