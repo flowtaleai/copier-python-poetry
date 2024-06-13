@@ -44,7 +44,8 @@ nbdime = "^4.0.1"
 {% if use_jupyter_notebooks %}
 [tool.poetry.group.jupyterlab]
 optional = true
-
+{% endif %}
+{% if use_jupyter_notebooks %}
 [tool.poetry.group.jupyterlab.dependencies]
 jupyterlab = "^4.2.2"
 {% endif %}
