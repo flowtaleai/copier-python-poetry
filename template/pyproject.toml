@@ -14,9 +14,6 @@ python = "^{{ python_version }}"
 {% if package_type == "cli" %}
 click = "^8.1.7"
 {% endif %}
-{% if use_jupyter_notebooks %}
-ipykernel = "^6.29.4"
-{% endif %}
 
 [tool.poetry.group.dev.dependencies]
 pytest = "^7.4.2"
@@ -39,6 +36,9 @@ pre-commit = "^3.4.0"
 pydocstyle = "^6.3.0"
 bump2version = "^1.0.1"
 detect-secrets = "^1.4.0"
+{% if use_jupyter_notebooks %}
+ipykernel = "^6.29.4"
+{% endif %}
 
 [build-system]
 requires = ["poetry>=1.0.0"]
