@@ -41,6 +41,11 @@ ipykernel = "^6.29.4"
 nbdime = "^4.0.1"
 {% endif %}
 
+{% if use_jupyter_notebooks %}
+[tool.poetry.extras]
+jupyterlab = ["jupyterlab"]
+{% endif %}
+
 [build-system]
 requires = ["poetry>=1.0.0"]
 build-backend = "poetry.core.masonry.api"
