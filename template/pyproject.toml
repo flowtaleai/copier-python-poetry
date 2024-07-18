@@ -38,6 +38,7 @@ bump2version = "^1.0.1"
 detect-secrets = "^1.4.0"
 {% if use_jupyter_notebooks %}
 ipykernel = "^6.29.4"
+nbdime = "^4.0.1"
 {% endif %}
 
 [build-system]
