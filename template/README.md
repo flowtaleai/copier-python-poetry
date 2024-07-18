@@ -26,7 +26,15 @@ TBW
   ```bash
   make setup-strict
   ```
+{% if ide.choices == vscode %}
 - Open VSCode and install the suggested extensions
+{% endif %}
+{% if use_jupyter_notebooks %}
+- Jupyterlab is not installed by default. Add it with
+  ```bash
+  poetry install --with jupyterlab
+  ```
+{% endif %}
 
 #### Environment Variables
 

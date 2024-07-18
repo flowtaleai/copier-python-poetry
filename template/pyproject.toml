@@ -39,6 +39,10 @@ detect-secrets = "^1.4.0"
 {% if use_jupyter_notebooks %}
 ipykernel = "^6.29.4"
 nbdime = "^4.0.1"
+
+[tool.poetry.group.jupyterlab]
+optional = true
+dependencies = { jupyterlab = "^4.2.2"}
 {% endif %}
 
 [build-system]
