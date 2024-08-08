@@ -9,6 +9,9 @@
     "matangover.mypy",
     "njpwerner.autodocstring",
     "hbenl.vscode-test-explorer",
-    "littlefoxteam.vscode-python-test-adapter"
+    "littlefoxteam.vscode-python-test-adapter",
+    {% if git_hosting == 'gitlab' %}
+    "GitLab.gitlab-workflow"
+    {% endif %}
   ]
 }
