@@ -22,22 +22,22 @@ author_email:
     Author email must be a valid email address.
     {% endif %}
 
+package_name:
+  type: str
+  placeholder: package_name
+  help: "Python package name. If '.' is provided as part of the package name, anything prior to the final part of that name is the package namespace."
+  validator: >-
+    {% if not (package_name | regex_search('^[a-z][a-z0-9_\.]*$')) %}
+    package_name must start with a lowercase letter and can only contain lowercase letters, numbers, or underscores. If it is a namespaced package use `.` to separate between package and namespace(s).
+    {% endif %}
+
 distribution_name:
   type: str
-  placeholder: distribution-name
+  default: "{{ package_name | replace('_', '-')}}"
   help: "Distribution name of the python package, akin to registries such as PyPI"
   validator: >-
     {% if not (distribution_name | regex_search('^[a-z][a-z0-9_-]*(?<![_-])$')) %}
     distribution must start with a lowercase letter and can only contain lowercase letters, numbers, dashes, or underscores.
-    {% endif %}
-
-package_name:
-  type: str
-  help: "Python package name. If '/' is provided as part of the package name, anything prior to the final part of that name is the package namespace."
-  default: "{{ distribution_name | replace('-', '_')}}"
-  validator: >-
-    {% if not (package_name | regex_search('^[a-z][a-z0-9_\/]*$')) %}
-    package_name must start with a lowercase letter and can only contain lowercase letters, numbers, or underscores.
     {% endif %}
 
 project_name:
