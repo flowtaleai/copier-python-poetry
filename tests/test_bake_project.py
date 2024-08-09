@@ -79,7 +79,7 @@ def test_bake_library(tmp_path, copier):
 def test_bake_namespaced_library(tmp_path, copier):
     custom_answers = {
         "package_type": "library",
-        "package_name": "flowtale/copier/template",
+        "package_name": "flowtale.copier.template",
     }
     project = copier.copy(tmp_path, **custom_answers)
     package_path = project.path / "src"

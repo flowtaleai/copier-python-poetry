@@ -37,7 +37,7 @@ def test_validate_distribtuion_name_invalid(tmp_path, copier, distribution_name)
 
 @pytest.mark.parametrize(
     "package_name",
-    ["validpackagename", "valid_package_name", "another/valid/packagename"],
+    ["validpackagename", "valid_package_name", "another.valid.packagename"],
 )
 def test_validate_package_name_valid(tmp_path, copier, package_name):
     custom_answers = {"package_name": package_name}
@@ -51,7 +51,8 @@ def test_validate_package_name_valid(tmp_path, copier, package_name):
         "2invalidpackagename",
         "invalidPackageName",
         "_invalidpackagename",
-        "",
+        "invalid/package/name",
+        "this is bad",
     ],
 )
 def test_validate_package_name_invalid(tmp_path, copier, package_name):
