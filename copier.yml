@@ -129,6 +129,11 @@ git_hosting:
   default: "none"
   help: "Git hosting provider for CI pipeline configuration"
 
+generate_docs:
+  type: bool
+  default: true
+  help: "Generate documentation with MkDocs"
+
 use_jupyter_notebooks:
   type: bool
   default: false

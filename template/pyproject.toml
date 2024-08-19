@@ -36,6 +36,12 @@ pre-commit = "^3.4.0"
 pydocstyle = "^6.3.0"
 bump2version = "^1.0.1"
 detect-secrets = "^1.4.0"
+{% if generate_docs %}
+mkdocstrings-python = "^1.10.8"
+mkdocs-material = "^9.5.32"
+mkdocs-gen-files = "^0.5.0"
+mkdocs-literate-nav = "^0.6.1"
+{% endif %}
 {% if use_jupyter_notebooks %}
 ipykernel = "^6.29.4"
 nbdime = "^4.0.1"
