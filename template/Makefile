@@ -31,3 +31,10 @@ lint:   ## Runs linting on all project files
 test:  ## Run the project tests
 	@poetry run pytest
 .PHONY: test
+
+docs: ## Build documentation
+	@mkdocs build
+
+serve-docs:
+	@mkdocs serve
+.PHONY: docs serve-docs
