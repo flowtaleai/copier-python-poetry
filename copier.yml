@@ -130,9 +130,12 @@ git_hosting:
   help: "Git hosting provider for CI pipeline configuration"
 
 generate_docs:
-  type: bool
-  default: true
-  help: "Generate documentation with MkDocs"
+  choices:
+    - none
+    - mkdocs
+    - pdoc
+  default: none
+  help: "Generate package documentation"
 
 use_jupyter_notebooks:
   type: bool
