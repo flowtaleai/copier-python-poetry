@@ -31,7 +31,6 @@ lint:   ## Runs linting on all project files
 test:  ## Run the project tests
 	@poetry run pytest
 .PHONY: test
-
 {% if generate_docs == "mkdocs" %}
 docs: ## Build documentation
 	@mkdocs build --site-dir build/site
@@ -40,7 +39,6 @@ serve-docs:
 	@mkdocs serve
 .PHONY: docs serve-docs
 {% endif %}
-
 {% if generate_docs == "pdoc" %}
 docs: ## Build documentation
 	# FIXME: what about namespace packages?
