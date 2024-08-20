@@ -1,5 +1,4 @@
 from pathlib import Path
-import shutil
 import mkdocs_gen_files
 
 root = Path(__file__).parent.parent.parent
