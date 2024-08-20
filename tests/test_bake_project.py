@@ -1,4 +1,5 @@
 import shutil
+import subprocess
 
 import pytest
 from prompt_toolkit.validation import ValidationError
@@ -221,3 +222,29 @@ def test_bake_without_code_examples(tmp_path, copier):
     assert main_module_example_path.exists() is False
     assert main_module_test_example_path.exists() is False
     assert jupyter_notebook_example_path.exists() is False
+
+
+@pytest.mark.parametrize("framework_frontpage", (("pdoc", "build/site/python_boilerplate.html"),
+                                                  ("mkdocs", "build/site/index.html")))
+def test_bake_with_documentation(tmp_path, copier, framework_frontpage):
+    framework, frontpage_path = framework_frontpage
+    custom_answers = {"generate_docs": framework}
+    project = copier.copy(tmp_path, **custom_answers)
+
+    # Install project and install dependencies
+    subprocess.run(("git", "init"), cwd=project.path)  # without make setup failes
+    subprocess.run(("make", "setup"), cwd=project.path)
+
+    # Build docs
+    subprocess.run(("make", "docs"), cwd=project.path)
+
+    # Check that index.html exists
+    frontpage_path = project.path / frontpage_path
+    assert frontpage_path.exists()
+
+    # Check that it has sucessfully copied the readme
+    title = project.answers["package_name"] or project.answers["distribution_name"]
+    with open(frontpage_path) as index:
+        front_page = "\n".join(index.readlines())
+    assert title in front_page
+    assert "Versioning" in front_page
