@@ -38,7 +38,7 @@ theme:
       icon: material/weather-night
       name: Switch to system preference
 
-plugins:    
+plugins:
 - search
 - gen-files:
     scripts:
@@ -69,8 +69,8 @@ plugins:
           show_symbol_type_toc: true
           signature_crossrefs: true
           summary: true
-        
+
 nav:
 - Home: index.md
-- API Reference: 
-    - {{distribution_name}}: reference/ 
+- API Reference:
+    - {{distribution_name}}: reference/

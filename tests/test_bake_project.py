@@ -224,8 +224,13 @@ def test_bake_without_code_examples(tmp_path, copier):
     assert jupyter_notebook_example_path.exists() is False
 
 
-@pytest.mark.parametrize("framework_frontpage", (("pdoc", "build/site/python_boilerplate.html"),
-                                                  ("mkdocs", "build/site/index.html")))
+@pytest.mark.parametrize(
+    "framework_frontpage",
+    (
+        ("pdoc", "build/site/python_boilerplate.html"),
+        ("mkdocs", "build/site/index.html"),
+    ),
+)
 def test_bake_with_documentation(tmp_path, copier, framework_frontpage):
     framework, frontpage_path = framework_frontpage
     custom_answers = {"generate_docs": framework}
