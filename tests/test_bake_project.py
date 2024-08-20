@@ -1,5 +1,4 @@
 import shutil
-import subprocess
 
 import pytest
 from prompt_toolkit.validation import ValidationError
@@ -236,18 +235,15 @@ def test_bake_with_documentation(tmp_path, copier, framework_frontpage):
     custom_answers = {"generate_docs": framework}
     project = copier.copy(tmp_path, **custom_answers)
 
-    # Install project and install dependencies
-    subprocess.run(("git", "init"), cwd=project.path)  # without make setup failes
-    subprocess.run(("make", "setup"), cwd=project.path)
-
-    # Build docs
-    subprocess.run(("make", "docs"), cwd=project.path)
+    project.run("git init")
+    project.run("make setup")
+    project.run("make docs")
 
     # Check that index.html exists
     frontpage_path = project.path / frontpage_path
     assert frontpage_path.exists()
 
-    # Check that it has sucessfully copied the readme
+    # Check that readme is displayed on frontpage
     title = project.answers["package_name"] or project.answers["distribution_name"]
     with open(frontpage_path) as index:
         front_page = "\n".join(index.readlines())
