@@ -189,6 +189,7 @@ To make use of direnv, make sure it is installed. Go to the project root directo
 | use_jupyter_notebooks     | true                        | If `true` install ipykernel dependency                                                                                                           |
 | generate_example_code     | true                        | If `true` generate example files and code snippets                                                                                               |
 | strip_jupyter_outputs     | true                        | If `true` strip output from Jupyter notebooks before committing                                                                                  |
+| generate_docs             | mkdocs                      | Generate documentation with either `pdoc` or `mkdocs`    |
 
 
 ### Project usage
