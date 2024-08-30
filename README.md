@@ -177,7 +177,7 @@ To make use of direnv, make sure it is installed. Go to the project root directo
 | project_name              | Awsome Project              | Name of the project                                                                                                                              |
 | repository_name           | awsome-project              | Name of the project repository                                                                                                                   |
 | project_short_description | A fantastic new project     | Description of the project. Also used in the CLI help.                                                                                           |
-| version                   | 0.1.0                       | SemVer 2.0 version                                                                                                                               |
+| version                   | 0.2.0                       | SemVer 2.0 version                                                                                                                               |
 | license                   | MIT                         | Project license                                                                                                                                  |
 | package_type              | cli                         | If `cli` generate cli module with argument parser and  cli entrypoint                                                                            |
 | python_version            | 3.10                        | Define the python version to use for `pyenv` and the CI pipelines                                                                                |
