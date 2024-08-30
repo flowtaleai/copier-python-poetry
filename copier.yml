@@ -80,6 +80,7 @@ python_version:
     - "3.9"
     - "3.10"
     - "3.11"
+    - "3.12"
   default: "3.10"
   help: "Python version to use"
 
