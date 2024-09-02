@@ -31,3 +31,7 @@ lint:   ## Runs linting on all project files
 test:  ## Run the project tests
 	@poetry run tox
 .PHONY: test
+
+testproject:  ## Create a new test project
+	copier copy --vcs-ref=HEAD . test-project
+.PHONY: testproject
