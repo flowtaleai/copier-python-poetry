@@ -72,5 +72,7 @@ plugins:
 
 nav:
 - Home: index.md
-- API Reference:
-    - {{distribution_name}}: reference/
+{% if generate_example_code %}
+- User Guide: user_guide.md
+{% endif %}
+- API Reference: reference/
