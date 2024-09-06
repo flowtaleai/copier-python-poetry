@@ -7,7 +7,7 @@ authors = [
 ]
 license = "{{ license }}"
 readme = "README.md"
-packages = [{include = "{{ package_name }}", from = "src"}]
+packages = [{include = "{{ package_name | replace('.', _copier_conf.sep) }}", from = "src"}]
 
 [tool.poetry.dependencies]
 python = "^{{ python_version }}"
@@ -51,7 +51,7 @@ build-backend = "poetry.core.masonry.api"
 {% if package_type == "cli" %}
 
 [tool.poetry.scripts]
-{{ package_name | replace(_copier_conf.sep, '') }} = "{{ package_name | replace(_copier_conf.sep, '.') }}.cli:cli"
+{{ package_name | replace('.', '') }} = "{{ package_name }}.cli:cli"
 {% endif %}
 
 [tool.black]
