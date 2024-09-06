@@ -34,10 +34,11 @@ package_name:
 distribution_name:
   type: str
   placeholder: distribution-name
+  default: "{{ package_name | replace('.', '-') }}"
   help: "Distribution name of the python package, akin to registries such as PyPI. Distribution name should be similar to package name but can like scikit-learn (sklearn) be different."
   validator: >-
-    {% if not (distribution_name | regex_search('^[a-z][a-z0-9_-]*(?<![_-])$')) %}
-    distribution must start with a lowercase letter and can only contain lowercase letters, numbers, dashes, or underscores.
+    {% if not (distribution_name | regex_search('^[a-z][a-z0-9\_\-\.]*(?<![_-])$')) %}
+    distribution must start with a lowercase letter and can only contain lowercase letters, numbers, dashes, underscores, or dots.
     {% endif %}
 
 project_name:
