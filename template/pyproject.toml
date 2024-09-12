@@ -51,7 +51,7 @@ build-backend = "poetry.core.masonry.api"
 {% if package_type == "cli" %}
 
 [tool.poetry.scripts]
-{{ package_name | replace('.', '') }} = "{{ package_name }}.cli:cli"
+{{ package_name.split('.')[-1] }} = "{{ package_name }}.cli:cli"
 {% endif %}
 
 [tool.black]
