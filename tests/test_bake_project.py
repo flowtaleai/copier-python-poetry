@@ -224,14 +224,13 @@ def test_bake_without_code_examples(tmp_path, copier):
 
 
 @pytest.mark.parametrize(
-    "framework_frontpage",
+    ("framework", "frontpage_path"),
     [
         ("pdoc", "build/site/python_boilerplate.html"),
         ("mkdocs", "build/site/index.html"),
     ],
 )
-def test_bake_with_documentation(tmp_path, copier, framework_frontpage):
-    framework, frontpage_path = framework_frontpage
+def test_bake_with_documentation(tmp_path, copier, framework, frontpage_path):
     custom_answers = {"generate_docs": framework}
     project = copier.copy(tmp_path, **custom_answers)
 
