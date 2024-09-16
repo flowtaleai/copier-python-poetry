@@ -41,7 +41,6 @@ serve-docs:
 {% endif %}
 {% if generate_docs == "pdoc" %}
 docs: ## Build documentation
-	# FIXME: what about namespace packages?
 	@pdoc --output-directory build/site src/{{ package_name }}
 
 serve-docs:
