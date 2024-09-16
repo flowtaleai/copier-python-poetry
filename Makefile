@@ -32,6 +32,8 @@ test:  ## Run the project tests
 	@poetry run tox
 .PHONY: test
 
-testproject:  ## Create a new test project
-	copier copy --vcs-ref=HEAD . test-project
+testproject :  ## Create a new test project in temporary directory
+	@tempdir=$$(mktemp -d testproject.XXX) && \
+	copier copy --vcs-ref=HEAD . $$tempdir && \
+	echo "Created project in $$tempdir"
 .PHONY: testproject
