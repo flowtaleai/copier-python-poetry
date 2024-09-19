@@ -1,11 +1,11 @@
-"""{{package_name}} CLI."""
+"""{{ package_name }} CLI."""
 from typing import Optional
 
 import click
 
-from {{package_name}} import __version__, logs
+from {{ package_name }} import __version__, logs
 {% if generate_example_code %}
-from {{package_name}}.{{package_name}} import a_function
+from {{ package_name }}.core import a_function
 {% endif %}
 
 
@@ -17,7 +17,7 @@ from {{package_name}}.{{package_name}} import a_function
     help="Log level [default: .env:LOG_LEVEL or info]",
 )
 def cli(log_level: Optional[str]) -> None:
-    """Engage with {{package_name}} using this cli."""
+    """Engage with {{ package_name }} using this cli."""
     logs.set_level(log_level)
     {% if generate_example_code %}
     print(a_function())

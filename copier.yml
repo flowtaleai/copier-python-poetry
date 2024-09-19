@@ -22,22 +22,30 @@ author_email:
     Author email must be a valid email address.
     {% endif %}
 
+package_name:
+  type: str
+  placeholder: package_name
+  help: |-
+    Python package name.
+    The package name can contain '.' if you are creating a namespaced package,
+    but supports a maximum package nesting of three levels.
+  validator: |-
+    {% if not (package_name | regex_search('^([a-z][a-z0-9_]*)+(\.[a-z][a-z0-9_]*){0,2}$')) %}
+    package name must start with a lowercase letter and can only contain lowercase letters, numbers, or underscores.
+    {% endif %}
+
 distribution_name:
   type: str
   placeholder: distribution-name
-  help: "Distribution name of the python package, akin to registries such as PyPI"
+  default: "{{ package_name }}"
+  help: |-
+    Distribution name of the python package.
+    The distribution name is used when installing and referring to the package.
+    Distribution name should be similar to package name but can like scikit-learn
+    (sklearn) be different.
   validator: >-
-    {% if not (distribution_name | regex_search('^[a-z][a-z0-9_-]*(?<![_-])$')) %}
-    distribution must start with a lowercase letter and can only contain lowercase letters, numbers, dashes, or underscores.
-    {% endif %}
-
-package_name:
-  type: str
-  help: "Python package name"
-  default: "{{ distribution_name | replace('-', '_')}}"
-  validator: >-
-    {% if not (package_name | regex_search('^[a-z][a-z0-9_]*$')) %}
-    package_name must start with a lowercase letter and can only contain lowercase letters, numbers, or underscores.
+    {% if not (distribution_name | regex_search('^([a-z][a-z0-9_]*)+((\.|\-)[a-z][a-z0-9_]*){0,2}$')) %}
+    distribution name must start with a lowercase letter and can only contain lowercase letters, numbers, dashes, underscores, or dots.
     {% endif %}
 
 project_name:

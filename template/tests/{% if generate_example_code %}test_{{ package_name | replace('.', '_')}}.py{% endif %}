@@ -2,7 +2,7 @@
 import unittest
 
 {% endif %}
-from {{package_name}}.{{package_name}} import a_function
+from {{ package_name | replace(_copier_conf.sep, ".") }}.core import a_function
 
 
 {% if testing_framework == "pytest" %}
