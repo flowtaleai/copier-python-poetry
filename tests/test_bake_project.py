@@ -221,3 +221,30 @@ def test_bake_without_code_examples(tmp_path, copier):
     assert main_module_example_path.exists() is False
     assert main_module_test_example_path.exists() is False
     assert jupyter_notebook_example_path.exists() is False
+
+
+@pytest.mark.parametrize(
+    ("framework", "frontpage_path"),
+    [
+        ("pdoc", "build/site/python_boilerplate.html"),
+        ("mkdocs", "build/site/index.html"),
+    ],
+)
+def test_bake_with_documentation(tmp_path, copier, framework, frontpage_path):
+    custom_answers = {"generate_docs": framework}
+    project = copier.copy(tmp_path, **custom_answers)
+
+    project.run("git init")
+    project.run("make setup")
+    project.run("make docs")
+
+    # Check that index.html exists
+    frontpage_path = project.path / frontpage_path
+    assert frontpage_path.exists()
+
+    # Check that readme is displayed on frontpage
+    title = project.answers["package_name"] or project.answers["distribution_name"]
+    with open(frontpage_path) as index:
+        front_page = "\n".join(index.readlines())
+    assert title in front_page
+    assert "Versioning" in front_page

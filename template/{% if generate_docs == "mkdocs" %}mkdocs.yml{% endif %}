@@ -1,0 +1,78 @@
+site_name: "{{distribution_name}}"
+
+theme:
+  name: material
+  features:
+  - announce.dismiss
+  - content.action.edit
+  - content.action.view
+  - content.code.annotate
+  - content.code.copy
+  - content.tooltips
+  - navigation.footer
+  - navigation.indexes
+  - navigation.sections
+  - navigation.tabs
+  - navigation.tabs.sticky
+  - navigation.top
+  - search.highlight
+  - search.suggest
+  - toc.follow
+  palette:
+  - media: "(prefers-color-scheme)"
+    toggle:
+      icon: material/brightness-auto
+      name: Switch to light mode
+  - media: "(prefers-color-scheme: light)"
+    scheme: default
+    primary: teal
+    accent: purple
+    toggle:
+      icon: material/weather-sunny
+      name: Switch to dark mode
+  - media: "(prefers-color-scheme: dark)"
+    scheme: slate
+    primary: black
+    accent: lime
+    toggle:
+      icon: material/weather-night
+      name: Switch to system preference
+
+plugins:
+- search
+- gen-files:
+    scripts:
+    # Generate API reference automatically
+    - docs/scripts/gen_ref_pages.py
+    # Use readme as index if there is none
+    - docs/scripts/readme_as_index.py
+- literate-nav:
+    nav_file: SUMMARY.md
+- mkdocstrings:
+    handlers:
+      python:
+        paths: [src]
+        options:
+          docstring_options:
+            ignore_init_summary: true
+          docstring_section_style: list
+          filters: ["!^_"]
+          heading_level: 1
+          inherited_members: true
+          merge_init_into_class: true
+          parameter_headings: true
+          separate_signature: true
+          show_root_heading: true
+          show_root_full_path: false
+          show_signature_annotations: true
+          show_symbol_type_heading: true
+          show_symbol_type_toc: true
+          signature_crossrefs: true
+          summary: true
+
+nav:
+- Home: index.md
+{% if generate_example_code %}
+- User Guide: user_guide.md
+{% endif %}
+- API Reference: reference/

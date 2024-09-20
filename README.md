@@ -189,6 +189,7 @@ To make use of direnv, make sure it is installed. Go to the project root directo
 | use_jupyter_notebooks     | true                        | If `true` install ipykernel dependency                                                                                                           |
 | generate_example_code     | true                        | If `true` generate example files and code snippets                                                                                               |
 | strip_jupyter_outputs     | true                        | If `true` strip output from Jupyter notebooks before committing                                                                                  |
+| generate_docs             | mkdocs                      | Generate documentation with either `pdoc` or `mkdocs`    |
 
 
 ### Project usage
@@ -255,6 +256,8 @@ To make use of direnv, make sure it is installed. Go to the project root directo
 ​		and select the part of the version to bump
 
 ## Rationale
+
+- [2024-08-19] We allow for a choice between generating documentation with either MkDocs or pdoc. The former is more powerful, using mostly additional Markdown files. The latter is more straightforward and uses only the doc-strings in the code files. For both choices, the README.md files is rendered as the front page of the documentation.
 
 - [2023-10-10] We pass the `--preview` flag to black 23.x in particular to format long strings. The effects of `--preview` should be re-evaluated at each major version update of black.
 
