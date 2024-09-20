@@ -32,18 +32,20 @@ test:  ## Run the project tests
 	@poetry run pytest
 .PHONY: test
 {% if generate_docs == "mkdocs" %}
+
 docs: ## Build documentation
 	@mkdocs build --site-dir build/site
 
-serve-docs:
+serve-docs: ## Build documentation and serve it locally
 	@mkdocs serve
 .PHONY: docs serve-docs
 {% endif %}
 {% if generate_docs == "pdoc" %}
+
 docs: ## Build documentation
 	@pdoc --output-directory build/site src/{{ package_name }}
 
-serve-docs:
+serve-docs: ## Build documentation and serve it locally
 	@pdoc src/{{ package_name }}
 .PHONY: docs serve-docs
 {% endif %}
