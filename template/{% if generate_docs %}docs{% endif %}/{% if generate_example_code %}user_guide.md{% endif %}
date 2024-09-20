@@ -1,6 +1,10 @@
 # User guide
 
-Let your users know how to use your package! For example, we can reference our example function with [`{{ package_name }}.{{ package_name }}.a_function`][]. You can use it like this:
+Let your users know how to use your package! For example, we can reference our
+example function with {% if generate_docs == "mkdocs" %}
+[`{{ package_name }}.{{ package_name }}.a_function`][]
+{% endif %}{% if generate_docs == "pdoc" %}
+`{{ package_name }}.{{ package_name }}.a_function`{% endif %}. You can use it like this:
 
 ```python
 assert a_function() is None  # passes
