@@ -32,7 +32,7 @@ test:  ## Run the project tests
 	@poetry run tox
 .PHONY: test
 
-testproject:  ## Create a new test project in temporary directory
+testproject:  ## Test the copier template by creating a new project in temporary directory
 	@mkdir -p testprojects
 	@tempdir=$$(mktemp -p testprojects -d testproject.XXX) && \
 	copier copy --vcs-ref=HEAD . $$tempdir && \
