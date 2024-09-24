@@ -31,3 +31,10 @@ lint:   ## Runs linting on all project files
 test:  ## Run the project tests
 	@poetry run tox
 .PHONY: test
+
+testproject:  ## Test the copier template by creating a new project in temporary directory
+	@mkdir -p testprojects
+	@tempdir=$$(mktemp -p testprojects -d testproject.XXX) && \
+	copier copy --vcs-ref=HEAD . $$tempdir && \
+	echo "Created project in $$tempdir"
+.PHONY: testproject
