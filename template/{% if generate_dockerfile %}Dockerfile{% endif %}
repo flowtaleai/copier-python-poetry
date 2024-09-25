@@ -17,7 +17,7 @@ ENV PYTHONUNBUFFERED=1 \
     \
     # Poetry
     # https://python-poetry.org/docs/configuration/#using-environment-variables
-    POETRY_VERSION=1.7.0 \
+    POETRY_VERSION=1.8.3 \
     # make poetry install to this location
     POETRY_HOME="/opt/poetry" \
     # do not ask any interactive question
@@ -30,9 +30,6 @@ ENV PYTHONUNBUFFERED=1 \
 
 # prepend poetry and venv to path
 ENV PATH="$POETRY_HOME/bin:$VIRTUAL_ENV/bin:$PATH"
-
-# TODO(rj) if web server is used
-ENV PORT=8000
 
 # prepare virtual env
 RUN python -m venv $VIRTUAL_ENV
@@ -56,52 +53,23 @@ RUN --mount=type=cache,target=/root/.cache \
 WORKDIR /work_dir
 COPY poetry.lock pyproject.toml ./
 
-# install runtime deps to $VIRTUAL_ENV
-ARG GIT_AUTH_METHOD=https
-ARG POETRY_HTTP_BASIC_GPT_CORE_USERNAME
-ARG POETRY_HTTP_BASIC_GPT_CORE_PASSWORD
-ARG GIT_HOST=gitlab.company-name.com
+# Following argument names must be adjusted the `MY_REGISTRY` part
+# according to the name of the registry you added with `poetry source add`
+# Example:
+# With `poetry source add my_registry https://gitlab.mycompany.com/api/v4/projects/1234/packages/pypi/simple`
+# leads to the following arguments:
+ARG POETRY_HTTP_BASIC_MY_REGISTRY_USERNAME
+ARG POETRY_HTTP_BASIC_MY_REGISTRY_PASSWORD
 
-# Setup environment for SSH or HTTPS based on the argument
-RUN if [ "$GIT_AUTH_METHOD" = "ssh" ]; then \
-        mkdir -p -m 0600 $HOME/.ssh && \
-        ssh-keyscan -t rsa $GIT_HOST >> $HOME/.ssh/known_hosts; \
-    elif [ "$GIT_AUTH_METHOD" = "https" ]; then \
-        if [ -z "$POETRY_HTTP_BASIC_GPT_CORE_USERNAME" ] || [ -z "$POETRY_HTTP_BASIC_GPT_CORE_PASSWORD" ]; then \
-            echo "POETRY_HTTP_BASIC_GPT_CORE_USERNAME and POETRY_HTTP_BASIC_GPT_CORE_PASSWORD are required for HTTPS method but are not set"; \
-            exit 1; \
-        fi; \
+# Setup environment for HTTPS auth based on the argument
+RUN if [ -n "$POETRY_HTTP_BASIC_MY_REGISTRY_USERNAME" ] && [ -n "$POETRY_HTTP_BASIC_MY_REGISTRY_PASSWORD" ]; then \
+        echo "Using provided registry credentials"; \
     else \
-        echo "GIT_AUTH_METHOD must be set to 'ssh' or 'https'"; \
-        exit 1; \
+        echo "Registry credentials not provided, skipping authentication setup"; \
     fi
+
 RUN --mount=type=cache,target=/root/.cache \
-    --mount=type=ssh \
     poetry install --no-root --only main
-
-
-FROM builder-base as development
-
-WORKDIR /work_dir
-
-# quicker install as runtime deps are already installed
-RUN --mount=type=cache,target=/root/.cache \
-    --mount=type=ssh \
-    poetry install --no-root --with dev
-
-# copy in our source code last, as it changes the most
-COPY pyproject.toml poetry.lock ./
-COPY ./src ./src
-RUN --mount=type=cache,target=/root/.cache \
-    --mount=type=ssh \
-    poetry install --only-root
-
-# TODO(rj) if web server is used
-EXPOSE $PORT
-
-# TODO(rj) entrypoint example
-# CMD uvicorn gpt_backend.main:app --host 0.0.0.0 --port $PORT --reload
-CMD ["python", "-m", "my_package.cli"]
 
 FROM python-base as production
 
@@ -117,10 +85,4 @@ COPY ./src ./src
 RUN --mount=type=cache,target=/root/.cache \
     poetry install --only-root
 
-
-# TODO(rj) if web server is used
-EXPOSE $PORT
-
-# TODO(rj) entrypoint example
-# CMD uvicorn gpt_backend.main:app --host 0.0.0.0 --port $PORT --reload
-CMD ["python", "-m", "my_package.cli"]
+CMD ["poetry", "run", "{{ package_name }}"]

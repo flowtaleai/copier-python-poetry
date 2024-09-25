@@ -153,3 +153,9 @@ strip_jupyter_outputs:
   help: "Strip output from Jupyter notebooks before committing"
   # Only ask if project uses Jupyter notebooks
   when: "{{ use_jupyter_notebooks == true }}"
+
+generate_dockerfile:
+  type: bool
+  default: false
+  help: "Generate Dockerfile for containerized development/deployment"
+  when: "{{ package_type == 'cli' }}"
