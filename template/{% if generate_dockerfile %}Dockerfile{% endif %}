@@ -90,4 +90,4 @@ COPY ./src ./src
 RUN --mount=type=cache,target=/root/.cache \
     poetry install --only-root
 
-CMD ["poetry", "run", "{{ package_name }}"]
+CMD ["bash", "scripts/entrypoint.sh"]
