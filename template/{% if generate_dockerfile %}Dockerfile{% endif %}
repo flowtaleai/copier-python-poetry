@@ -40,8 +40,7 @@ ENV PYTHONPATH="/work_dir:$PYTHONPATH"
 
 FROM python-base as builder-base
 RUN apt-get update \
-    && apt-get install -y curl git
-    # build-essential # if ever needed, leave it here
+    && apt-get install -y curl git build-essential
 
 # install poetry - respects $POETRY_VERSION & $POETRY_HOME
 # The --mount will mount the buildx cache directory to where
