@@ -46,17 +46,12 @@ Project specific environment variables are defined in the `.env` file. This file
 
 For production it is not recommended to use a `.envrc` file or direnv.
 
-#### Docker
-
-When the Copier template has the CLI option activated (rather than the library option), there is a downstream option to generate a Dockerfile. This is useful for running the CLI in a containerized environment. The Dockerfile includes build arguments to add authentication credentials for private Python package registries configured via Poetry.
-
 ##### Adding Credentials Outside Docker
 
 To add credentials to the Poetry configuration outside of Docker, use the following commands:
 
 ```bash
-export POETRY_HTTP_BASIC_MY_REGISTRY_USERNAME=your_username
-export POETRY_HTTP_BASIC_MY_REGISTRY_PASSWORD=your_personal_access_token
+poetry config http-basic.my_registry your_username your_personal_access_token
 poetry source add my_registry https://gitlab.mycompany.com/api/v4/projects/1234/packages/pypi/simple
 poetry add private-package@0.1.0 --source my_registry
 ```
@@ -66,8 +61,9 @@ poetry add private-package@0.1.0 --source my_registry
 To add credentials during the Docker build process, use the following command:
 ```bash
 docker build \
-  --build-arg POETRY_HTTP_BASIC_MY_REGISTRY_USERNAME=your_username \
-  --build-arg POETRY_HTTP_BASIC_MY_REGISTRY_PASSWORD=your_personal_access_token \
+  --build-arg PYTHON_REGISTRY_NAME=your_private_registry_name \
+  --build-arg PYTHON_REGISTRY_USERNAME=your_username \
+  --build-arg PYTHON_REGISTRY_PASSWORD=your_personal_access_token \
   -t your_image_name:tag .
 ```
 
