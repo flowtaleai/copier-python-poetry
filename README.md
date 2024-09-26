@@ -224,29 +224,6 @@ To make use of direnv, make sure it is installed. Go to the project root directo
 
 When the Copier template has the CLI option activated (rather than the library option), there is a downstream option to generate a Dockerfile. This is useful for running the CLI in a containerized environment. The Dockerfile includes build arguments to add authentication credentials for private Python package registries configured via Poetry.
 
-##### Adding Credentials Outside Docker
-
-To add credentials to the Poetry configuration outside of Docker, use the following commands:
-
-```bash
-export POETRY_HTTP_BASIC_MY_REGISTRY_USERNAME=your_username
-export POETRY_HTTP_BASIC_MY_REGISTRY_PASSWORD=your_personal_access_token
-poetry source add my_registry https://gitlab.mycompany.com/api/v4/projects/1234/packages/pypi/simple
-poetry add private-package@0.1.0 --source my_registry
-```
-
-##### Adding Credentials Within Docker
-
-To add credentials during the Docker build process, use the following command:
-```bash
-docker build \
-  --build-arg POETRY_HTTP_BASIC_MY_REGISTRY_USERNAME=your_username \
-  --build-arg POETRY_HTTP_BASIC_MY_REGISTRY_PASSWORD=your_personal_access_token \
-  -t your_image_name:tag .
-```
-
-This approach allows you to securely pass your authentication credentials to the Docker build process, enabling access to private package registries during the container creation.
-
 ## Style suggestions
 
 - Docstrings convention is `google` without types (types are specified using standard python typing)
