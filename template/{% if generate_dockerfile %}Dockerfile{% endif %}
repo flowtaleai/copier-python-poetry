@@ -1,44 +1,41 @@
 # syntax=docker/dockerfile:1
 # Keep this syntax directive! It's used to enable Docker BuildKit
 
-# Dockerfile inspired by:
+# Dockerfile inspired by, but change to use pip for installation of poetry
 # https://github.com/orgs/python-poetry/discussions/1879
 # https://github.com/orgs/python-poetry/discussions/1879#discussioncomment-216865
 # https://github.com/orgs/python-poetry/discussions/1879#discussioncomment-7284113
 # https://gist.github.com/usr-ein/c42d98abca3cb4632ab0c2c6aff8c88a
 
-FROM python:{{ python_version }}-slim as python-base
+FROM python:{{ python_version }}-slim AS python-base
 
 ENV PYTHONUNBUFFERED=1 \
     PYTHONDONTWRITEBYTECODE=1 \
     # pip
     PIP_DISABLE_PIP_VERSION_CHECK=on \
     PIP_DEFAULT_TIMEOUT=100 \
-    \
-    # Poetry
-    # https://python-poetry.org/docs/configuration/#using-environment-variables
     POETRY_VERSION=1.8.3 \
-    # make poetry install to this location
-    POETRY_HOME="/opt/poetry" \
-    # do not ask any interactive question
-    POETRY_NO_INTERACTION=1 \
-    # never create virtual environment automaticly, only use env prepared by us
     POETRY_VIRTUALENVS_CREATE=false \
-    \
-    # this is where our requirements + virtual environment will live
-    VIRTUAL_ENV="/venv"
+    # virtual environment of application
+    VIRTUAL_ENV="/app_venv" \
+    # virtual environment of poetry
+    POETRY_HOME="/poetry_venv"
 
-# prepend poetry and venv to path
-ENV PATH="$POETRY_HOME/bin:$VIRTUAL_ENV/bin:$PATH"
+# Create a virtual environment for Poetry
+RUN python -m venv $POETRY_HOME
 
-# prepare virtual env
+# Install Poetry in its own virtual environment
+RUN $POETRY_HOME/bin/pip install --no-cache-dir poetry==$POETRY_VERSION
+
+# Create a separate virtual environment for the application
 RUN python -m venv $VIRTUAL_ENV
 
-# working directory and Python path
-WORKDIR /work_dir
-ENV PYTHONPATH="/work_dir:$PYTHONPATH"
+# Set PATH to prioritize the app's virtual environment
+ENV PATH="$VIRTUAL_ENV/bin:$POETRY_HOME/bin:$PATH"
 
-FROM python-base as builder-base
+WORKDIR /work_dir
+
+FROM python-base AS builder-base
 # Example for PYTHON_REGISTRY_NAME Argument
 # If you used:
 # `poetry source add my_registry https://gitlab.mycompany.com/api/v4/projects/1234/packages/pypi/simple`
@@ -52,42 +49,45 @@ ARG PYTHON_REGISTRY_PASSWORD
 # and not used in the final image, it should be safe.
 # This approach avoids the added complexity of using Docker secrets.
 
+RUN apt-get update \
+    && apt-get install -y curl git build-essential
+
+# Configure Poetry to use the application's virtual environment
+RUN $POETRY_HOME/bin/poetry config virtualenvs.create $POETRY_VIRTUALENVS_CREATE \
+    && $POETRY_HOME/bin/poetry config virtualenvs.path $VIRTUAL_ENV \
+    && $POETRY_HOME/bin/poetry config cache-dir /root/.cache/pypoetry
+
 # Setup environment for HTTPS auth based on the arguments
 RUN if [ -n "$PYTHON_REGISTRY_NAME" ] && [ -n "$PYTHON_REGISTRY_USERNAME" ] && [ -n "$PYTHON_REGISTRY_PASSWORD" ]; then \
         echo "Using provided registry credentials for $PYTHON_REGISTRY_NAME"; \
-        poetry config http-basic.$PYTHON_REGISTRY_NAME $PYTHON_REGISTRY_USERNAME $PYTHON_REGISTRY_PASSWORD; \
+        $POETRY_HOME/bin/poetry config http-basic.$PYTHON_REGISTRY_NAME $PYTHON_REGISTRY_USERNAME $PYTHON_REGISTRY_PASSWORD; \
     else \
         echo "Registry credentials or name not provided, skipping authentication setup"; \
     fi
 
-RUN apt-get update \
-    && apt-get install -y curl git build-essential
-
-# install poetry - respects $POETRY_VERSION & $POETRY_HOME
-# The --mount will mount the buildx cache directory to where
-# Poetry and Pip store their cache so that they can re-use it
-RUN --mount=type=cache,target=/root/.cache \
-    pip install --no-cache-dir poetry==$POETRY_VERSION
-
-# used to init dependencies
-WORKDIR /work_dir
+# Copy and install dependencies
 COPY poetry.lock pyproject.toml ./
-
 RUN --mount=type=cache,target=/root/.cache \
-    poetry install --no-root --only main
+    $POETRY_HOME/bin/poetry install --no-interaction  --no-root --only main
 
-FROM python-base as production
+FROM python-base AS production
 
-# copy in our built poetry + venv
-COPY --from=builder-base $POETRY_HOME $POETRY_HOME
+# Copy the application's virtual environment
 COPY --from=builder-base $VIRTUAL_ENV $VIRTUAL_ENV
 
-WORKDIR /work_dir
+# Copy Poetry from its virtual environment
+COPY --from=builder-base $POETRY_HOME $POETRY_HOME
 
-# copy in our source code last, as it changes the most
+# Set PATH to prioritize the app's virtual environment
+ENV PATH="$VIRTUAL_ENV/bin:$POETRY_HOME/bin:$PATH"
+
+# Copy source code
 COPY pyproject.toml poetry.lock ./
+COPY ./scripts ./scripts
 COPY ./src ./src
+
+# Install the project
 RUN --mount=type=cache,target=/root/.cache \
-    poetry install --only-root
+    $POETRY_HOME/bin/poetry install --no-interaction  --only-root
 
 CMD ["bash", "scripts/entrypoint.sh"]
