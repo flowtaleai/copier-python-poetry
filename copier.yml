@@ -109,6 +109,11 @@ max_line_length:
     Maximum line length must be positive.
     {% endif %}
 
+use_mypy:
+  type: bool
+  default: true
+  help: "Enable mypy for static type checking, improving code quality and catching potential errors early in development"
+
 use_flake8_strict_plugins:
   type: bool
   default: true
