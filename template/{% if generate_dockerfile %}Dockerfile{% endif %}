@@ -90,4 +90,7 @@ COPY ./src ./src
 RUN --mount=type=cache,target=/root/.cache \
     $POETRY_HOME/bin/poetry install --no-interaction --only-root
 
-CMD ["bash", "scripts/entrypoint.sh"]
+# chmod +x for entrypoint script
+RUN chmod +x scripts/entrypoint.sh
+
+ENTRYPOINT ["scripts/entrypoint.sh"]
