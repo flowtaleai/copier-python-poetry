@@ -88,6 +88,6 @@ COPY ./src ./src
 
 # Install the project
 RUN --mount=type=cache,target=/root/.cache \
-    $POETRY_HOME/bin/poetry install --no-interaction  --only-root
+    $POETRY_HOME/bin/poetry install --no-interaction --only-root
 
 CMD ["bash", "scripts/entrypoint.sh"]
