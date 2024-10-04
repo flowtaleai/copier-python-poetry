@@ -56,6 +56,7 @@ poetry source add my_registry https://gitlab.mycompany.com/api/v4/projects/1234/
 poetry add private-package@0.1.0 --source my_registry
 ```
 
+{% if generate_dockerfile %}
 ##### Adding Python Package Registry Credentials Within Docker
 
 To add credentials during the Docker build process, use the following command:
@@ -67,6 +68,7 @@ docker build \
   -t your_image_name:tag .
 ```
 
+{% endif %}
 ## Versioning
 
 This project is tagged with versions according to [SemVer](https://semver.org/). To bump the project version:
