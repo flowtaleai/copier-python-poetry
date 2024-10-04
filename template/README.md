@@ -46,7 +46,7 @@ Project specific environment variables are defined in the `.env` file. This file
 
 For production it is not recommended to use a `.envrc` file or direnv.
 
-##### Adding Credentials Outside Docker
+##### Adding Python Package Registry Credentials
 
 To add credentials to the Poetry configuration outside of Docker, use the following commands:
 
@@ -56,7 +56,7 @@ poetry source add my_registry https://gitlab.mycompany.com/api/v4/projects/1234/
 poetry add private-package@0.1.0 --source my_registry
 ```
 
-##### Adding Credentials Within Docker
+##### Adding Python Package Registry Credentials Within Docker
 
 To add credentials during the Docker build process, use the following command:
 ```bash
@@ -66,8 +66,6 @@ docker build \
   --build-arg PYTHON_REGISTRY_PASSWORD=your_personal_access_token \
   -t your_image_name:tag .
 ```
-
-This approach allows you to securely pass your authentication credentials to the Docker build process, enabling access to private package registries during the container creation.
 
 ## Versioning
 
