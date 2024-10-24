@@ -1,0 +1,96 @@
+# syntax=docker/dockerfile:1
+# Keep this syntax directive! It's used to enable Docker BuildKit
+
+# Dockerfile inspired by, but change to use pip for installation of poetry
+# https://github.com/orgs/python-poetry/discussions/1879
+# https://github.com/orgs/python-poetry/discussions/1879#discussioncomment-216865
+# https://github.com/orgs/python-poetry/discussions/1879#discussioncomment-7284113
+# https://gist.github.com/usr-ein/c42d98abca3cb4632ab0c2c6aff8c88a
+
+FROM python:{{ python_version }}-slim AS python-base
+
+ENV PYTHONUNBUFFERED=1 \
+    PYTHONDONTWRITEBYTECODE=1 \
+    # pip
+    PIP_DISABLE_PIP_VERSION_CHECK=on \
+    PIP_DEFAULT_TIMEOUT=100 \
+    POETRY_VERSION=1.8.3 \
+    POETRY_VIRTUALENVS_CREATE=false \
+    # virtual environment of application
+    VIRTUAL_ENV="/app_venv" \
+    # virtual environment of poetry
+    POETRY_HOME="/poetry_venv"
+
+# Create a virtual environment for Poetry
+RUN python -m venv $POETRY_HOME
+
+# Install Poetry in its own virtual environment
+RUN $POETRY_HOME/bin/pip install --no-cache-dir poetry==$POETRY_VERSION
+
+# Create a separate virtual environment for the application
+RUN python -m venv $VIRTUAL_ENV
+
+# Set PATH to prioritize the app's virtual environment
+ENV PATH="$VIRTUAL_ENV/bin:$POETRY_HOME/bin:$PATH"
+
+WORKDIR /work_dir
+
+FROM python-base AS builder-base
+# Example for PYTHON_REGISTRY_NAME Argument
+# If you used:
+# `poetry source add my_registry https://gitlab.mycompany.com/api/v4/projects/1234/packages/pypi/simple`
+# PYTHON_REGISTRY_NAME=my_registry
+ARG PYTHON_REGISTRY_NAME
+ARG PYTHON_REGISTRY_USERNAME
+ARG PYTHON_REGISTRY_PASSWORD
+
+# Note: Passing credentials as build arguments is generally not secure.
+# However, since these ARGs are defined in the `builder` stage
+# and not used in the final image, it should be safe.
+# This approach avoids the added complexity of using Docker secrets.
+
+RUN apt-get update \
+    && apt-get install -y curl git build-essential
+
+# Configure Poetry to use the application's virtual environment
+RUN $POETRY_HOME/bin/poetry config virtualenvs.create $POETRY_VIRTUALENVS_CREATE \
+    && $POETRY_HOME/bin/poetry config virtualenvs.path $VIRTUAL_ENV \
+    && $POETRY_HOME/bin/poetry config cache-dir /root/.cache/pypoetry
+
+# Setup environment for HTTPS auth based on the arguments
+RUN if [ -n "$PYTHON_REGISTRY_NAME" ] && [ -n "$PYTHON_REGISTRY_USERNAME" ] && [ -n "$PYTHON_REGISTRY_PASSWORD" ]; then \
+        echo "Using provided registry credentials for $PYTHON_REGISTRY_NAME"; \
+        $POETRY_HOME/bin/poetry config http-basic.$PYTHON_REGISTRY_NAME $PYTHON_REGISTRY_USERNAME $PYTHON_REGISTRY_PASSWORD; \
+    else \
+        echo "Registry credentials or name not provided, skipping authentication setup"; \
+    fi
+
+# Copy and install dependencies
+COPY poetry.lock pyproject.toml ./
+RUN --mount=type=cache,target=/root/.cache \
+    $POETRY_HOME/bin/poetry install --no-interaction  --no-root --only main
+
+FROM python-base AS production
+
+# Copy the application's virtual environment
+COPY --from=builder-base $VIRTUAL_ENV $VIRTUAL_ENV
+
+# Copy Poetry from its virtual environment
+COPY --from=builder-base $POETRY_HOME $POETRY_HOME
+
+# Set PATH to prioritize the app's virtual environment
+ENV PATH="$VIRTUAL_ENV/bin:$POETRY_HOME/bin:$PATH"
+
+# Copy source code
+COPY pyproject.toml poetry.lock ./
+COPY ./scripts ./scripts
+COPY ./src ./src
+
+# Install the project
+RUN --mount=type=cache,target=/root/.cache \
+    $POETRY_HOME/bin/poetry install --no-interaction --only-root
+
+# chmod +x for entrypoint script
+RUN chmod +x scripts/entrypoint.sh
+
+ENTRYPOINT ["scripts/entrypoint.sh"]

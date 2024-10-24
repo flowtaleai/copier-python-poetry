@@ -220,6 +220,9 @@ To make use of direnv, make sure it is installed. Go to the project root directo
       poetry run COMMAND
       ```
 
+#### Docker
+
+When the Copier template has the CLI option activated (rather than the library option), there is a downstream option to generate a Dockerfile. This is useful for running the CLI in a containerized environment. The Dockerfile includes build arguments to add authentication credentials for private Python package registries configured via Poetry.
 
 ## Style suggestions
 
