@@ -8,6 +8,7 @@
 *.pyw    text diff=python
 *.pyx    text diff=python
 *.pyz    text diff=python
+*.ipynb  text diff=jupyternotebook merge=jupyternotebook
 
 # Binary files
 # ============
@@ -18,9 +19,6 @@
 *.pyc    binary
 *.pyd    binary
 *.pyo    binary
-
-# Jupyter notebook
-*.ipynb  text
 
 # Note: .db, .p, and .pkl files are associated
 # with the python modules ``pickle``, ``dbm.*``,
