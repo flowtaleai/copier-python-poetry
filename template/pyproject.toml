@@ -80,7 +80,7 @@ pythonpath = "src"
 
 {% if use_mypy %}
 [tool.mypy]
-exclude = ["tests/*"]
+exclude = ["tests/*", "docs/*"]
 
 follow_imports = "silent"
 warn_redundant_casts = true
