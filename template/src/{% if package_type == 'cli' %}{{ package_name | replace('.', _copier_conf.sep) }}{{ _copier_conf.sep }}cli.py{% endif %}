@@ -6,12 +6,17 @@ import typer
 
 from {{ package_name }} import logs
 from {{ package_name }}.logs import LogLevel
+from {{ package_name }} import __version__
 {% if generate_example_code %}
 from {{ package_name }}.core import a_function
 {% endif %}
 
 app = typer.Typer()
 
+def version_callback(value: bool) -> None:
+    if value:
+        typer.echo(f"{{ package_name }} version {__version__}")
+        raise typer.Exit()
 
 @app.command()
 def cli(
@@ -22,7 +27,17 @@ def cli(
             envvar="LOG_LEVEL",
             help="Set the logging level.",
         ),
-    ] = LogLevel.INFO
+    ] = LogLevel.INFO,
+    version: Annotated[
+        Optional[bool],
+        typer.Option(
+            "--version",
+            "-V",
+            callback=version_callback,
+            is_eager=True,
+            help="Show the application's version and exit.",
+        ),
+    ] = None,
 ) -> None:
     """Engage with {{ package_name }} using this CLI."""
     logs.set_level(log_level.value)
