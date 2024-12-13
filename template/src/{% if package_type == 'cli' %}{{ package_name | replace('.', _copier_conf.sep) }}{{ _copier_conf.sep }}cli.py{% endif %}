@@ -1,5 +1,6 @@
 """{{ package_name }} CLI."""
 from typing import Annotated, Optional
+from enum import Enum
 
 import typer
 
@@ -8,22 +9,29 @@ from {{ package_name }} import logs
 from {{ package_name }}.core import a_function
 {% endif %}
 
+class LogLevel(str, Enum):
+    DEBUG = "debug"
+    INFO = "info"
+    WARNING = "warning"
+    ERROR = "error"
+    CRITICAL = "critical"
+
 app = typer.Typer()
 
 
 @app.command()
 def cli(
     log_level: Annotated[
-        Optional[str],
+        Optional[LogLevel],
         typer.Option(
             case_sensitive=False,
             envvar="LOG_LEVEL",
             help="Set the logging level.",
         ),
-    ] = "info"
+    ] = LogLevel.INFO
 ) -> None:
     """Engage with {{ package_name }} using this CLI."""
-    logs.set_level(log_level)
+    logs.set_level(log_level.value)
     {% if generate_example_code %}
     typer.echo(a_function())
     {% endif %}
