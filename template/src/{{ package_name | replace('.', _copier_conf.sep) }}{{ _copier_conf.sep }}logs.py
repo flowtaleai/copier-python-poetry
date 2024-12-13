@@ -36,6 +36,8 @@ LOGGING_CONFIG = {
 
 
 class LogLevel(str, Enum):
+    """Enumeration for standard log levels."""
+
     DEBUG = "debug"
     INFO = "info"
     WARNING = "warning"

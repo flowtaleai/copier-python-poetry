@@ -1,22 +1,22 @@
 """{{ package_name }} CLI."""
 from typing import Annotated, Optional
-from enum import Enum
 
 import typer
 
-from {{ package_name }} import logs
-from {{ package_name }}.logs import LogLevel
-from {{ package_name }} import __version__
+from {{ package_name }} import __version__, logs
 {% if generate_example_code %}
 from {{ package_name }}.core import a_function
 {% endif %}
+from {{ package_name }}.logs import LogLevel
 
 app = typer.Typer()
+
 
 def version_callback(value: bool) -> None:
     if value:
         typer.echo(f"{{ package_name }} version {__version__}")
         raise typer.Exit()
+
 
 @app.command()
 def cli(
