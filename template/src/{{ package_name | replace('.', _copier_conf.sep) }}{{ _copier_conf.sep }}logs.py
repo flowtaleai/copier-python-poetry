@@ -1,6 +1,7 @@
 import logging
 import logging.config
 import os
+from enum import Enum
 from typing import Optional
 
 PACKAGE_LOGGER = __name__.split(".")[0]
@@ -32,6 +33,14 @@ LOGGING_CONFIG = {
         },
     },
 }
+
+
+class LogLevel(str, Enum):
+    DEBUG = "debug"
+    INFO = "info"
+    WARNING = "warning"
+    ERROR = "error"
+    CRITICAL = "critical"
 
 
 def set_level(level: Optional[str]) -> None:

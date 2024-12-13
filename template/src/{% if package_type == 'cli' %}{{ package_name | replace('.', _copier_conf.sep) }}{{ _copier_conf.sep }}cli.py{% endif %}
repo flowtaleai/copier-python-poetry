@@ -5,16 +5,10 @@ from enum import Enum
 import typer
 
 from {{ package_name }} import logs
+from {{ package_name }}.logs import LogLevel
 {% if generate_example_code %}
 from {{ package_name }}.core import a_function
 {% endif %}
-
-class LogLevel(str, Enum):
-    DEBUG = "debug"
-    INFO = "info"
-    WARNING = "warning"
-    ERROR = "error"
-    CRITICAL = "critical"
 
 app = typer.Typer()
 
