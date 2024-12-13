@@ -29,7 +29,7 @@ flake8-eradicate = "^1.5.0"
 flake8-bugbear = "^23.9.16"
 flake8-annotations = "^3.0.1"
 {% endif %}
-{% if use_mypy %}
+{% if type_checker == "mypy" %}
 mypy = "^1.11.2"
 {% endif %}
 black = "^22.1.0"
@@ -78,7 +78,7 @@ convention = "google"
 [tool.pytest.ini_options]
 pythonpath = "src"
 
-{% if use_mypy %}
+{% if type_checker == "mypy" %}
 [tool.mypy]
 exclude = ["tests/*", "docs/*"]
 
@@ -88,7 +88,7 @@ warn_unused_ignores = true
 disallow_any_generics = true
 check_untyped_defs = true
 no_implicit_reexport = true
-
-# for strict mypy: (this is the tricky one :-))
+{% if type_checker_strictness == "strict" %}
 disallow_untyped_defs = true
+{% endif %}
 {% endif %}

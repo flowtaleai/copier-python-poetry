@@ -6,7 +6,7 @@
     "ms-python.black-formatter",
     "ms-python.isort",
     "ms-python.flake8",
-    {% if use_mypy %}
+    {% if type_checker == "mypy" %}
     "matangover.mypy",
     {% endif %}
     "njpwerner.autodocstring",

@@ -7,6 +7,9 @@
   "black-formatter.args": [
     "--preview"
   ],
+  {% if type_checker == "mypy" %}
+   "mypy.runUsingActiveInterpreter": true ,
+  {% endif %}
   "isort.importStrategy": "fromEnvironment",
   "isort.args": [
     "--profile",

@@ -38,12 +38,12 @@
         entry: poetry run pydocstyle
         require_serial: true
         types_or: [python, pyi]
-{% if use_mypy %}
+{% if type_checker == "mypy" %}
   - repo: local
     hooks:
       - id: mypy
         name: mypy
-        entry: poetry run mypy
+        entry: poetry run mypy{% if type_checker_strictness == "strict" %} --disallow-untyped-defs{% endif %}
         language: system
         types: [python]
         require_serial: true

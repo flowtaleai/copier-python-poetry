@@ -27,16 +27,4 @@
     "editor.codeActionsOnSave": {
       "source.organizeImports": "explicit"
   },
-  {% if use_mypy %}
-  "python.linting.mypyEnabled": true,
-  "python.linting.enabled": true,
-  "python.analysis.typeCheckingMode": "basic",
-  "python.linting.mypyArgs": [
-    "--follow-imports=silent",
-    "--ignore-missing-imports",
-    "--show-column-numbers",
-    "--no-pretty",
-    "--disallow-untyped-defs"
-  ]
-  {% endif %}
 }

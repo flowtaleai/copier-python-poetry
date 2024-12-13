@@ -26,10 +26,6 @@ lint:   ## Runs linting on all project files
 	trap 'rm -f $$tempfile' EXIT && \
 	cat .pre-commit-config.standard.yaml .pre-commit-config.addon.strict.yaml > $$tempfile && \
 	poetry run pre-commit run --all-files -c $$tempfile
-{% if use_mypy %}
-	@echo "Running mypy..."
-	@poetry run mypy src
-{% endif %}
 .PHONY: lint
 
 test:  ## Run the project tests
