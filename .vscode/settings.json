@@ -1,16 +1,8 @@
 {
-  "[json]": {
-    "editor.formatOnSave": true,
-    "editor.defaultFormatter": "vscode.json-language-features"
+  "notebook.formatOnSave.enabled": true,
+  "notebook.codeActionsOnSave": {
+    "source.organizeImports": "explicit"
   },
-  "[python]": {
-    "editor.defaultFormatter": "ms-python.black-formatter",
-    "editor.formatOnSave": true,
-    "editor.codeActionsOnSave": {
-      "source.organizeImports": "explicit"
-    },
-  },
-  "python.formatting.provider": "none",
   "black-formatter.importStrategy": "fromEnvironment",
   "black-formatter.args": [
     "--preview"
@@ -23,4 +15,14 @@
   "flake8.importStrategy": "fromEnvironment",
   "json.format.keepLines": true,
   "autoDocstring.docstringFormat": "google-notypes",
+  "[json]": {
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "vscode.json-language-features"
+  },
+  "[python]": {
+    "editor.defaultFormatter": "ms-python.black-formatter",
+    "editor.formatOnSave": true,
+    "editor.codeActionsOnSave": {
+      "source.organizeImports": "explicit"
+  },
 }

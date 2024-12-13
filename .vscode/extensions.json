@@ -10,6 +10,7 @@
     "njpwerner.autodocstring",
     "hbenl.vscode-test-explorer",
     "littlefoxteam.vscode-python-test-adapter",
-    "darkriszty.markdown-table-prettify"
+    "GitLab.gitlab-workflow",
+    "darkriszty.markdown-table-prettify",
   ]
 }
