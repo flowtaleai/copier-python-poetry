@@ -77,8 +77,8 @@ convention = "google"
 
 [tool.pytest.ini_options]
 pythonpath = "src"
-
 {% if type_checker == "mypy" %}
+
 [tool.mypy]
 exclude = ["tests/*", "docs/*"]
 
