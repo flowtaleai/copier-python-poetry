@@ -134,7 +134,7 @@ def test_bake_gitlab_and_unittest(tmp_path, copier):
     project = copier.copy(tmp_path, **custom_answers)
 
     gitlab_ci_path = project.path / ".gitlab-ci.yml"
-    assert "poetry run python -m unittest discover"  in gitlab_ci_path.read_text()
+    assert "poetry run python -m unittest discover" in gitlab_ci_path.read_text()
 
 
 @pytest.mark.slow()
