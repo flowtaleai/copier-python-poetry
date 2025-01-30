@@ -1,8 +1,10 @@
 {
+  {% if use_jupyter_notebooks %}
   "notebook.formatOnSave.enabled": true,
   "notebook.codeActionsOnSave": {
     "source.organizeImports": "explicit"
   },
+  {% endif %}
   "black-formatter.importStrategy": "fromEnvironment",
   "black-formatter.args": [
     "--preview"

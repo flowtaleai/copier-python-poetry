@@ -28,6 +28,7 @@ def test_bake_with_defaults(tmp_path, copier):
     assert "bitbucket-pipelines.yml" not in found_toplevel_files
 
     assert (project.path / "src" / "python_boilerplate").exists()
+    assert not (project.path / "docs").exists()
 
 
 def test_bake_and_run_tests_with_pytest_framework(tmp_path, copier):
