@@ -6,13 +6,19 @@ stages:
   - linting
 
 before_script:
+  - apt-get update && apt-get install -y make
   - pip install poetry
-  - poetry install
+  - make setup-strict
 
 test:
   stage: test
   script:
+    {% if testing_framework == "pytest" %}
     - poetry run pytest
+    {% endif %}
+    {% if testing_framework == "unittest" %}
+    - poetry run python -m unittest discover
+    {% endif %}
 
 pre-commit:
   stage: linting
