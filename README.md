@@ -4,19 +4,20 @@ Opinionated copier template for Flowtale python projects.
 
 ## Features
 
-| Task                   | Tool                                                                |
-|------------------------|---------------------------------------------------------------------|
-| Testing framework      | pytest, unittest                                                    |
-| Test mocking           | pytest-mock                                                         |
-| Pre-commit hooks       | pre-commit                                                          |
-| Version management     | bump2version                                                        |
-| Environment management | direnv                                                              |
-| Common style           | EditorConfig                                                        |
-| Editor configuration   | vscode with suggested extensions                                    |
+| Task                   | Tool                                                         |
+| ---------------------- | ------------------------------------------------------------ |
+| Command line interface | Typer                                                        |
+| Testing framework      | pytest, unittest                                             |
+| Test mocking           | pytest-mock                                                  |
+| Pre-commit hooks       | pre-commit                                                   |
+| Version management     | bump2version                                                 |
+| Environment management | direnv                                                       |
+| Common style           | EditorConfig                                                 |
+| Editor configuration   | vscode with suggested extensions                             |
 | Autoformatters         | black with experimental string processing (`--preview`), pydocstyle |
-| Linters                | flake8, pydocstyle                                                  |
-| Test and packaging     | gitlab-ci                                                           |
-| Run common commands    | make                                                                |
+| Linters                | flake8, pydocstyle                                           |
+| Test and packaging     | gitlab-ci                                                    |
+| Run common commands    | make                                                         |
 
 ### Automatisms
 

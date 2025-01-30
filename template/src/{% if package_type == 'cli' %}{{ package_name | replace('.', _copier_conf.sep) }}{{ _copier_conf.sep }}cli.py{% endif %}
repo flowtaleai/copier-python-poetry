@@ -1,24 +1,46 @@
 """{{ package_name }} CLI."""
-from typing import Optional
+from typing import Annotated, Optional
 
-import click
+import typer
 
 from {{ package_name }} import __version__, logs
 {% if generate_example_code %}
 from {{ package_name }}.core import a_function
 {% endif %}
+from {{ package_name }}.logs import LogLevel
+
+app = typer.Typer()
 
 
-@click.command()
-@click.version_option(__version__)
-@click.option(
-    "--log-level",
-    type=click.Choice(["error", "warning", "info", "debug"]),
-    help="Log level [default: .env:LOG_LEVEL or info]",
-)
-def cli(log_level: Optional[str]) -> None:
-    """Engage with {{ package_name }} using this cli."""
-    logs.set_level(log_level)
+def version_callback(value: bool) -> None:
+    if value:
+        typer.echo(f"{{ package_name }} version {__version__}")
+        raise typer.Exit()
+
+
+@app.command()
+def cli(
+    log_level: Annotated[
+        Optional[LogLevel],
+        typer.Option(
+            case_sensitive=False,
+            envvar="LOG_LEVEL",
+            help="Set the logging level.",
+        ),
+    ] = LogLevel.INFO,
+    version: Annotated[
+        Optional[bool],
+        typer.Option(
+            "--version",
+            "-V",
+            callback=version_callback,
+            is_eager=True,
+            help="Show the application's version and exit.",
+        ),
+    ] = None,
+) -> None:
+    """Engage with {{ package_name }} using this CLI."""
+    logs.set_level(log_level.value)
     {% if generate_example_code %}
-    print(a_function())
+    typer.echo(a_function())
     {% endif %}
