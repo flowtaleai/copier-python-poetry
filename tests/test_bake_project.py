@@ -205,10 +205,9 @@ def test_bake_with_code_examples(tmp_path, copier):
     project = copier.copy(tmp_path, **custom_answers)
 
     package_name = project.answers["package_name"]
-    if "/" in package_name:
-        *package_namespace, package_name = package_name.split("/")
-        package_namespace = "/".join(package_namespace[:-1])
-        package_test_name = package_name.replace("/", "_")
+    if "." in package_name:
+        package_test_name = package_name.replace(".", "_")
+        package_namespace = package_name.replace(".", "/")
     else:
         package_namespace = package_name
         package_test_name = package_name
@@ -230,10 +229,9 @@ def test_bake_without_code_examples(tmp_path, copier):
     project = copier.copy(tmp_path, **custom_answers)
 
     package_name = project.answers["package_name"]
-    if "/" in package_name:
-        *package_namespace, package_name = package_name.split("/")
-        package_namespace = "/".join(package_namespace[:-1])
-        package_test_name = package_name.replace("/", "_")
+    if "." in package_name:
+        package_test_name = package_name.replace(".", "_")
+        package_namespace = package_name.replace(".", "/")
     else:
         package_namespace = package_name
         package_test_name = package_name
@@ -283,16 +281,17 @@ def test_bake_with_many_files(tmp_path, copier):
         "generate_example_code": True,
         "generate_dockerfile": True,
         "generate_docs": "mkdocs",
+        "type_checker": "mypy",
+        "type_checker_strictness": "strict",
         "ide": "vscode",
         "package_type": "cli",
     }
     project = copier.copy(tmp_path, **custom_answers)
 
     package_name = project.answers["package_name"]
-    if "/" in package_name:
-        *package_namespace, package_name = package_name.split("/")
-        package_namespace = "/".join(package_namespace[:-1])
-        package_test_name = package_name.replace("/", "_")
+    if "." in package_name:
+        package_test_name = package_name.replace(".", "_")
+        package_namespace = package_name.replace(".", "/")
     else:
         package_namespace = package_name
         package_test_name = package_name
@@ -327,6 +326,87 @@ def test_bake_with_many_and_run_pre_commit(tmp_path, copier):
         "generate_example_code": True,
         "generate_dockerfile": True,
         "generate_docs": "mkdocs",
+        "type_checker": "mypy",
+        "type_checker_strictness": "strict",
+        "ide": "vscode",
+        "package_type": "cli",
+    }
+    project = copier.copy(tmp_path, **custom_answers)
+
+    project.run("git init")
+    project.run("git add .")
+    project.run("git config user.name 'User Name'")
+    project.run("git config user.email 'user@email.org'")
+    project.run("git commit -m init")
+
+    std_pre_commit_path = project.path / ".pre-commit-config.standard.yaml"
+    strict_pre_commit_path = project.path / ".pre-commit-config.addon.strict.yaml"
+    dst_pre_commit_path = project.path / ".pre-commit-config.yaml"
+    shutil.copy(std_pre_commit_path, dst_pre_commit_path)
+    with dst_pre_commit_path.open("a") as f:
+        f.write(strict_pre_commit_path.read_text())
+
+    project.run("poetry install")
+    project.run("poetry run pre-commit run --all-files")
+
+
+def test_bake_namespaced_package_with_many_files(tmp_path, copier):
+    custom_answers = {
+        "package_name": "company.mypackage",
+        "use_jupyter_notebooks": True,
+        "strip_jupyter_outputs": True,
+        "generate_example_code": True,
+        "generate_dockerfile": True,
+        "generate_docs": "mkdocs",
+        "type_checker": "mypy",
+        "type_checker_strictness": "strict",
+        "ide": "vscode",
+        "package_type": "cli",
+    }
+    project = copier.copy(tmp_path, **custom_answers)
+
+    package_name = project.answers["package_name"]
+    if "." in package_name:
+        package_namespace = package_name.replace(".", "/")
+        package_test_name = package_name.replace(".", "_")
+    else:
+        package_namespace = package_name
+        package_test_name = package_name
+    main_module_example_path = project.path / "src" / package_namespace / "core.py"
+    main_module_test_example_path = (
+        project.path / "tests" / f"test_{package_test_name}.py"
+    )
+    # Jupyter
+    jupyter_notebook_example_path = (
+        project.path / "notebooks" / "example_notebook.ipynb"
+    )
+    # Docs
+    mkdocs_config_filepath = project.path / "mkdocs.yml"
+    mkdocs_dir_path = project.path / "docs"
+    # Dockerfile
+    dockerfile_path = project.path / "Dockerfile"
+
+    print(main_module_example_path)
+    assert main_module_example_path.exists() is True
+    assert main_module_test_example_path.exists() is True
+    assert jupyter_notebook_example_path.exists() is True
+    assert mkdocs_config_filepath.exists() is True
+    assert mkdocs_dir_path.exists() is True
+    assert dockerfile_path.exists() is True
+
+
+@pytest.mark.slow()
+@pytest.mark.venv()
+def test_bake_namespaced_package_with_many_and_run_pre_commit(tmp_path, copier):
+    custom_answers = {
+        "package_name": "company.mypackage",
+        "use_jupyter_notebooks": True,
+        "strip_jupyter_outputs": True,
+        "generate_example_code": True,
+        "generate_dockerfile": True,
+        "generate_docs": "mkdocs",
+        "type_checker": "mypy",
+        "type_checker_strictness": "strict",
         "ide": "vscode",
         "package_type": "cli",
     }
