@@ -15,9 +15,10 @@ Opinionated copier template for Flowtale python projects.
 | Common style           | EditorConfig                                                 |
 | Editor configuration   | vscode with suggested extensions                             |
 | Autoformatters         | black with experimental string processing (`--preview`), pydocstyle |
-| Linters                | flake8, pydocstyle                                           |
-| Test and packaging     | gitlab-ci                                                    |
-| Run common commands    | make                                                         |
+| Linters                | flake8, pydocstyle                                                  |
+| Test and packaging     | gitlab-ci                                                           |
+| Type Checkers          | mypy                                                                |
+| Run common commands    | make                                                                |
 
 ### Automatisms
 
@@ -110,11 +111,9 @@ direnv is a tool that enables automatic loading and unloading of directory-speci
 
 To make use of direnv, make sure it is installed. Go to the project root directory (where the `.envrc` file is located) and run `direnv allow`.
 
-
 ## Usage
 
 ### Project initialization
-
 
 1. Create a new project based on this copier template (it can also be applied to existing projects)
 
@@ -172,7 +171,7 @@ To make use of direnv, make sure it is installed. Go to the project root directo
 | Name                      | Example                     | Description                                                                                                                                      |
 |---------------------------|-----------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------|
 | author_name               | Team Faboulous              |                                                                                                                                                  |
-| author_email              | teamfaboulous@mycompany.com |                                                                                                                                                  |
+| author_email              | <teamfaboulous@mycompany.com> |                                                                                                                                                  |
 | package_name              | awsomeproject               | Used to define the name of the python package. This can include "." if you need to create a namespaced package.                                                                                                    |
 | distribution_name         | awsome-project              | Used to define the name of the python distribution                                                                                               |
 | project_name              | Awsome Project              | Name of the project                                                                                                                              |
@@ -184,6 +183,8 @@ To make use of direnv, make sure it is installed. Go to the project root directo
 | python_version            | 3.10                        | Define the python version to use for `pyenv` and the CI pipelines                                                                                |
 | testing_framework         | pytest                      | Python testing framework                                                                                                                         |
 | max_line_length           | 88                          | Code max line length                                                                                                                             |
+| type_checker | mypy | Select whether to add a type checker |
+| type_checker_strictness | strict | Decide whether to support gradual typing or not  |
 | use_flake8_strict_plugins | true                        | If `true` install flake8 plugins that allow to catch bugs, security vulnerabilities and apply more strict rules. They can be a bit overwhelming. |
 | ide                       | vscode                      | Define the IDE(s) used by the developers.                                                                                                        |
 | git_hosting               | gitlab                      | Define GIT hosting that will be used.                                                                                                            |
@@ -191,7 +192,6 @@ To make use of direnv, make sure it is installed. Go to the project root directo
 | generate_example_code     | true                        | If `true` generate example files and code snippets                                                                                               |
 | strip_jupyter_outputs     | true                        | If `true` strip output from Jupyter notebooks before committing                                                                                  |
 | generate_docs             | mkdocs                      | Generate documentation with either `pdoc` or `mkdocs`    |
-
 
 ### Project usage
 
@@ -203,19 +203,19 @@ To make use of direnv, make sure it is installed. Go to the project root directo
 
 - VSCode should automatically detect the virtual environment if poetry is configured to store the venv in a subfolder of the project (it is by default).
 - Otherwise manually select the interpreter with `Python: Select interpreter`
-    - Run `poetry run poetry env info -p` to discover where it is located
+  - Run `poetry run poetry env info -p` to discover where it is located
 
 #### Shell
 
 - To perform actions in the shell
 
-    - explicitly activate the virtual environment
+  - explicitly activate the virtual environment
 
         ```bash
         poetry shell
         ```
 
-    - Or run commands in the virtual environment
+  - Or run commands in the virtual environment
 
       ```bash
       poetry run COMMAND
@@ -251,13 +251,13 @@ When the Copier template has the CLI option activated (rather than the library o
     - e.g. add support for generating the documentation
   - Patch: Fixes to issues or bugs in the template that do not affect the generated project's structure or compatibility.
 
--  To bump the project version:
+- To bump the project version:
 
   ```bash
   make bump
   ```
 
-​		and select the part of the version to bump
+​  and select the part of the version to bump
 
 ## Rationale
 
