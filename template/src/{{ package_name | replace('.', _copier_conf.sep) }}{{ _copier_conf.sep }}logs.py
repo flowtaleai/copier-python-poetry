@@ -2,7 +2,7 @@ import logging
 import logging.config
 import os
 from enum import Enum
-from typing import Optional
+from typing import Any, Optional
 
 PACKAGE_LOGGER = __name__.split(".")[0]
 
