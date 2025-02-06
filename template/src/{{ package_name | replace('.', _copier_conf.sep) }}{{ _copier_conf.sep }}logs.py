@@ -6,7 +6,7 @@ from typing import Optional
 
 PACKAGE_LOGGER = __name__.split(".")[0]
 
-LOGGING_CONFIG = {
+LOGGING_CONFIG: dict[str, Any] = {
     "version": 1,
     "disable_existing_loggers": False,
     "formatters": {
