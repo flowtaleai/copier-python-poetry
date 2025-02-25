@@ -25,7 +25,6 @@ pytest-mock = "^3.11.1"
 mypy = "^1.11.2"
 {% endif %}
 pre-commit = "^3.4.0"
-pydocstyle = "^6.3.0"
 bump2version = "^1.0.1"
 detect-secrets = "^1.4.0"
 {% if generate_docs == "mkdocs" %}
@@ -108,10 +107,6 @@ combine-as-imports = true
 "tests/*" = ["S101", "T20"]
 "tests/test_*.py" = ["ANN"]
 "tests/**/test_*.py" = ["ANN"]
-
-[tool.pydocstyle]
-add_ignore = "D100,D103,D104"
-convention = "google"
 
 [tool.pytest.ini_options]
 pythonpath = "src"
