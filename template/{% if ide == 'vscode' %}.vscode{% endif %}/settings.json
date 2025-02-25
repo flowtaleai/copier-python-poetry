@@ -5,16 +5,6 @@
     "source.organizeImports": "explicit"
   },
   {% endif %}
-  "black-formatter.importStrategy": "fromEnvironment",
-  "black-formatter.args": [
-    "--preview"
-  ],
-  "isort.importStrategy": "fromEnvironment",
-  "isort.args": [
-    "--profile",
-    "black"
-  ],
-  "flake8.importStrategy": "fromEnvironment",
   "json.format.keepLines": true,
   "autoDocstring.docstringFormat": "google-notypes",
   "[json]": {
@@ -22,9 +12,10 @@
     "editor.defaultFormatter": "vscode.json-language-features"
   },
   "[python]": {
-    "editor.defaultFormatter": "ms-python.black-formatter",
+    // You might remove the default formatter setting if ruff does not act as a formatter via VSCode.
     "editor.formatOnSave": true,
     "editor.codeActionsOnSave": {
       "source.organizeImports": "explicit"
-  },
+    }
+  }
 }

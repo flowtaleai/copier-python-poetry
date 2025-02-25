@@ -29,7 +29,7 @@ lint:   ## Runs linting on all project files
 	@tempfile=$$(mktemp) && \
 	trap 'rm -f $$tempfile' EXIT && \
 	cat .pre-commit-config.standard.yaml .pre-commit-config.addon.strict.yaml > $$tempfile && \
-	poetry run pre-commit run --all-files -c $$tempfile
+	poetry run ruff check .
 .PHONY: lint
 
 test:  ## Run the project tests
