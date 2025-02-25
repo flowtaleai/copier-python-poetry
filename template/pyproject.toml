@@ -57,26 +57,57 @@ build-backend = "poetry.core.masonry.api"
 
 [tool.ruff]
 line-length = {{ max_line_length }}
-target-version = "py310"  # Adjust to your Python version (e.g., "py39", "py311")
+target-version = "py{{ python_version | replace('.', '') }}"
 
 [tool.ruff.lint]
-select = ["ALL"]
-ignore = ["ANN101", "ANN102", "ANN401", "D100", "D104", "E203", "W503"]
+#select = ["ALL"]
+select = ["E", "F", "W"]
+ignore = [
+    # Docstring rules
+    "D100",  # Ignore missing docstring in public modules
+    "D103",  # Ignore missing docstring in public functions
+    "D104",  # Ignore missing docstring in public packages
+
+    # Import-related rules
+    "F401",  # Ignore unused imports
+    "I001",  # Ignore unsorted imports
+
+    # Function argument and annotation rules
+    "ARG001", # Ignore unused function arguments
+    "FBT001", # Ignore boolean-typed positional arguments
+    "UP007",  # Ignore non-PEP604 annotation union issues
+
+    # Formatting and compatibility rules
+    "RSE102", # Ignore unnecessary parentheses on raised exceptions
+    "D203",   # Remove conflict with D211 (blank line before class)
+    "D211",
+    "D213",
+    "D212",   # Remove conflict with D213 (docstring summary conflicts)
+    "COM812", # Avoid formatter conflicts
+    "D202",  # Remove conflict with D203 (blank line before class)
+    #"lines-between-types" # Prevent related warnings
+]
 
 [tool.ruff.lint.mccabe]
-max-complexity = 10  # Matches flake8's max-complexity
+max-complexity = 10
+
+[tool.ruff.format]
+preview = true
 
 [tool.ruff.lint.isort]
-import-order-style = "google"
 known-first-party = ["{{ package_name }}"]
+force-sort-within-sections = true
+case-sensitive = false
+section-order = ["future", "standard-library", "third-party", "first-party", "local-folder"]
+combine-as-imports = true
 
 [tool.ruff.lint.per-file-ignores]
 {% if package_type == "cli" %}
-"src/{{ package_name }}/cli.py" = ["T"]  # Ignore print-related warnings for CLI
+"src/{{ package_name }}/cli.py" = ["T"]
 {% endif %}
-"tests/*" = ["S101", "T20"]  # Ignore assert and print in tests
-"tests/test_*.py" = ["ANN"]  # Ignore annotation issues in test files
-"tests/**/test_*.py" = ["ANN"]  # Ignore annotations in nested test files
+"tests/*" = ["S101", "T20"]
+"tests/test_*.py" = ["ANN"]
+"tests/**/test_*.py" = ["ANN"]
 
 [tool.pydocstyle]
 add_ignore = "D100,D103,D104"
