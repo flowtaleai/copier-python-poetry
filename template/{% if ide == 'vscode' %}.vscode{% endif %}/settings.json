@@ -7,15 +7,24 @@
   {% endif %}
   "json.format.keepLines": true,
   "autoDocstring.docstringFormat": "google-notypes",
+
+  // 📝 Save Actions: Fix all issues & organize imports
+  "editor.codeActionsOnSave": {
+    "source.organizeImports": true,
+    "source.fixAll": true
+  },
+
+  // 📝 Language-Specific Settings
   "[json]": {
     "editor.formatOnSave": true,
     "editor.defaultFormatter": "vscode.json-language-features"
   },
   "[python]": {
-    // You might remove the default formatter setting if ruff does not act as a formatter via VSCode.
-    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "charliermarsh.ruff",  // Use Ruff as the Python formatter
+    "editor.formatOnSave": true,                      // Format Python files on save
     "editor.codeActionsOnSave": {
-      "source.organizeImports": "explicit"
+      "source.organizeImports": true,                 // Ruff organizes imports
+      "source.fixAll": true                           // Auto-fix issues on save
     }
   }
 }
