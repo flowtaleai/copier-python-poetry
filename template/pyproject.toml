@@ -68,11 +68,9 @@ ignore = [
     "D104",  # Ignore missing docstring in public packages
 
     # Import-related rules
-    "F401",  # Ignore unused imports
     "I001",  # Ignore unsorted imports
 
     # Function argument and annotation rules
-    "ARG001", # Ignore unused function arguments
     "FBT001", # Ignore boolean-typed positional arguments
     "UP007",  # Ignore non-PEP604 annotation union issues
 
