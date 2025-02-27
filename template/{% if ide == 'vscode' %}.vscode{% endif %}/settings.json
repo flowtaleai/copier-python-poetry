@@ -5,26 +5,25 @@
     "source.organizeImports": "explicit"
   },
   {% endif %}
-  "json.format.keepLines": true,
-  "autoDocstring.docstringFormat": "google-notypes",
 
-  // 📝 Save Actions: Fix all issues & organize imports
+  "json.format.keepLines": true,
+
   "editor.codeActionsOnSave": {
-    "source.organizeImports": true,
-    "source.fixAll": true
+    "source.organizeImports": "explicit",
+    "source.fixAll": "explicit"
   },
 
-  // 📝 Language-Specific Settings
   "[json]": {
     "editor.formatOnSave": true,
     "editor.defaultFormatter": "vscode.json-language-features"
   },
+
   "[python]": {
-    "editor.defaultFormatter": "charliermarsh.ruff",  // Use Ruff as the Python formatter
-    "editor.formatOnSave": true,                      // Format Python files on save
+    "editor.defaultFormatter": "charliermarsh.ruff",
+    "editor.formatOnSave": true,
     "editor.codeActionsOnSave": {
-      "source.organizeImports": true,                 // Ruff organizes imports
-      "source.fixAll": true                           // Auto-fix issues on save
+      "source.organizeImports": "explicit",
+      "source.fixAll": "explicit"
     }
   }
 }
