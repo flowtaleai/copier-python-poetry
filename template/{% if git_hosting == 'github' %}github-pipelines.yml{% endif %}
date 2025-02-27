@@ -1,0 +1,55 @@
+name: CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["{{ python_version }}"]
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v3
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Install Dependencies
+        run: |
+          apt-get update || sudo apt-get update
+          apt-get install -y make || sudo apt-get install -y make
+          python -m pip install --upgrade pip
+          pip install poetry
+          make setup-strict
+      - name: Test with pytest
+        run: |
+          {% if testing_framework == "pytest" %}
+          poetry run pytest
+          {% endif %}
+          {% if testing_framework == "unittest" %}
+          poetry run python -m unittest discover
+          {% endif %}
+
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up Python
+        uses: actions/setup-python@v3
+        with:
+          python-version: "{{ python_version }}"
+      - name: Install Dependencies
+        run: |
+          apt-get update || sudo apt-get update
+          apt-get install -y make || sudo apt-get install -y make
+          python -m pip install --upgrade pip
+          pip install poetry
+          make setup-strict
+      - name: Lint with pre-commit
+        run: |
+          poetry run pre-commit run --all-files
