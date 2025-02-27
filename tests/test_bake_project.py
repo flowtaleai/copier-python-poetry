@@ -109,6 +109,7 @@ def test_bake_bitbucket(tmp_path, copier):
 
     found_toplevel_files = [f.name for f in project.path.glob("*")]
     assert "bitbucket-pipelines.yml" in found_toplevel_files
+    assert "github-pipelines.yml" not in found_toplevel_files
     assert ".gitlab-ci.yml" not in found_toplevel_files
 
 
@@ -118,15 +119,29 @@ def test_bake_gitlab(tmp_path, copier):
 
     found_toplevel_files = [f.name for f in project.path.glob("*")]
     assert "bitbucket-pipelines.yml" not in found_toplevel_files
+    assert "github-pipelines.yml" not in found_toplevel_files
     assert ".gitlab-ci.yml" in found_toplevel_files
 
 
-def test_bake_gitlab_and_pytest(tmp_path, copier):
-    custom_answers = {"git_hosting": "gitlab", "testing_framework": "pytest"}
+def test_bake_github(tmp_path, copier):
+    custom_answers = {"git_hosting": "github"}
     project = copier.copy(tmp_path, **custom_answers)
 
-    gitlab_ci_path = project.path / ".gitlab-ci.yml"
-    assert "poetry run pytest" in gitlab_ci_path.read_text()
+    found_toplevel_files = [f.name for f in project.path.glob("*")]
+    assert "bitbucket-pipelines.yml" not in found_toplevel_files
+    assert ".gitlab-ci.yml" not in found_toplevel_files
+    assert "github-workflows-ci.yml" in found_toplevel_files
+
+
+def test_bake_github_and_pytest(tmp_path, copier):
+    custom_answers = {"git_hosting": "github", "testing_framework": "pytest"}
+    project = copier.copy(tmp_path, **custom_answers)
+
+    github_workflow_path = project.path / "github-workflows-ci.yml"
+    assert github_workflow_path.exists()
+    workflow_content = github_workflow_path.read_text()
+    assert "poetry run pytest" in workflow_content
+    assert "poetry run python -m unittest discover" not in workflow_content
 
 
 def test_bake_gitlab_and_unittest(tmp_path, copier):
@@ -135,6 +150,17 @@ def test_bake_gitlab_and_unittest(tmp_path, copier):
 
     gitlab_ci_path = project.path / ".gitlab-ci.yml"
     assert "poetry run python -m unittest discover" in gitlab_ci_path.read_text()
+
+
+def test_bake_github_and_unittest(tmp_path, copier):
+    custom_answers = {"git_hosting": "github", "testing_framework": "unittest"}
+    project = copier.copy(tmp_path, **custom_answers)
+
+    github_workflow_path = project.path / "github-workflows-ci.yml"
+    assert github_workflow_path.exists()
+    workflow_content = github_workflow_path.read_text()
+    assert "poetry run python -m unittest discover" in workflow_content
+    assert "poetry run pytest" not in workflow_content
 
 
 @pytest.mark.slow()
