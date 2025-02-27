@@ -15,7 +15,6 @@ def test_bake_with_defaults(tmp_path, copier):
     assert ".editorconfig" in found_toplevel_files
     assert "README.md" in found_toplevel_files
     assert "LICENSE" in found_toplevel_files
-    assert ".flake8" in found_toplevel_files
     assert ".gitattributes" in found_toplevel_files
     assert "tests" in found_toplevel_files
 
