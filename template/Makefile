@@ -1,5 +1,9 @@
 .DEFAULT_GOAL := help
 
+build:  ## Build a python wheel package
+	poetry build --format=wheel
+.PHONY: build
+
 VERSION_PART ?= $(shell bash -c 'read -p "Version part [major, minor, patch]: " version_part; echo $$version_part')
 bump:  ## Bump the project version and create a tag
 	poetry run bump2version $(VERSION_PART)
