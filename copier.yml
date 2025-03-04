@@ -109,6 +109,21 @@ max_line_length:
     Maximum line length must be positive.
     {% endif %}
 
+type_checker:
+  choices:
+    - none
+    - mypy
+  default: none
+  help: "Include type checker for static type checking, improving code quality and catching potential errors early in development"
+
+type_checker_strictness:
+  choices:
+    - gradual
+    - strict
+  default: strict
+  when: "{{ type_checker != 'none' }}"
+  help: "Whether or not to support gradual typing with the type-checker."
+
 use_flake8_strict_plugins:
   type: bool
   default: true

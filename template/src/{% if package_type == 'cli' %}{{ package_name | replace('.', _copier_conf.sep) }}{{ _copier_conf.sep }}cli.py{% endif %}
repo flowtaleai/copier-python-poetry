@@ -1,4 +1,6 @@
 """{{ package_name }} CLI."""
+from __future__ import annotations
+
 from typing import Annotated, Optional
 
 import typer
@@ -40,7 +42,9 @@ def cli(
     ] = None,
 ) -> None:
     """Engage with {{ package_name }} using this CLI."""
-    logs.set_level(log_level.value)
+    if log_level is not None:
+        logs.set_level(log_level.value)
+
     {% if generate_example_code %}
     typer.echo(a_function())
     {% endif %}

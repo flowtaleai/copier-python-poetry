@@ -9,6 +9,8 @@ git_hosting: gitlab
 ide: vscode
 license: MIT license
 max_line_length: 88
+type_checker: "mypy"
+type_checker_strictness: "gradual"
 package_name: template
 package_type: library
 project_name: Copier python template

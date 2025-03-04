@@ -6,7 +6,9 @@
     "ms-python.black-formatter",
     "ms-python.isort",
     "ms-python.flake8",
+    {% if type_checker == "mypy" %}
     "matangover.mypy",
+    {% endif %}
     "njpwerner.autodocstring",
     "hbenl.vscode-test-explorer",
     "littlefoxteam.vscode-python-test-adapter",

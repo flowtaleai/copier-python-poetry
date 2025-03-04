@@ -38,3 +38,26 @@
         entry: poetry run pydocstyle
         require_serial: true
         types_or: [python, pyi]
+{% if type_checker == "mypy" %}
+  - repo: local
+    hooks:
+      - id: mypy
+        name: mypy
+        entry: poetry run mypy
+        {% if "." in package_name %}
+        pass_filenames: false
+        {% if type_checker_strictness == "strict" %}
+        args: ["--disallow-untyped-defs", "--namespace-packages", "-p", "{{ package_name }}"]
+        {% else %}
+        args: ["--namespace-packages", "-p", "{{ package_name }}"]
+        {% endif %}
+        {% else %}
+        {% if type_checker_strictness == "strict" %}
+        args: ["--disallow-untyped-defs"]
+        {% endif %}
+        {% endif %}
+        language: system
+        types: [python]
+        require_serial: true
+        exclude: "^(tests/|docs/)"
+{% endif %}

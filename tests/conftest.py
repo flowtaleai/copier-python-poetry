@@ -36,6 +36,8 @@ def copier_defaults() -> dict[str, str]:
         "project_short_description": "An very nice project",
         "license": "MIT license",
         "package_type": "cli",
+        "type_checker": "none",
+        "type_checker_strictness": "strict",
     }
 
 

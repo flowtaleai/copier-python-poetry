@@ -2,11 +2,11 @@ import logging
 import logging.config
 import os
 from enum import Enum
-from typing import Optional
+from typing import Any, Optional
 
 PACKAGE_LOGGER = __name__.split(".")[0]
 
-LOGGING_CONFIG = {
+LOGGING_CONFIG: dict[str, Any] = {
     "version": 1,
     "disable_existing_loggers": False,
     "formatters": {
