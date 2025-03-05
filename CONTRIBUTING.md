@@ -1,111 +1,321 @@
 # Contributing to Copier Python Poetry
 
-This document provides guidelines for contributing to the Copier Python Poetry template project.
+This document provides guidelines for contributing to the Copier Python Poetry template project. Since this is a template generator, there are two distinct contexts to consider: the template itself and the projects generated from it.
 
-## Setup
+## Template Development
 
-### Dependencies
+### Prerequisites
 
-Dependencies to create the project template with copier
-
-- python (suggested install method: system)
-- copier (suggested install method: pipx)
-
-Dependencies for the project
-
-- [poetry](https://python-poetry.org/docs#installation)
+- Python (suggested install method: system)
+- [Copier](https://copier.readthedocs.io/) (suggested install method: pipx)
+- [Poetry](https://python-poetry.org/docs#installation)
 - [pyenv](https://github.com/pyenv/pyenv#getting-pyenv) (recommended)
+- [direnv](https://direnv.net/) (recommended for environment management)
+- Git
 
-### Development environment configuration
+### Development Environment Setup
 
-These configurations are required to setup the development environment and need to be performed only once.
+#### Installing pyenv (recommended)
 
-#### poetry
+This step can be skipped if your system Python version matches the one specified in the `.python-version` file.
 
-(Recommended) To make poetry use the python interpreter of pyenv (defined in the `.python-version` file inside the project)
+Add the following to `~/.bashrc` or `~/.zshrc` to initialize `pyenv`:
 
 ```bash
-poetry config virtualenvs.prefer-active-python true
-```
-
-This setting allows to easier to rename the project folder without having to recreated the virtual environment. It
-also makes vscode automatically detected the poetry virtual environment (see [VScode](#vscode))
-
-#### pyenv (recommended)
-
-This step can be skipped if the system python version always matches the version specified in the `.python-version` of
-the project (very unlikely).
-
-Add the following to `~/.bashrc` or `~/.zshrc` to initialize `pyenv`
-
-```
 export PYENV_ROOT="$HOME/.pyenv"
 command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
 eval "$(pyenv init -)"
 ```
 
-#### direnv (recommended)
+#### Configuring Poetry
 
-direnv is a tool that enables automatic loading and unloading of directory-specific environment variables. It is useful to automatically activate the virtual environment and load any project specific environment variables when entering a project folder. Because this template expects the use of poetry, the `.envrc` file accompanying the template includes a function to automatically load a poetry virtual environment, and will also load project specific environment variables from any present `.env` file with the dotenv command.
+To make Poetry use the Python interpreter specified by pyenv:
 
-To make use of direnv, make sure it is installed. Go to the project root directory (where the `.envrc` file is located) and run `direnv allow`.
+```bash
+poetry config virtualenvs.prefer-active-python true
+```
 
-## Project development
+This setting allows for easier project folder renaming without recreating the virtual environment, and helps VSCode detect the Poetry environment automatically.
 
-### python dependencies
+#### Setting up direnv (recommended)
 
-- Do not manually change the [dependency specification](https://python-poetry.org/docs/dependency-specification/) of the python packages related to the copier template (i.e. do not change the version in pyproject.toml). These will be automatically updated when we apply an update of the copier template.
+direnv automatically loads and unloads directory-specific environment variables. To use it:
 
-#### VSCode
+1. [Install direnv](https://direnv.net/docs/installation.html)
+2. At the project root (where `.envrc` is located), run:
+   ```bash
+   direnv allow
+   ```
 
-- VSCode should automatically detect the virtual environment if poetry is configured to store the venv in a subfolder of the project (it is by default).
-- Otherwise manually select the interpreter with `Python: Select interpreter`
-  - Run `poetry run poetry env info -p` to discover where it is located
+### Testing the Template
 
-#### Shell
+There are multiple approaches for testing the template to ensure it works correctly. A comprehensive testing strategy involves testing both the template itself and the projects it generates.
 
-- To perform actions in the shell
+#### Running Template Tests
 
-  - explicitly activate the virtual environment
+To run the automated test suite for the template:
 
-        ```bash
-        poetry shell
-        ```
+```bash
+make test
+```
 
-  - Or run commands in the virtual environment
+This runs tests using tox. If you encounter environment-related issues, you can recreate the environments:
 
-      ```bash
-      poetry run COMMAND
-      ```
+```bash
+poetry run tox -r
+```
 
-#### Docker
+#### Generating Test Projects
 
-When the Copier template has the CLI option activated (rather than the library option), there is a downstream option to generate a Dockerfile. This is useful for running the CLI in a containerized environment. The Dockerfile includes build arguments to add authentication credentials for private Python package registries configured via Poetry.
+1. **Using Make (Quickest Method)**:
+   ```bash
+   make testproject
+   ```
+   This creates a project in a temporary directory under `testprojects/` using the current template version.
 
-## Contributing
+   > **Note:** The `make testproject` command uses `--vcs-ref=HEAD` which means it will use the committed files in your repository. To test changes, you must commit them first.
 
-- The python dependencies in the template should be update periodically
-  - Updating the major version of black may require reformatting large portions of a project codebase to make the CI lint stage pass
+2. **Basic Manual Generation**:
+   ```bash
+   mkdir -p /tmp/test-project
+   copier copy . /tmp/test-project
+   ```
 
-- A note to the [Rationale](README.md#rationale) section should be added if it helps explaining non-obvious choices
+   > **Important:** When using Copier with a Git repository as the source, Copier always accesses the repository content through Git, not the filesystem. This means:
+   >
+   > - Without a reference flag (`-r` or `--vcs-ref`), Copier uses the latest tag
+   > - With `-r HEAD`, it uses the latest commit
+   > - Uncommitted changes in your working directory **will not** be included in the template
+   > - To test changes, you must commit them first, then use `-r HEAD`
+
+3. **Complete Test with Git Initialization**:
+   ```bash
+   # First, commit your changes if needed
+   git add .
+   git commit -m "WIP: Testing changes"
+
+   # Then generate a test project
+   mkdir /tmp/copier-test-project && cd /tmp/copier-test-project && \
+   copier copy /media/data/software/copier-python-poetry . -r HEAD \
+   --data-file ~/copier-default-answers.yml && \
+   git init && git add . && git commit -m "initial commit" && make setup-strict && direnv allow
+   ```
+
+   After testing, you can undo the temporary commit if needed:
+   ```bash
+   git reset HEAD~1  # Unstage the changes but keep them in your working directory
+   ```
+
+#### Testing Different Configurations
+
+When making significant changes, test the template with various configurations:
+
+1. **CLI Project**:
+   ```bash
+   copier copy . /tmp/test-cli --data package_type=cli
+   ```
+
+2. **Library Project**:
+   ```bash
+   copier copy . /tmp/test-lib --data package_type=library
+   ```
+
+3. **Documentation Variations**:
+   ```bash
+   copier copy . /tmp/test-mkdocs --data generate_docs=mkdocs
+   copier copy . /tmp/test-pdoc --data generate_docs=pdoc
+   ```
+
+4. **Automated Testing with Predefined Answers**:
+   ```bash
+   copier copy . /tmp/test-automated -r HEAD --data-file ~/copier-default-answers.yml
+   ```
+
+#### Verifying Generated Projects
+
+After generating a test project, verify it works correctly:
+
+1. Install dependencies:
+   ```bash
+   cd /tmp/test-project
+   poetry install
+   ```
+
+2. Run tests and linting:
+   ```bash
+   make test
+   make lint
+   ```
+
+3. Check other features based on your configuration:
+   ```bash
+   # For projects with documentation
+   make docs
+
+   # For CLI projects
+   poetry run your-package-name --help
+   ```
+
+#### Using a Default Answers File
+
+To streamline testing, create a default answers YAML file:
+
+```yaml
+# ~/copier-default-answers.yml
+author_name: "Test Author"
+author_email: "test@example.com"
+package_name: "testpackage"
+distribution_name: "test-package"
+project_name: "Test Project"
+repository_name: "test-project"
+project_short_description: "A project for testing the template"
+version: "0.1.0"
+license: "MIT"
+package_type: "cli"
+python_version: "3.10"
+testing_framework: "pytest"
+max_line_length: 88
+type_checker: "mypy"
+type_checker_strictness: "strict"
+use_flake8_strict_plugins: true
+ide: "vscode"
+git_hosting: "gitlab"
+use_jupyter_notebooks: true
+generate_example_code: true
+strip_jupyter_outputs: true
+generate_docs: "mkdocs"
+```
+
+Adjust these values to match your testing preferences.
+
+### Available Make Commands
+
+The template project includes several useful commands:
+
+- `make help`: Show all available commands with descriptions
+- `make setup`: Set up the development environment
+- `make setup-strict`: Set up the development environment with strict pre-commit rules
+- `make lint`: Run linting on all project files
+- `make test`: Run the template's tests using tox
+- `make testproject`: Generate a test project in a temporary directory
+- `make bump`: Bump the project version (you'll be prompted to select major, minor, or patch)
+
+### Template Structure
+
+The template follows this structure:
+
+```
+copier-python-poetry/
+├── template/                  # Template files that will be copied
+├── tests/                     # Template tests
+├── copier.yml                 # Copier configuration
+└── ...                        # Other repository files
+```
+
+When modifying template files:
+- Use Jinja2 syntax for dynamic content: `{{ variable_name }}`
+- Use conditional blocks when appropriate: `{% if condition %}...{% endif %}`
+- Test thoroughly after changes
+
+### Recursive Template Structure
+
+Importantly, the outer project itself is based on its own template. This creates a recursive structure:
+
+1. The `template/` directory contains files that will be copied to generated projects
+2. The outer project structure mirrors what a generated project would look like
+
+After tagging a new version, we run `copier update` on the outer project to apply the template changes to itself. This means:
+
+- **New features should primarily be implemented in the inner `template/` directory**
+- These changes will be automatically applied (except for merge conflicts) the next time the outer project template is updated
+- Some changes might specifically target only the outer template (e.g., updates to the outer README.md and CONTRIBUTING.md, or other infrastructure changes that don't get copied to generated projects)
+
+This recursive approach ensures that the template itself follows the best practices it promotes for generated projects.
+
+## Contribution Guidelines
+
+Before contributing to this project, please review the following internal resources:
+
+- **Copier Guidelines** - Internal Google Drive document with detailed guidelines for running the project
+- **GitLab Organization** - Internal Google Drive document with information on our GitLab workflow and organization
+
+### Pull Request Management
+
+Please follow the Pull Request Management Best Practices outlined in our internal GitLab Organization document, with one project-specific modification:
+
+**Review order**: First request review from another sprint team member, then notify the product owner for final review after initial approval.
+
+### Code Style
+
+- Follow the style conventions evident in the existing template files
+- Use consistent indentation and formatting
+- Document any non-obvious template variables or logic
+- Docstrings convention is `google` without types (types are specified using standard python typing)
+- Use `pathlib.Path` instead of `str` for file names
+- Use `pathlib.Path` to process files instead of `os`
+
+### Python Dependencies
+
+- Do not manually change the dependency specifications in template files without testing
+- When updating dependencies in the template, ensure they are compatible across supported Python versions
+- Consider the impact on generated projects when updating dependencies
+
+#### Dependency Version Management
+
+The template's dependencies in `template/pyproject.toml` need to be periodically updated to maintain security and incorporate new features. However, these updates require careful consideration:
+
+- Each version update must be taken seriously as it affects all projects generated from the template
+- Major version updates of formatters (like black) or linters may require reformatting entire codebases
+- Test updates thoroughly across different Python versions and configurations
+- Document any breaking changes or required manual steps in the release notes
+- Consider creating a major template version when introducing potentially disruptive dependency updates
+
+For example:
+- Updating the formatter major version might require reformatting all code in existing projects
+- Updating linter plugins might introduce new rules that existing projects need to address
+- Updating type checkers might enforce stricter rules requiring code modifications
 
 ### Versioning
 
-- This project is tagged with versions according to [SemVer](https://semver.org/).
+This project follows [Semantic Versioning](https://semver.org/).
 
-- The version has a format `MAJOR.MINOR.PATCH`, which in the context of this project means:
+- **MAJOR**: Breaking changes to the template structure or generated projects
+  - Example: Updating to a new major version of Black that reformats code differently
+  - Example: Adding required linters that may cause failures in existing projects
 
-  - Major: Changes that modify the generated project structure or components significantly in a way that is not backward-compatible.
-    - e.g. updating the black major version
-    - e.g. add a required flake8 plugin that may cause the CI pipeline of an existing project to fail
-  - Minor: Additions or enhancements to the template that do not alter the existing structure in a backward-incompatible way.
-    - e.g. add support for generating the documentation
-  - Patch: Fixes to issues or bugs in the template that do not affect the generated project's structure or compatibility.
+- **MINOR**: New features or enhancements that are backward compatible
+  - Example: Adding support for new documentation generators
+  - Example: New optional template features
 
-- To bump the project version:
+- **PATCH**: Bug fixes that don't affect compatibility
+  - Example: Fixing template syntax errors
+  - Example: Correcting documentation
 
-  ```bash
-  make bump
-  ```
+To bump the project version:
 
-​  and select the part of the version to bump
+```bash
+make bump
+```
+
+And select the version part to increment (major, minor, or patch).
+
+## Template Rationale Documentation
+
+When making significant changes or adding new features to the template, add an entry to the [Rationale](README.md#rationale) section of the README with:
+
+1. Date in [YYYY-MM-DD] format
+2. Clear explanation of the change and why it was made
+3. Examples if applicable
+
+This helps future contributors understand the reasoning behind design decisions.
+
+## Release Process
+
+1. Bump the version using `make bump` and select the appropriate version part
+2. Push the changes and new tag to the repository
+3. Create a release on GitHub/GitLab with release notes
+4. Run `copier update` on the outer project to apply template changes to itself
+5. Resolve any merge conflicts that arise from the update
+6. Commit the applied changes with a message describing the update
+
+Thank you for contributing to the Copier Python Poetry template!

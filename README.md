@@ -89,7 +89,7 @@ Strict checks:
 4. Generate the poetry lock file
 
    ```bash
-   poetry install
+   make setup-strict
    ```
 
 5. Commit the lock file
@@ -101,7 +101,7 @@ Strict checks:
 
    (Opinion) It is always better to commit the lock file by itself given that reverting a commit with an update to the lock file is complicated.
 
-6. Follow the project `README` to configure the project development environment
+6. Follow the project `CONTRIBUTING.md` to configure the project development environment
 
 ### Project update
 
@@ -144,12 +144,6 @@ Strict checks:
 | generate_example_code     | true                        | If `true` generate example files and code snippets                                                                                               |
 | strip_jupyter_outputs     | true                        | If `true` strip output from Jupyter notebooks before committing                                                                                  |
 | generate_docs             | mkdocs                      | Generate documentation with either `pdoc` or `mkdocs`    |
-
-## Style suggestions
-
-- Docstrings convention is `google` without types (types are specified using standard python typing)
-- Use `pathlib.Path` instead of `str` for file names
-- Use `pathlib.Path` to process files instead of `os`
 
 See [CONTRIBUTING.md](CONTRIBUTING.md) for information on how to contribute to this project.
 
