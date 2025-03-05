@@ -121,7 +121,7 @@ This file should:
 
 Example `.env` file:
 ```
-DATABASE_URL=postgresql://user:password@localhost:5432/dbname
+DATABASE_URL=postgresql://user@localhost:5432/dbname
 API_KEY=your_api_key_here
 FEATURE_FLAG_NEW_UI=true
 ```
