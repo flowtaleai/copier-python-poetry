@@ -6,6 +6,16 @@
 
   - repo: local
     hooks:
+      - id: ruff-format
+        name: ruff-format
+        entry: poetry run ruff format
+        language: system
+        exclude: "template"
+        require_serial: true
+        types_or: [python, pyi]
+        args:
+        - --diff
+
       - id: ruff-lint
         name: ruff-lint
         entry: poetry run ruff check
@@ -16,16 +26,6 @@
         args:
           - --fix
           - --show-fixes
-
-      - id: ruff-format
-        name: ruff-format
-        entry: poetry run ruff format
-        language: system
-        exclude: "template"
-        require_serial: true
-        types_or: [python, pyi]
-        args:
-          - --diff
 
 {% if type_checker == "mypy" %}
   - repo: local
