@@ -204,7 +204,10 @@ def test_make_bump_updates_version_in_selected_files(tmp_path, copier):
 
 
 def test_bake_with_code_examples(tmp_path, copier):
-    custom_answers = {"use_jupyter_notebooks": True, "generate_example_code": True}
+    custom_answers = {
+        "use_jupyter_notebooks": True,
+        "generate_example_code": True,
+    }
     project = copier.copy(tmp_path, **custom_answers)
 
     package_name = project.answers["package_name"]
