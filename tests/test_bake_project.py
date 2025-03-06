@@ -271,7 +271,7 @@ def test_bake_with_documentation(tmp_path, copier, framework, frontpage_path):
     with open(frontpage_path) as index:
         front_page = "\n".join(index.readlines())
     assert title in front_page
-    assert "Versioning" in front_page
+    assert "Usage" in front_page
 
 
 def test_bake_with_many_files(tmp_path, copier):
