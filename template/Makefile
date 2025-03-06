@@ -53,6 +53,3 @@ serve-docs: ## Build documentation and serve it locally
 	@pdoc src/{{ package_name }}
 .PHONY: docs serve-docs
 {% endif %}
-
-show-ruff-fixes:  ## Show what Ruff would fix
-	@poetry run ruff format --diff
