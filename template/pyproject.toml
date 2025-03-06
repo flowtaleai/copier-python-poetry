@@ -59,14 +59,8 @@ line-length = {{ max_line_length }}
 target-version = "py{{ python_version | replace('.', '') }}"
 
 [tool.ruff.lint]
-select = [
-    {% if use_ruff_strict %}
-    "ALL"
-    {% else %}
-    "E", "F", "W"
-    {% endif %}
-]
-{% if not use_ruff_strict %}
+#select = ["ALL"]
+select = ["E", "F", "W"]
 ignore = [
     # Docstring rules
     "D100",  # Ignore missing docstring in public modules
@@ -85,8 +79,8 @@ ignore = [
     "D212",   # Remove conflict with D213 (docstring summary conflicts)
     "COM812", # Avoid formatter conflicts
     "D202",  # Remove conflict with D203 (blank line before class)
+    #"lines-between-types" # Prevent related warnings
 ]
-{% endif %}
 
 [tool.ruff.lint.mccabe]
 max-complexity = 10
