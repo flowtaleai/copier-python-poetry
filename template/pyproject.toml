@@ -59,8 +59,14 @@ line-length = {{ max_line_length }}
 target-version = "py{{ python_version | replace('.', '') }}"
 
 [tool.ruff.lint]
-#select = ["ALL"]
-select = ["E", "F", "W"]
+select = [
+    {% if use_ruff_strict %}
+    "ALL"
+    {% else %}
+    "E", "F", "W"
+    {% endif %}
+]
+#select = ["E", "F", "W"]
 ignore = [
     # Docstring rules
     "D100",  # Ignore missing docstring in public modules
