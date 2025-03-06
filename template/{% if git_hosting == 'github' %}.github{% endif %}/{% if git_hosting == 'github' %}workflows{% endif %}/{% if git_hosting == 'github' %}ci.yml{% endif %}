@@ -6,9 +6,12 @@ on:
   pull_request:
     branches: [ main ]
 
+env:
+  POETRY_VERSION: "1.8.3"
+
 jobs:
   test:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v3
       - name: Set up Python
@@ -20,7 +23,7 @@ jobs:
           apt-get update || sudo apt-get update
           apt-get install -y make || sudo apt-get install -y make
           python -m pip install --upgrade pip
-          pip install poetry
+          pip install poetry==${POETRY_VERSION}
           make setup-strict
       - name: Test with pytest
         run: |
@@ -32,7 +35,7 @@ jobs:
           {% endif %}
 
   lint:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v3
       - name: Set up Python
@@ -44,8 +47,8 @@ jobs:
           apt-get update || sudo apt-get update
           apt-get install -y make || sudo apt-get install -y make
           python -m pip install --upgrade pip
-          pip install poetry
+          pip install poetry==${POETRY_VERSION}
           make setup-strict
       - name: Lint with pre-commit
         run: |
-          poetry run pre-commit run --all-files
+          make lint
