@@ -141,6 +141,7 @@ git_hosting:
   choices:
     - "none"
     - "gitlab"
+    - "github"
     - "bitbucket"
   default: "none"
   help: "Git hosting provider for CI pipeline configuration"

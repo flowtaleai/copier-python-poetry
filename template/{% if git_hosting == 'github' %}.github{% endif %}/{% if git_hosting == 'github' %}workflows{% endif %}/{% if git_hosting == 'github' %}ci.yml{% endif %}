@@ -1,0 +1,54 @@
+name: CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+env:
+  POETRY_VERSION: "1.8.3"
+
+jobs:
+  test:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up Python
+        uses: actions/setup-python@v3
+        with:
+          python-version: "{{ python_version }}"
+      - name: Install Dependencies
+        run: |
+          apt-get update || sudo apt-get update
+          apt-get install -y make || sudo apt-get install -y make
+          python -m pip install --upgrade pip
+          pip install poetry==${POETRY_VERSION}
+          make setup-strict
+      - name: Test with pytest
+        run: |
+          {% if testing_framework == "pytest" %}
+          poetry run pytest
+          {% endif %}
+          {% if testing_framework == "unittest" %}
+          poetry run python -m unittest discover
+          {% endif %}
+
+  lint:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up Python
+        uses: actions/setup-python@v3
+        with:
+          python-version: "{{ python_version }}"
+      - name: Install Dependencies
+        run: |
+          apt-get update || sudo apt-get update
+          apt-get install -y make || sudo apt-get install -y make
+          python -m pip install --upgrade pip
+          pip install poetry==${POETRY_VERSION}
+          make setup-strict
+      - name: Lint with pre-commit
+        run: |
+          make lint
