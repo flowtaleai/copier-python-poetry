@@ -21,8 +21,7 @@ repos:
   {% endif %}
   {% if use_jupyter_notebooks %}
   - repo: https://github.com/nbQA-dev/nbQA
-    rev: 1.7.1
+    rev: 1.9.1
     hooks:
     - id: nbqa-ruff
-      args: [--fix]
   {% endif %}
