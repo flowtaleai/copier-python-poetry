@@ -76,6 +76,7 @@ select = [
     "ERA", # eradicate
     "B", # flake8-bugbear
     {% endif %}
+    "I" # isort
 ]
 ignore = [
     # Docstring rules
@@ -103,13 +104,6 @@ max-complexity = 10
 
 [tool.ruff.format]
 preview = true
-
-[tool.ruff.lint.isort]
-known-first-party = ["{{ package_name }}"]
-force-sort-within-sections = true
-case-sensitive = false
-section-order = ["future", "standard-library", "third-party", "first-party", "local-folder"]
-combine-as-imports = true
 
 [tool.ruff.lint.per-file-ignores]
 {% if package_type == "cli" %}
