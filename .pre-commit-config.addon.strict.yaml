@@ -10,7 +10,6 @@
         name: ruff-format
         entry: poetry run ruff format
         language: system
-        exclude: "template"
         require_serial: true
         types_or: [python, pyi]
         args:
@@ -20,7 +19,6 @@
         name: ruff-lint
         entry: poetry run ruff check
         language: system
-        exclude: "template"
         require_serial: true
         types_or: [python, pyi]
         args:
