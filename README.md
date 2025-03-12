@@ -14,8 +14,8 @@ Opinionated copier template for Flowtale python projects.
 | Environment management | direnv                                                       |
 | Common style           | EditorConfig                                                 |
 | Editor configuration   | vscode with suggested extensions                             |
-| Autoformatters         | black with experimental string processing (`--preview`), pydocstyle |
-| Linters                | flake8, pydocstyle                                                  |
+| Autoformatters         | ruff                                                         |
+| Linters                | ruff                                                         |
 | Test and packaging     | gitlab-ci                                                           |
 | Type Checkers          | mypy                                                                |
 | Run common commands    | make                                                                |
@@ -24,8 +24,7 @@ Opinionated copier template for Flowtale python projects.
 
 #### On save (vscode)
 
-- Code formatted with `black`
-- Import sorted with `isort`
+- Code formatted with `ruff`
 
 #### On commit
 
@@ -42,22 +41,17 @@ Strict checks:
 
 - Trailing whitespaces removed
 - Add newline at the end of the file
-- `flake8` linter executed
-- `black` formatter executed
-- `isort` import sorted executed
-- `pydocstyle` docstring checker executed
+- `ruff` formatter and linter executed
 
-#### Linter plugins
+#### Linter rules
 
 | Name                | Description                                                                                    | strict |
 |---------------------|------------------------------------------------------------------------------------------------|--------|
-| flake8-builtins     | Check for python builtins being used as variables or parameters.                               |        |
-| pep8-naming         | Check your code against [PEP 8](https://www.python.org/dev/peps/pep-0008/) naming conventions. |        |
+| flake8-builtins     | Check for python builtins being used as variables or parameters.                               |      |
 | flake8-pytest-style | Check for common style issues or inconsistencies with `pytest`-based tests.                    |        |
 | flake8-print        | Forbids print in the code besides `cli.py` (use `logging`!)                                    | x      |
 | flake8-eradicate    | Find commented out (or so called "dead") code.                                                 | x      |
 | flake8-bugbear      | Find likely bugs and design problems in your program                                           | x      |
-| flake8-annotations  | Find missing type annotations                                                                  | x      |
 
 #### On push
 
@@ -153,19 +147,6 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for information on how to contribute to t
 
 - [2024-08-19] We allow for a choice between generating documentation with either MkDocs or pdoc. The former is more powerful, using mostly additional Markdown files. The latter is more straightforward and uses only the doc-strings in the code files. For both choices, the README.md files is rendered as the front page of the documentation.
 
-- [2023-10-10] We pass the `--preview` flag to black 23.x in particular to format long strings. The effects of `--preview` should be re-evaluated at each major version update of black.
-
-  ```python
-  # before formatting
-  myvar = "Loooong ... string"
-
-  # after formatting
-  myvar = (
-      "Loooong ..."
-      "... string"
-  )
-  ```
-
-- The versions of python dependencies of the tools (black, flake, ...) are managed by the copier template and should not be changed manually in the generated projects. This allows to keep the various projects aligned and have a consistent behavior when we develop on multiple projects. Sometimes a newer copier template version may be applied to a project before the others, so there is a period where there is a disalignment, but at least is a controlled one.
+- The versions of python dependencies of the tools (e.g. ruff) are managed by the copier template and should not be changed manually in the generated projects. This allows to keep the various projects aligned and have a consistent behavior when we develop on multiple projects. Sometimes a newer copier template version may be applied to a project before the others, so there is a period where there is a disalignment, but at least is a controlled one.
 
 - typing annotations are not checked in the tests because tests do not need to be perfect and we want to be able to write them fast.
