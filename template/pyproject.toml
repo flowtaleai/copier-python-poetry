@@ -85,11 +85,9 @@ preview = true
 
 [tool.ruff.lint.per-file-ignores]
 {% if package_type == "cli" %}
-"src/{{ package_name }}/cli.py" = ["T"]
+"src/{{ package_name }}/cli.py" = ["T20"]
 {% endif %}
-"tests/*" = ["S101", "T20"]
-"tests/test_*.py" = ["ANN"]
-"tests/**/test_*.py" = ["ANN"]
+"tests/*" = ["T20"]
 
 [tool.pytest.ini_options]
 pythonpath = "src"
