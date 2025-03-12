@@ -7,7 +7,7 @@
   - repo: local
     hooks:
       - id: ruff-format
-        name: ruff-format
+        name: Format files with ruff
         entry: poetry run ruff format
         language: system
         require_serial: true
@@ -16,7 +16,7 @@
           - --force-exclude
 
       - id: ruff-lint
-        name: ruff-lint
+        name: Lint files with ruff
         entry: poetry run ruff check
         language: system
         require_serial: true
