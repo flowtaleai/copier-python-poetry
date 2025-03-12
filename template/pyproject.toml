@@ -80,9 +80,6 @@ ignore = [
     "D104",  # Ignore missing docstring in public packages
 ]
 
-[tool.ruff.format]
-preview = true
-
 [tool.ruff.lint.per-file-ignores]
 {% if package_type == "cli" %}
 "src/{{ package_name }}/cli.py" = ["T20"]
