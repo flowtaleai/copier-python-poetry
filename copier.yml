@@ -124,10 +124,10 @@ type_checker_strictness:
   when: "{{ type_checker != 'none' }}"
   help: "Whether or not to support gradual typing with the type-checker."
 
-use_ruff_strict:
+use_lint_strict_rules:
   type: bool
   default: true
-  help: "Include ruff strict checks that makes code cleaner and safer but require more coding skills"
+  help: "Include linter strict checks that makes code cleaner and safer but require more coding skills"
 
 ide:
   choices:

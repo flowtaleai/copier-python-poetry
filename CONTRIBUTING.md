@@ -177,7 +177,7 @@ testing_framework: "pytest"
 max_line_length: 88
 type_checker: "mypy"
 type_checker_strictness: "strict"
-use_flake8_strict_plugins: true
+use_lint_strict_rules: true
 ide: "vscode"
 git_hosting: "gitlab"
 use_jupyter_notebooks: true
