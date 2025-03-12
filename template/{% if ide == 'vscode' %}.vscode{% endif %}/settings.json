@@ -5,25 +5,18 @@
     "source.organizeImports": "explicit"
   },
   {% endif %}
-
   "json.format.keepLines": true,
-
-  "editor.codeActionsOnSave": {
-    "source.organizeImports": "explicit",
-    "source.fixAll": "explicit"
-  },
-
+  "autoDocstring.docstringFormat": "google-notypes",
   "[json]": {
     "editor.formatOnSave": true,
     "editor.defaultFormatter": "vscode.json-language-features"
   },
-
   "[python]": {
     "editor.defaultFormatter": "charliermarsh.ruff",
     "editor.formatOnSave": true,
     "editor.codeActionsOnSave": {
-      "source.organizeImports": "explicit",
-      "source.fixAll": "explicit"
+      "source.organizeImports": "explicit"
     }
-  }
+  },
+  "ruff.importStrategy": "fromEnvironment",
 }
