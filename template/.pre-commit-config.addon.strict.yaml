@@ -13,7 +13,7 @@
         require_serial: true
         types_or: [python, pyi]
         args:
-        - --diff
+          - --force-exclude
 
       - id: ruff-lint
         name: ruff-lint
@@ -24,6 +24,7 @@
         args:
           - --fix
           - --show-fixes
+          - --force-exclude
 {% if type_checker == "mypy" %}
   - repo: local
     hooks:
