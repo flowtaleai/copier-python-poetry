@@ -80,9 +80,6 @@ ignore = [
     "D104",  # Ignore missing docstring in public packages
 ]
 
-[tool.ruff.lint.mccabe]
-max-complexity = 10
-
 [tool.ruff.format]
 preview = true
 
