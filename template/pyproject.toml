@@ -61,6 +61,11 @@ target-version = "py{{ python_version | replace('.', '') }}"
 [tool.ruff.lint]
 
 select = [
+    "E", # pycodestyle, basic flake8
+    "W", # pycodestyle, basic flake8
+    "F", # pyflakes, basic flake8
+    "N", # pep8-naming, basic flake8
+    "C90", # maccabe, basic flake8
     "A",  # flake8-builtins,
     "D", # pydocstyle
     {% if testing_framework == "pytest" %}
