@@ -45,13 +45,16 @@ Strict checks:
 
 #### Linter rules
 
-| Name                | Description                                                                                    | strict |
-|---------------------|------------------------------------------------------------------------------------------------|--------|
-| flake8-builtins     | Check for python builtins being used as variables or parameters.                               |      |
-| flake8-pytest-style | Check for common style issues or inconsistencies with `pytest`-based tests.                    |        |
-| flake8-print        | Forbids print in the code besides `cli.py` (use `logging`!)                                    | x      |
-| flake8-eradicate    | Find commented out (or so called "dead") code.                                                 | x      |
-| flake8-bugbear      | Find likely bugs and design problems in your program                                           | x      |
+| Name                           | Description                                                                  | strict |
+|--------------------------------|------------------------------------------------------------------------------|--------|
+| pyflakes                       | Check for syntax errors and undefined variables                              |        |
+| pep8                           | Check for compliance with the PEP 8 style guide.                             |        |
+| Ned Batchelder’s McCabe Script | Measure the complexity of functions and methods using cyclomatic complexity. |        |
+| flake8-builtins                | Check for python builtins being used as variables or parameters.             |        |
+| flake8-pytest-style            | Check for common style issues or inconsistencies with `pytest`-based tests.  |        |
+| flake8-print                   | Forbids print in the code besides `cli.py` (use `logging`!)                  | x      |
+| flake8-eradicate               | Find commented out (or so called "dead") code.                               | x      |
+| flake8-bugbear                 | Find likely bugs and design problems in your program                         | x      |
 
 #### On push
 
