@@ -59,15 +59,10 @@ line-length = {{ max_line_length }}
 target-version = "py{{ python_version | replace('.', '') }}"
 
 [tool.ruff.lint]
-#select = [
-#    {% if use_ruff_strict %}
-#    "ALL"
-#    {% else %}
-#    "E", "F", "W"
-#    {% endif %}
-#]
+
 select = [
-    "A",  # flake8-builtins
+    "A",  # flake8-builtins,
+    "D", # pydocstyle
     {% if testing_framework == "pytest" %}
     "PT", # flake8-pytest-style
     {% endif %}
@@ -83,20 +78,6 @@ ignore = [
     "D100",  # Ignore missing docstring in public modules
     "D103",  # Ignore missing docstring in public functions
     "D104",  # Ignore missing docstring in public packages
-
-    # Function argument and annotation rules
-    "FBT001", # Ignore boolean-typed positional arguments
-    "UP007",  # Ignore non-PEP604 annotation union issues
-
-    # Formatting and compatibility rules
-    "RSE102", # Ignore unnecessary parentheses on raised exceptions
-    "D203",   # Remove conflict with D211 (blank line before class)
-    "D211",
-    "D213",
-    "D212",   # Remove conflict with D213 (docstring summary conflicts)
-    "COM812", # Avoid formatter conflicts
-    "D202",  # Remove conflict with D203 (blank line before class)
-    #"lines-between-types" # Prevent related warnings
 ]
 
 [tool.ruff.lint.mccabe]
