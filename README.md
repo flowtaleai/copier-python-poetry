@@ -131,7 +131,7 @@ Strict checks:
 | max_line_length           | 88                          | Code max line length                                                                                                                             |
 | type_checker | mypy | Select whether to add a type checker |
 | type_checker_strictness | strict | Decide whether to support gradual typing or not  |
-| use_lint_strict_rules | true                        | If `true` install flake8 plugins that allow to catch bugs, security vulnerabilities and apply more strict rules. They can be a bit overwhelming. |
+| use_lint_strict_rules | true                        | If `true` run linter with more rules. These could potentially catch bugs, security vulnerabilities etc. but can be a bit overwhelming. |
 | ide                       | vscode                      | Define the IDE(s) used by the developers.                                                                                                        |
 | git_hosting               | gitlab                      | Define GIT hosting that will be used.                                                                                                            |
 | use_jupyter_notebooks     | true                        | If `true` install ipykernel dependency                                                                                                           |
