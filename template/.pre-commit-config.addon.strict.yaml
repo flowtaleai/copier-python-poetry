@@ -11,7 +11,7 @@
         entry: poetry run ruff format
         language: system
         require_serial: true
-        types_or: [python, pyi]
+        types_or: [python, pyi, jupyter]
         args:
           - --force-exclude
 
@@ -20,7 +20,7 @@
         entry: poetry run ruff check
         language: system
         require_serial: true
-        types_or: [python, pyi]
+        types_or: [python, pyi, jupyter]
         args:
           - --fix
           - --show-fixes

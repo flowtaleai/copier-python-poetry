@@ -19,9 +19,3 @@ repos:
     hooks:
       - id: nbstripout
   {% endif %}
-  {% if use_jupyter_notebooks %}
-  - repo: https://github.com/nbQA-dev/nbQA
-    rev: 1.9.1
-    hooks:
-      - id: nbqa-ruff
-  {% endif %}
