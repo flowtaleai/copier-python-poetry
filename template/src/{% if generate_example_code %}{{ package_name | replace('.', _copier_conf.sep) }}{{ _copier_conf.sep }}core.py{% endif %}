@@ -1,4 +1,5 @@
 """Main module."""
+
 from {{ package_name }} import logs
 
 logger = logs.get_logger(__name__)

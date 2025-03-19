@@ -1,78 +1,68 @@
-[tool.poetry]
+[project]
 name = "{{ distribution_name }}"
 version = "{{ version }}"
 description = "{{ project_short_description }}"
+readme = "README.md"
 authors = [
-  "{{ author_name }} <{{ author_email }}>"
+  {name = "{{ author_name }}", email = "{{ author_email }}"},
 ]
 license = "{{ license }}"
 packages = [{include = "{{ package_name | replace('.', _copier_conf.sep) }}", from = "src"}]
-
-[tool.poetry.dependencies]
-python = "^{{ python_version }}"
-{% if package_type == "cli" %}
-typer = "^0.13.0"
-{% endif %}
-
-[tool.poetry.group.dev.dependencies]
-pytest = "^7.4.2"
-flake8 = "^6.1.0"
-flake8-builtins = "^2.1.0"
-pep8-naming = "^0.13.3"
-{% if testing_framework == "pytest" %}
-pytest-mock = "^3.11.1"
-flake8-pytest-style = "^1.7.2"
-{% endif %}
-{% if use_flake8_strict_plugins %}
-flake8-print = "^5.0.0"
-flake8-eradicate = "^1.5.0"
-flake8-bugbear = "^23.9.16"
-{% endif %}
-{% if type_checker == "mypy" %}
-mypy = "^1.11.2"
-{% endif %}
-black = "^22.1.0"
-isort = "^5.12.0"
-pre-commit = "^3.4.0"
-pydocstyle = "^6.3.0"
-bump2version = "^1.0.1"
-detect-secrets = "^1.4.0"
-{% if generate_docs == "mkdocs" %}
-mkdocstrings-python = "^1.10.8"
-mkdocs-material = "^9.5.32"
-mkdocs-gen-files = "^0.5.0"
-mkdocs-literate-nav = "^0.6.1"
-{% endif %}
-{% if generate_docs == "pdoc" %}
-pdoc = "^14.6"
-{% endif %}
-{% if use_jupyter_notebooks %}
-ipykernel = "^6.29.4"
-nbdime = "^4.0.1"
-
-[tool.poetry.group.jupyterlab]
-optional = true
-dependencies = { jupyterlab = "^4.2.2"}
-{% endif %}
-
-[build-system]
-requires = ["poetry>=1.0.0"]
-build-backend = "poetry.core.masonry.api"
+requires-python = ">={{ python_version }}"
+dependencies = [
+  {% if package_type == "cli" %}
+  "typer~=0.13.0",
+  {% endif %}
+]
 {% if package_type == "cli" %}
 
-[tool.poetry.scripts]
+[project.scripts]
 {{ package_name.split('.')[-1] }} = "{{ package_name }}.cli:app"
 {% endif %}
 
-[tool.black]
+[dependency-groups]
+dev = [
+  "pytest~=7.4.2",
+  "ipykernel~=6.29.4",
+  "ruff ~=0.11.0",
+  "pre-commit~=3.4.0",
+  "bump2version~=1.0.1",
+  "detect-secrets~=1.4.0",
+  {% if generate_docs == "mkdocs" %}
+  "mkdocstrings-python~=1.10.8",
+  "mkdocs-material~=9.5.32",
+  "mkdocs-gen-files~=0.5.0",
+  "mkdocs-literate-nav~=0.6.1",
+  {% endif %}
+  {% if generate_docs == "pdoc" %}
+  "pdoc~=14.6",
+  {% endif %}
+  {% if testing_framework == "pytest" %}
+  "pytest-mock~=3.11.1",
+  {% endif %}
+  {% if type_checker == "mypy" %}
+  "mypy~=1.11.2",
+  {% endif %}
+]
+jupyter = [
+  "nbdime~=4.0.1",
+  "jupyterlab~=4.2.2"
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/{{ package_name.split('.')[0] }}"]
+
+[tool.ruff]
 line-length = {{ max_line_length }}
 
-[tool.isort]
-profile = "black"
+[tool.ruff.lint]
+ignore = []
+pydocstyle.convention = "google"
 
-[tool.pydocstyle]
-add_ignore = "D100,D103,D104"
-convention = "google"
 
 [tool.pytest.ini_options]
 pythonpath = "src"

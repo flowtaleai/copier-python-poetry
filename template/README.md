@@ -18,6 +18,8 @@ The project documentation is available at [docs/](docs/).
 ```
 {% endif %}
 
+{% if license != "LicenseRef-Proprietary" %}
 ## License
 
 This project is licensed under the terms of the [{{ license }}](LICENSE).
+{% endif %}

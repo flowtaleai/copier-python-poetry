@@ -14,8 +14,8 @@ Opinionated copier template for Flowtale python projects.
 | Environment management | direnv                                                       |
 | Common style           | EditorConfig                                                 |
 | Editor configuration   | vscode with suggested extensions                             |
-| Autoformatters         | black with experimental string processing (`--preview`), pydocstyle |
-| Linters                | flake8, pydocstyle                                                  |
+| Autoformatters         | ruff  |
+| Linters                | ruff  |
 | Test and packaging     | gitlab-ci                                                           |
 | Type Checkers          | mypy                                                                |
 | Run common commands    | make                                                                |
@@ -24,8 +24,8 @@ Opinionated copier template for Flowtale python projects.
 
 #### On save (vscode)
 
-- Code formatted with `black`
-- Import sorted with `isort`
+- Code formatted with `ruff`
+- Import sorted with ruff's `isort`
 
 #### On commit
 
@@ -42,22 +42,8 @@ Strict checks:
 
 - Trailing whitespaces removed
 - Add newline at the end of the file
-- `flake8` linter executed
-- `black` formatter executed
-- `isort` import sorted executed
-- `pydocstyle` docstring checker executed
-
-#### Linter plugins
-
-| Name                | Description                                                                                    | strict |
-|---------------------|------------------------------------------------------------------------------------------------|--------|
-| flake8-builtins     | Check for python builtins being used as variables or parameters.                               |        |
-| pep8-naming         | Check your code against [PEP 8](https://www.python.org/dev/peps/pep-0008/) naming conventions. |        |
-| flake8-pytest-style | Check for common style issues or inconsistencies with `pytest`-based tests.                    |        |
-| flake8-print        | Forbids print in the code besides `cli.py` (use `logging`!)                                    | x      |
-| flake8-eradicate    | Find commented out (or so called "dead") code.                                                 | x      |
-| flake8-bugbear      | Find likely bugs and design problems in your program                                           | x      |
-| flake8-annotations  | Find missing type annotations                                                                  | x      |
+- `ruff` linter executed
+- `ruff` formatter executed
 
 #### On push
 
@@ -83,7 +69,7 @@ Strict checks:
    cd pythonboilerplate
    git init
    git add .
-   git commit -m "Initial commit"
+   git commit -m "initial commit"
    ```
 
 4. Generate the poetry lock file
@@ -95,8 +81,8 @@ Strict checks:
 5. Commit the lock file
 
    ```bash
-   git add poetry.lock
-   git commit -m "Poetry lock file regenerated"
+   git add uv.lock
+   git commit -m "add lock file"
    ```
 
    (Opinion) It is always better to commit the lock file by itself given that reverting a commit with an update to the lock file is complicated.
@@ -137,7 +123,6 @@ Strict checks:
 | max_line_length           | 88                          | Code max line length                                                                                                                             |
 | type_checker | mypy | Select whether to add a type checker |
 | type_checker_strictness | strict | Decide whether to support gradual typing or not  |
-| use_flake8_strict_plugins | true                        | If `true` install flake8 plugins that allow to catch bugs, security vulnerabilities and apply more strict rules. They can be a bit overwhelming. |
 | ide                       | vscode                      | Define the IDE(s) used by the developers.                                                                                                        |
 | git_hosting               | gitlab                      | Define GIT hosting that will be used.                                                                                                            |
 | use_jupyter_notebooks     | true                        | If `true` install ipykernel dependency                                                                                                           |

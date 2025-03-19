@@ -48,7 +48,7 @@ def test_bake_and_run_tests_with_unittest_framework(tmp_path, copier):
 
 
 def test_bake_with_proprietary_license(tmp_path, copier):
-    custom_answers = {"license": "Proprietary"}
+    custom_answers = {"license": "LicenseRef-Proprietary"}
     project = copier.copy(tmp_path, **custom_answers)
 
     found_toplevel_files = [f.name for f in project.path.glob("*")]
@@ -97,7 +97,7 @@ def test_bake_app_and_check_cli_scripts(tmp_path, copier):
     assert project.path.is_dir()
     pyproject_path = project.path / "pyproject.toml"
     assert_str = (
-        '[tool.poetry.scripts]\npython_boilerplate = "python_boilerplate.cli:app"'
+        '[project.scripts]\npython_boilerplate = "python_boilerplate.cli:app"'
     )
     assert assert_str in pyproject_path.read_text()
 
@@ -138,7 +138,7 @@ def test_bake_gitlab_and_unittest(tmp_path, copier):
     project = copier.copy(tmp_path, **custom_answers)
 
     gitlab_ci_path = project.path / ".gitlab-ci.yml"
-    assert "poetry run python -m unittest discover" in gitlab_ci_path.read_text()
+    assert "uv run python -m unittest discover" in gitlab_ci_path.read_text()
 
 
 @pytest.mark.slow()
@@ -147,8 +147,7 @@ def test_bake_and_run_cli(tmp_path, copier):
     custom_answers = {"package_type": "cli"}
     project = copier.copy(tmp_path, **custom_answers)
 
-    project.run("poetry install --only main")
-    project.run("poetry run python_boilerplate")
+    project.run("uv run python_boilerplate")
 
 
 @pytest.mark.venv()
@@ -156,7 +155,7 @@ def test_bake_and_bump_version(tmp_path, copier):
     custom_answers = {"package_type": "cli"}
     project = copier.copy(tmp_path, **custom_answers)
 
-    project.run("poetry run bump2version minor")
+    project.run("uv run bump2version minor")
 
 
 @pytest.mark.slow()
@@ -178,8 +177,7 @@ def test_bake_defaults_and_run_pre_commit(tmp_path, copier):
     with dst_pre_commit_path.open("a") as f:
         f.write(strict_pre_commit_path.read_text())
 
-    project.run("poetry install")
-    project.run("poetry run pre-commit run --all-files")
+    project.run("uv run pre-commit run --all-files")
 
 
 @pytest.mark.slow()
@@ -193,7 +191,7 @@ def test_make_bump_updates_version_in_selected_files(tmp_path, copier):
     project.run("git config user.name 'User Name'")
     project.run("git config user.email 'user@email.org'")
     project.run("git commit -m init")
-    project.run("poetry run bump2version major")
+    project.run("uv run bump2version major")
 
     copier_answers_path = project.path / ".copier-answers.yml"
     pyproject_path = project.path / "pyproject.toml"
@@ -350,8 +348,7 @@ def test_bake_with_many_and_run_pre_commit(tmp_path, copier):
     with dst_pre_commit_path.open("a") as f:
         f.write(strict_pre_commit_path.read_text())
 
-    project.run("poetry install")
-    project.run("poetry run pre-commit run --all-files")
+    project.run("uv run pre-commit run --all-files")
 
 
 def test_bake_namespaced_package_with_many_files(tmp_path, copier):
@@ -429,5 +426,4 @@ def test_bake_namespaced_package_with_many_and_run_pre_commit(tmp_path, copier):
     with dst_pre_commit_path.open("a") as f:
         f.write(strict_pre_commit_path.read_text())
 
-    project.run("poetry install")
-    project.run("poetry run pre-commit run --all-files")
+    project.run("uv run pre-commit run --all-files")

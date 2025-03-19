@@ -3,11 +3,9 @@
     "editorconfig.editorconfig",
     "ms-python.python",
     "ms-python.vscode-pylance",
-    "ms-python.black-formatter",
-    "ms-python.isort",
-    "ms-python.flake8",
+    "charliermarsh.ruff",
     {% if type_checker == "mypy" %}
-    "matangover.mypy",
+    "ms-python.mypy-type-checker",
     {% endif %}
     "njpwerner.autodocstring",
     "hbenl.vscode-test-explorer",

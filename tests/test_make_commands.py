@@ -7,7 +7,6 @@ def test_make_build(tmp_path, copier):
     custom_answers = {"package_type": "cli"}
     project = copier.copy(tmp_path, **custom_answers)
 
-    project.run("poetry install --only main")
     project.run("make build")
 
     package_name = project.answers["package_name"]

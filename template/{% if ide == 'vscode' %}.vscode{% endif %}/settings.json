@@ -1,20 +1,9 @@
 {
-  {% if use_jupyter_notebooks %}
   "notebook.formatOnSave.enabled": true,
   "notebook.codeActionsOnSave": {
-    "source.organizeImports": "explicit"
+    "notebook.source.fixAll": "explicit",
+    "notebook.source.organizeImports": "explicit"
   },
-  {% endif %}
-  "black-formatter.importStrategy": "fromEnvironment",
-  "black-formatter.args": [
-    "--preview"
-  ],
-  "isort.importStrategy": "fromEnvironment",
-  "isort.args": [
-    "--profile",
-    "black"
-  ],
-  "flake8.importStrategy": "fromEnvironment",
   "json.format.keepLines": true,
   "autoDocstring.docstringFormat": "google-notypes",
   "[json]": {
@@ -22,9 +11,11 @@
     "editor.defaultFormatter": "vscode.json-language-features"
   },
   "[python]": {
-    "editor.defaultFormatter": "ms-python.black-formatter",
     "editor.formatOnSave": true,
     "editor.codeActionsOnSave": {
+      "source.fixAll": "explicit",
       "source.organizeImports": "explicit"
-  },
+    },
+    "editor.defaultFormatter": "charliermarsh.ruff",
+  }
 }
