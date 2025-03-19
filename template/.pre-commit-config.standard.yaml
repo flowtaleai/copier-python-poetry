@@ -10,7 +10,7 @@ repos:
     hooks:
       - id: detect-secrets
         name: Secret detection
-        entry: poetry run detect-secrets-hook
+        entry: uv run detect-secrets-hook
         language: system
         files: .*
   {% if use_jupyter_notebooks and strip_jupyter_outputs %}

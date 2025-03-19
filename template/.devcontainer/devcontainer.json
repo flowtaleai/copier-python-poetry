@@ -4,7 +4,7 @@
   "name": "{{ project_name if project_name else distribution_name }}",
   "image": "mcr.microsoft.com/devcontainers/python:1-{{ python_version }}-bullseye",
   "features": {
-    "ghcr.io/devcontainers-contrib/features/poetry:2": {},
+    "ghcr.io/va-h/devcontainers-features/uv:1": {"shellautocompletion": true},
     "ghcr.io/devcontainers-contrib/features/pre-commit": {},
     "ghcr.io/christophermacgown/devcontainer-features/direnv:1": {},
     {% if generate_dockerfile %}

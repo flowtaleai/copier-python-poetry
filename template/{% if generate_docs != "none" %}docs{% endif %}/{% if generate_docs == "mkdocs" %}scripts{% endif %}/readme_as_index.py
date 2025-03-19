@@ -1,4 +1,5 @@
 """Use the root README as index in case there is no docs/index.md yet."""
+
 from pathlib import Path
 
 import mkdocs_gen_files

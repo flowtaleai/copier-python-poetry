@@ -1,49 +1,19 @@
-  - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v3.2.0
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    # Ruff version.
+    rev: v0.11.0
     hooks:
-      - id: trailing-whitespace
-      - id: end-of-file-fixer
-  - repo: local
-    hooks:
-      - id: flake8
-        name: flake8
-        exclude: "template"
-        language: system
-        entry: poetry run flake8
-        require_serial: true
-        types: [python]
-  - repo: local
-    hooks:
-      - id: black
-        name: black
-        exclude: "template"
-        language: system
-        entry: poetry run black --preview
-        require_serial: true
-        types_or: [python, pyi]
-  - repo: local
-    hooks:
-      - id: isort
-        name: isort
-        language: system
-        entry: poetry run isort --filter-files
-        require_serial: true
-        types_or: [python, pyi, cython]
-  - repo: local
-    hooks:
-      - id: pydocstyle
-        name: pydocstyle
-        exclude: "template"
-        language: system
-        entry: poetry run pydocstyle
-        require_serial: true
-        types_or: [python, pyi]
+      # Run the linter.
+      - id: ruff
+        args: [ --fix ]
+      # Run the formatter.
+      - id: ruff-format
+        args: [ --diff ]
 {% if type_checker == "mypy" %}
   - repo: local
     hooks:
       - id: mypy
         name: mypy
-        entry: poetry run mypy
+        entry: uv run mypy
         {% if "." in package_name %}
         pass_filenames: false
         {% if type_checker_strictness == "strict" %}

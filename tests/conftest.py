@@ -34,7 +34,7 @@ def copier_defaults() -> dict[str, str]:
         "package_name": "python_boilerplate",
         "project_name": "Python Boilerplate",
         "project_short_description": "An very nice project",
-        "license": "MIT license",
+        "license": "MIT",
         "package_type": "cli",
         "type_checker": "none",
         "type_checker_strictness": "strict",

@@ -69,12 +69,10 @@ version:
 license:
   type: str
   choices:
-    - Proprietary
-    - MIT license
-    - BSD license
-    - ISC license
-    - Apache Software License 2.0
-    - GNU General Public License v3
+    - LicenseRef-Proprietary
+    - MIT
+    - GPL-3.0-or-later
+    - Apache-2.0
 
 package_type:
   choices:

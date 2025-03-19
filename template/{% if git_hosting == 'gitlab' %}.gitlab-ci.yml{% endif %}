@@ -7,20 +7,20 @@ stages:
 
 before_script:
   - apt-get update && apt-get install -y make
-  - pip install poetry
+  - pip install uv
   - make setup-strict
 
 test:
   stage: test
   script:
     {% if testing_framework == "pytest" %}
-    - poetry run pytest
+    - uv run pytest
     {% endif %}
     {% if testing_framework == "unittest" %}
-    - poetry run python -m unittest discover
+    - uv run python -m unittest discover
     {% endif %}
 
 pre-commit:
   stage: linting
   script:
-    - poetry run pre-commit run --all-files
+    - uv run pre-commit run --all-files

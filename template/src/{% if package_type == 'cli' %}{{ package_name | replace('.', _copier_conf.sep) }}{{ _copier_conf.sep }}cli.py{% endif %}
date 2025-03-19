@@ -1,4 +1,5 @@
 """{{ package_name }} CLI."""
+
 from __future__ import annotations
 
 from typing import Annotated, Optional
