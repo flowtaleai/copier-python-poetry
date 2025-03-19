@@ -13,17 +13,23 @@ repos:
         entry: uv run detect-secrets-hook
         language: system
         files: .*
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.11.0
+    hooks:
+      - id: ruff
+        args: [ --fix ]
+      - id: ruff-format
+        args: [ --diff ]
+  - repo: https://github.com/astral-sh/uv-pre-commit
+    rev: 0.6.8
+    hooks:
+      - id: uv-lock
+        args: ["--locked"]
+        name: Check uv lockfile is in sync
+      - id: uv-export
   {% if use_jupyter_notebooks and strip_jupyter_outputs %}
   - repo: https://github.com/kynan/nbstripout
-    rev: 0.7.1
+    rev: 0.8.1
     hooks:
       - id: nbstripout
-  {% endif %}
-  {% if use_jupyter_notebooks %}
-  - repo: https://github.com/nbQA-dev/nbQA
-    rev: 1.7.1
-    hooks:
-    - id: nbqa-black
-    - id: nbqa-isort
-      args: [--profile=black]
   {% endif %}
