@@ -24,6 +24,7 @@ pytest-mock = "^3.11.1"
 {% if type_checker == "mypy" %}
 mypy = "^1.11.2"
 {% endif %}
+black = "^22.1.0"
 pre-commit = "^3.4.0"
 bump2version = "^1.0.1"
 detect-secrets = "^1.4.0"
@@ -53,6 +54,9 @@ build-backend = "poetry.core.masonry.api"
 [tool.poetry.scripts]
 {{ package_name.split('.')[-1] }} = "{{ package_name }}.cli:app"
 {% endif %}
+
+[tool.black]
+line-length = {{ max_line_length }}
 
 [tool.ruff]
 line-length = {{ max_line_length }}

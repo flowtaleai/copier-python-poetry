@@ -4,27 +4,27 @@ Opinionated copier template for Flowtale python projects.
 
 ## Features
 
-| Task                   | Tool                                                         |
-| ---------------------- | ------------------------------------------------------------ |
-| Command line interface | Typer                                                        |
-| Testing framework      | pytest, unittest                                             |
-| Test mocking           | pytest-mock                                                  |
-| Pre-commit hooks       | pre-commit                                                   |
-| Version management     | bump2version                                                 |
-| Environment management | direnv                                                       |
-| Common style           | EditorConfig                                                 |
-| Editor configuration   | vscode with suggested extensions                             |
-| Autoformatters         | ruff                                                         |
-| Linters                | ruff                                                         |
-| Test and packaging     | gitlab-ci                                                           |
-| Type Checkers          | mypy                                                                |
-| Run common commands    | make                                                                |
+| Task                   | Tool                                                    |
+|------------------------|---------------------------------------------------------|
+| Command line interface | Typer                                                   |
+| Testing framework      | pytest, unittest                                        |
+| Test mocking           | pytest-mock                                             |
+| Pre-commit hooks       | pre-commit                                              |
+| Version management     | bump2version                                            |
+| Environment management | direnv                                                  |
+| Common style           | EditorConfig                                            |
+| Editor configuration   | vscode with suggested extensions                        |
+| Autoformatters         | black with experimental string processing (`--preview`) |
+| Linters                | ruff                                                    |
+| Test and packaging     | gitlab-ci                                               |
+| Type Checkers          | mypy                                                    |
+| Run common commands    | make                                                    |
 
 ### Automatisms
 
 #### On save (vscode)
 
-- Code formatted with `ruff`
+- Code formatted with `black`
 
 #### On commit
 
@@ -41,7 +41,7 @@ Strict checks:
 
 - Trailing whitespaces removed
 - Add newline at the end of the file
-- `ruff` formatter and linter executed
+- `black` formatter and `ruff` linter executed
 
 #### Linter rules
 
@@ -117,36 +117,36 @@ Strict checks:
 
 ### Copier parameters
 
-| Name                      | Example                     | Description                                                                                                                                      |
-|---------------------------|-----------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------|
-| author_name               | Team Faboulous              |                                                                                                                                                  |
-| author_email              | <teamfaboulous@mycompany.com> |                                                                                                                                                  |
-| package_name              | awsomeproject               | Used to define the name of the python package. This can include "." if you need to create a namespaced package.                                                                                                    |
-| distribution_name         | awsome-project              | Used to define the name of the python distribution                                                                                               |
-| project_name              | Awsome Project              | Name of the project                                                                                                                              |
-| repository_name           | awsome-project              | Name of the project repository                                                                                                                   |
-| project_short_description | A fantastic new project     | Description of the project. Also used in the CLI help.                                                                                           |
-| version                   | 0.2.0                       | SemVer 2.0 version                                                                                                                               |
-| license                   | MIT                         | Project license                                                                                                                                  |
-| package_type              | cli                         | If `cli` generate cli module with argument parser and  cli entrypoint                                                                            |
-| python_version            | 3.10                        | Define the python version to use for `pyenv` and the CI pipelines                                                                                |
-| testing_framework         | pytest                      | Python testing framework                                                                                                                         |
-| max_line_length           | 88                          | Code max line length                                                                                                                             |
-| type_checker | mypy | Select whether to add a type checker |
-| type_checker_strictness | strict | Decide whether to support gradual typing or not  |
-| use_lint_strict_rules | true                        | If `true` run linter with more rules. These could potentially catch bugs, security vulnerabilities etc. but can be a bit overwhelming. |
-| ide                       | vscode                      | Define the IDE(s) used by the developers.                                                                                                        |
-| git_hosting               | gitlab                      | Define GIT hosting that will be used.                                                                                                            |
-| use_jupyter_notebooks     | true                        | If `true` install ipykernel dependency                                                                                                           |
-| generate_example_code     | true                        | If `true` generate example files and code snippets                                                                                               |
-| strip_jupyter_outputs     | true                        | If `true` strip output from Jupyter notebooks before committing                                                                                  |
-| generate_docs             | mkdocs                      | Generate documentation with either `pdoc` or `mkdocs`    |
+| Name                      | Example                       | Description                                                                                                                            |
+|---------------------------|-------------------------------|----------------------------------------------------------------------------------------------------------------------------------------|
+| author_name               | Team Faboulous                |                                                                                                                                        |
+| author_email              | <teamfaboulous@mycompany.com> |                                                                                                                                        |
+| package_name              | awsomeproject                 | Used to define the name of the python package. This can include "." if you need to create a namespaced package.                        |
+| distribution_name         | awsome-project                | Used to define the name of the python distribution                                                                                     |
+| project_name              | Awsome Project                | Name of the project                                                                                                                    |
+| repository_name           | awsome-project                | Name of the project repository                                                                                                         |
+| project_short_description | A fantastic new project       | Description of the project. Also used in the CLI help.                                                                                 |
+| version                   | 0.2.0                         | SemVer 2.0 version                                                                                                                     |
+| license                   | MIT                           | Project license                                                                                                                        |
+| package_type              | cli                           | If `cli` generate cli module with argument parser and  cli entrypoint                                                                  |
+| python_version            | 3.10                          | Define the python version to use for `pyenv` and the CI pipelines                                                                      |
+| testing_framework         | pytest                        | Python testing framework                                                                                                               |
+| max_line_length           | 88                            | Code max line length                                                                                                                   |
+| type_checker              | mypy                          | Select whether to add a type checker                                                                                                   |
+| type_checker_strictness   | strict                        | Decide whether to support gradual typing or not                                                                                        |
+| use_lint_strict_rules     | true                          | If `true` run linter with more rules. These could potentially catch bugs, security vulnerabilities etc. but can be a bit overwhelming. |
+| ide                       | vscode                        | Define the IDE(s) used by the developers.                                                                                              |
+| git_hosting               | gitlab                        | Define GIT hosting that will be used.                                                                                                  |
+| use_jupyter_notebooks     | true                          | If `true` install ipykernel dependency                                                                                                 |
+| generate_example_code     | true                          | If `true` generate example files and code snippets                                                                                     |
+| strip_jupyter_outputs     | true                          | If `true` strip output from Jupyter notebooks before committing                                                                        |
+| generate_docs             | mkdocs                        | Generate documentation with either `pdoc` or `mkdocs`                                                                                  |
 
 See [CONTRIBUTING.md](CONTRIBUTING.md) for information on how to contribute to this project.
 
 ## Rationale
 
-- [2025-03-06] We swap out black, isort, flake8 and pydocstring for ruff. Ruff is faster and better and we can reduce the amount of dependencies and separate config files needed to achieve the same (better) functionality.
+- [2025-03-06] We swap out isort, flake8 and pydocstring for ruff. Ruff is faster and better and we can reduce the amount of dependencies and separate config files needed to achieve the same (better) functionality.
 
 - [2024-08-19] We allow for a choice between generating documentation with either MkDocs or pdoc. The former is more powerful, using mostly additional Markdown files. The latter is more straightforward and uses only the doc-strings in the code files. For both choices, the README.md files is rendered as the front page of the documentation.
 

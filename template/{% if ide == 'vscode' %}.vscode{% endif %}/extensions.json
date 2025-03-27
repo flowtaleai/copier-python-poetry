@@ -3,6 +3,7 @@
     "editorconfig.editorconfig",
     "ms-python.python",
     "ms-python.vscode-pylance",
+    "ms-python.black-formatter",
     "charliermarsh.ruff",
     {% if type_checker == "mypy" %}
     "matangover.mypy",

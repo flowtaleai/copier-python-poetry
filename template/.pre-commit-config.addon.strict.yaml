@@ -6,15 +6,12 @@
 
   - repo: local
     hooks:
-      - id: ruff-format
-        name: Format files with ruff
-        entry: poetry run ruff format
+      - id: black
+        name: Format files with black
         language: system
+        entry: poetry run black --preview
         require_serial: true
-        types_or: [python, pyi, jupyter]
-        args:
-          - --force-exclude
-
+        types_or: [python, pyi]
       - id: ruff-lint
         name: Lint files with ruff
         entry: poetry run ruff check

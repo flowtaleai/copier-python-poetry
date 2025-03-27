@@ -5,6 +5,10 @@
     "source.organizeImports": "explicit"
   },
   {% endif %}
+  "black-formatter.importStrategy": "fromEnvironment",
+  "black-formatter.args": [
+    "--preview"
+  ],
   "json.format.keepLines": true,
   "autoDocstring.docstringFormat": "google-notypes",
   "[json]": {
@@ -12,7 +16,7 @@
     "editor.defaultFormatter": "vscode.json-language-features"
   },
   "[python]": {
-    "editor.defaultFormatter": "charliermarsh.ruff",
+    "editor.defaultFormatter": "ms-python.black-formatter",
     "editor.formatOnSave": true,
     "editor.codeActionsOnSave": {
       "source.organizeImports": "explicit"
