@@ -2,7 +2,9 @@
     rev: v3.2.0
     hooks:
       - id: trailing-whitespace
+        exclude: "template"
       - id: end-of-file-fixer
+        exclude: "template"
   - repo: local
     hooks:
       - id: flake8

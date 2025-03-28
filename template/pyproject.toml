@@ -16,25 +16,15 @@ typer = "^0.13.0"
 
 [tool.poetry.group.dev.dependencies]
 pytest = "^7.4.2"
-flake8 = "^6.1.0"
-flake8-builtins = "^2.1.0"
-pep8-naming = "^0.13.3"
+ruff = "^0.9.7"
 {% if testing_framework == "pytest" %}
 pytest-mock = "^3.11.1"
-flake8-pytest-style = "^1.7.2"
-{% endif %}
-{% if use_flake8_strict_plugins %}
-flake8-print = "^5.0.0"
-flake8-eradicate = "^1.5.0"
-flake8-bugbear = "^23.9.16"
 {% endif %}
 {% if type_checker == "mypy" %}
 mypy = "^1.11.2"
 {% endif %}
 black = "^22.1.0"
-isort = "^5.12.0"
 pre-commit = "^3.4.0"
-pydocstyle = "^6.3.0"
 bump2version = "^1.0.1"
 detect-secrets = "^1.4.0"
 {% if generate_docs == "mkdocs" %}
@@ -67,12 +57,44 @@ build-backend = "poetry.core.masonry.api"
 [tool.black]
 line-length = {{ max_line_length }}
 
-[tool.isort]
-profile = "black"
+[tool.ruff]
+line-length = {{ max_line_length }}
+target-version = "py{{ python_version | replace('.', '') }}"
 
-[tool.pydocstyle]
-add_ignore = "D100,D103,D104"
-convention = "google"
+[tool.ruff.lint]
+
+select = [
+    "E", # pycodestyle, basic flake8
+    "W", # pycodestyle, basic flake8
+    "F", # pyflakes, basic flake8
+    "N", # pep8-naming, basic flake8
+    "C90", # maccabe, basic flake8
+    "A",  # flake8-builtins,
+    "D", # pydocstyle
+    {% if testing_framework == "pytest" %}
+    "PT", # flake8-pytest-style
+    {% endif %}
+    {% if use_lint_strict_rules %}
+    "T20", # flake8-print
+    "ERA", # eradicate
+    "B", # flake8-bugbear
+    {% endif %}
+    "I" # isort
+]
+ignore = [
+    # Docstring rules
+    "D100",  # Ignore missing docstring in public modules
+    "D103",  # Ignore missing docstring in public functions
+    "D104",  # Ignore missing docstring in public packages
+    "D203",  # Ignore blank-line-before-class conflicting with D211
+    "D213",  # Ignore multi-line-summary-second-line conflicting with D212
+]
+
+[tool.ruff.lint.per-file-ignores]
+{% if package_type == "cli" %}
+"src/{{ package_name }}/cli.py" = ["T20"]
+{% endif %}
+"tests/*" = ["T20"]
 
 [tool.pytest.ini_options]
 pythonpath = "src"

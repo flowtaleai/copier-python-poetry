@@ -4,28 +4,27 @@ Opinionated copier template for Flowtale python projects.
 
 ## Features
 
-| Task                   | Tool                                                         |
-| ---------------------- | ------------------------------------------------------------ |
-| Command line interface | Typer                                                        |
-| Testing framework      | pytest, unittest                                             |
-| Test mocking           | pytest-mock                                                  |
-| Pre-commit hooks       | pre-commit                                                   |
-| Version management     | bump2version                                                 |
-| Environment management | direnv                                                       |
-| Common style           | EditorConfig                                                 |
-| Editor configuration   | vscode with suggested extensions                             |
-| Autoformatters         | black with experimental string processing (`--preview`), pydocstyle |
-| Linters                | flake8, pydocstyle                                                  |
-| Test and packaging     | gitlab-ci                                                           |
-| Type Checkers          | mypy                                                                |
-| Run common commands    | make                                                                |
+| Task                   | Tool                                                    |
+|------------------------|---------------------------------------------------------|
+| Command line interface | Typer                                                   |
+| Testing framework      | pytest, unittest                                        |
+| Test mocking           | pytest-mock                                             |
+| Pre-commit hooks       | pre-commit                                              |
+| Version management     | bump2version                                            |
+| Environment management | direnv                                                  |
+| Common style           | EditorConfig                                            |
+| Editor configuration   | vscode with suggested extensions                        |
+| Autoformatters         | black with experimental string processing (`--preview`) |
+| Linters                | ruff                                                    |
+| Test and packaging     | gitlab-ci                                               |
+| Type Checkers          | mypy                                                    |
+| Run common commands    | make                                                    |
 
 ### Automatisms
 
 #### On save (vscode)
 
 - Code formatted with `black`
-- Import sorted with `isort`
 
 #### On commit
 
@@ -42,22 +41,20 @@ Strict checks:
 
 - Trailing whitespaces removed
 - Add newline at the end of the file
-- `flake8` linter executed
-- `black` formatter executed
-- `isort` import sorted executed
-- `pydocstyle` docstring checker executed
+- `black` formatter and `ruff` linter executed
 
-#### Linter plugins
+#### Linter rules
 
-| Name                | Description                                                                                    | strict |
-|---------------------|------------------------------------------------------------------------------------------------|--------|
-| flake8-builtins     | Check for python builtins being used as variables or parameters.                               |        |
-| pep8-naming         | Check your code against [PEP 8](https://www.python.org/dev/peps/pep-0008/) naming conventions. |        |
-| flake8-pytest-style | Check for common style issues or inconsistencies with `pytest`-based tests.                    |        |
-| flake8-print        | Forbids print in the code besides `cli.py` (use `logging`!)                                    | x      |
-| flake8-eradicate    | Find commented out (or so called "dead") code.                                                 | x      |
-| flake8-bugbear      | Find likely bugs and design problems in your program                                           | x      |
-| flake8-annotations  | Find missing type annotations                                                                  | x      |
+| Name                           | Description                                                                  | strict |
+|--------------------------------|------------------------------------------------------------------------------|--------|
+| pyflakes                       | Check for syntax errors and undefined variables                              |        |
+| pep8                           | Check for compliance with the PEP 8 style guide.                             |        |
+| Ned Batchelder’s McCabe Script | Measure the complexity of functions and methods using cyclomatic complexity. |        |
+| flake8-builtins                | Check for python builtins being used as variables or parameters.             |        |
+| flake8-pytest-style            | Check for common style issues or inconsistencies with `pytest`-based tests.  |        |
+| flake8-print                   | Forbids print in the code besides `cli.py` (use `logging`!)                  | x      |
+| flake8-eradicate               | Find commented out (or so called "dead") code.                               | x      |
+| flake8-bugbear                 | Find likely bugs and design problems in your program                         | x      |
 
 #### On push
 
@@ -120,50 +117,39 @@ Strict checks:
 
 ### Copier parameters
 
-| Name                      | Example                     | Description                                                                                                                                      |
-|---------------------------|-----------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------|
-| author_name               | Team Faboulous              |                                                                                                                                                  |
-| author_email              | <teamfaboulous@mycompany.com> |                                                                                                                                                  |
-| package_name              | awsomeproject               | Used to define the name of the python package. This can include "." if you need to create a namespaced package.                                                                                                    |
-| distribution_name         | awsome-project              | Used to define the name of the python distribution                                                                                               |
-| project_name              | Awsome Project              | Name of the project                                                                                                                              |
-| repository_name           | awsome-project              | Name of the project repository                                                                                                                   |
-| project_short_description | A fantastic new project     | Description of the project. Also used in the CLI help.                                                                                           |
-| version                   | 0.2.0                       | SemVer 2.0 version                                                                                                                               |
-| license                   | MIT                         | Project license                                                                                                                                  |
-| package_type              | cli                         | If `cli` generate cli module with argument parser and  cli entrypoint                                                                            |
-| python_version            | 3.10                        | Define the python version to use for `pyenv` and the CI pipelines                                                                                |
-| testing_framework         | pytest                      | Python testing framework                                                                                                                         |
-| max_line_length           | 88                          | Code max line length                                                                                                                             |
-| type_checker | mypy | Select whether to add a type checker |
-| type_checker_strictness | strict | Decide whether to support gradual typing or not  |
-| use_flake8_strict_plugins | true                        | If `true` install flake8 plugins that allow to catch bugs, security vulnerabilities and apply more strict rules. They can be a bit overwhelming. |
-| ide                       | vscode                      | Define the IDE(s) used by the developers.                                                                                                        |
-| git_hosting               | gitlab                      | Define GIT hosting that will be used.                                                                                                            |
-| use_jupyter_notebooks     | true                        | If `true` install ipykernel dependency                                                                                                           |
-| generate_example_code     | true                        | If `true` generate example files and code snippets                                                                                               |
-| strip_jupyter_outputs     | true                        | If `true` strip output from Jupyter notebooks before committing                                                                                  |
-| generate_docs             | mkdocs                      | Generate documentation with either `pdoc` or `mkdocs`    |
+| Name                      | Example                       | Description                                                                                                                            |
+|---------------------------|-------------------------------|----------------------------------------------------------------------------------------------------------------------------------------|
+| author_name               | Team Faboulous                |                                                                                                                                        |
+| author_email              | <teamfaboulous@mycompany.com> |                                                                                                                                        |
+| package_name              | awsomeproject                 | Used to define the name of the python package. This can include "." if you need to create a namespaced package.                        |
+| distribution_name         | awsome-project                | Used to define the name of the python distribution                                                                                     |
+| project_name              | Awsome Project                | Name of the project                                                                                                                    |
+| repository_name           | awsome-project                | Name of the project repository                                                                                                         |
+| project_short_description | A fantastic new project       | Description of the project. Also used in the CLI help.                                                                                 |
+| version                   | 0.2.0                         | SemVer 2.0 version                                                                                                                     |
+| license                   | MIT                           | Project license                                                                                                                        |
+| package_type              | cli                           | If `cli` generate cli module with argument parser and  cli entrypoint                                                                  |
+| python_version            | 3.10                          | Define the python version to use for `pyenv` and the CI pipelines                                                                      |
+| testing_framework         | pytest                        | Python testing framework                                                                                                               |
+| max_line_length           | 88                            | Code max line length                                                                                                                   |
+| type_checker              | mypy                          | Select whether to add a type checker                                                                                                   |
+| type_checker_strictness   | strict                        | Decide whether to support gradual typing or not                                                                                        |
+| use_lint_strict_rules     | true                          | If `true` run linter with more rules. These could potentially catch bugs, security vulnerabilities etc. but can be a bit overwhelming. |
+| ide                       | vscode                        | Define the IDE(s) used by the developers.                                                                                              |
+| git_hosting               | gitlab                        | Define GIT hosting that will be used.                                                                                                  |
+| use_jupyter_notebooks     | true                          | If `true` install ipykernel dependency                                                                                                 |
+| generate_example_code     | true                          | If `true` generate example files and code snippets                                                                                     |
+| strip_jupyter_outputs     | true                          | If `true` strip output from Jupyter notebooks before committing                                                                        |
+| generate_docs             | mkdocs                        | Generate documentation with either `pdoc` or `mkdocs`                                                                                  |
 
 See [CONTRIBUTING.md](CONTRIBUTING.md) for information on how to contribute to this project.
 
 ## Rationale
 
+- [2025-03-06] We swap out isort, flake8 and pydocstring for ruff. Ruff is faster and better and we can reduce the amount of dependencies and separate config files needed to achieve the same (better) functionality.
+
 - [2024-08-19] We allow for a choice between generating documentation with either MkDocs or pdoc. The former is more powerful, using mostly additional Markdown files. The latter is more straightforward and uses only the doc-strings in the code files. For both choices, the README.md files is rendered as the front page of the documentation.
 
-- [2023-10-10] We pass the `--preview` flag to black 23.x in particular to format long strings. The effects of `--preview` should be re-evaluated at each major version update of black.
-
-  ```python
-  # before formatting
-  myvar = "Loooong ... string"
-
-  # after formatting
-  myvar = (
-      "Loooong ..."
-      "... string"
-  )
-  ```
-
-- The versions of python dependencies of the tools (black, flake, ...) are managed by the copier template and should not be changed manually in the generated projects. This allows to keep the various projects aligned and have a consistent behavior when we develop on multiple projects. Sometimes a newer copier template version may be applied to a project before the others, so there is a period where there is a disalignment, but at least is a controlled one.
+- The versions of python dependencies of the tools (e.g. ruff) are managed by the copier template and should not be changed manually in the generated projects. This allows to keep the various projects aligned and have a consistent behavior when we develop on multiple projects. Sometimes a newer copier template version may be applied to a project before the others, so there is a period where there is a disalignment, but at least is a controlled one.
 
 - typing annotations are not checked in the tests because tests do not need to be perfect and we want to be able to write them fast.

@@ -9,12 +9,6 @@
   "black-formatter.args": [
     "--preview"
   ],
-  "isort.importStrategy": "fromEnvironment",
-  "isort.args": [
-    "--profile",
-    "black"
-  ],
-  "flake8.importStrategy": "fromEnvironment",
   "json.format.keepLines": true,
   "autoDocstring.docstringFormat": "google-notypes",
   "[json]": {
@@ -26,5 +20,7 @@
     "editor.formatOnSave": true,
     "editor.codeActionsOnSave": {
       "source.organizeImports": "explicit"
+    }
   },
+  "ruff.importStrategy": "fromEnvironment",
 }
