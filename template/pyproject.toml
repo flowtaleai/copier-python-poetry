@@ -103,7 +103,7 @@ pythonpath = "src"
 [tool.mypy]
 exclude = ["tests/*", "docs/*"]
 
-follow_imports = "silent"
+follow_imports = "normal"
 warn_redundant_casts = true
 warn_unused_ignores = true
 disallow_any_generics = true
