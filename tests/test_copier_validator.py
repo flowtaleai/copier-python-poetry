@@ -60,6 +60,7 @@ def test_validate_distribtuion_name_invalid(tmp_path, copier, distribution_name)
     [
         "validpackagename",
         "valid_package_name",
+        "valid_package_name_",
         "another.valid.packagename",
         "my_other.valid.package_name",
     ],
