@@ -433,3 +433,32 @@ def test_bake_namespaced_package_with_many_and_run_pre_commit(tmp_path, copier):
 
     project.run("poetry install")
     project.run("poetry run pre-commit run --all-files")
+
+
+@pytest.mark.parametrize("git_hosting", ["github", "gitlab", "bitbucket"])
+def test_poetry_version_consistency(tmp_path, copier, git_hosting):
+    custom_answers = {
+        "poetry_version": "1.8.3",
+        "generate_dockerfile": True,
+        "git_hosting": git_hosting,
+    }
+    project = copier.copy(tmp_path, **custom_answers)
+
+    # Check Dockerfile
+    dockerfile_path = project.path / "Dockerfile"
+    assert "POETRY_VERSION=1.8.3" in dockerfile_path.read_text()
+
+    # Check CI files
+    if git_hosting == "github":
+        ci_path = project.path / ".github" / "workflows" / "ci.yml"
+        assert 'POETRY_VERSION: "1.8.3"' in ci_path.read_text()
+    elif git_hosting == "gitlab":
+        ci_path = project.path / ".gitlab-ci.yml"
+        assert "pip install poetry==1.8.3" in ci_path.read_text()
+    elif git_hosting == "bitbucket":
+        ci_path = project.path / "bitbucket-pipelines.yml"
+        assert "pip install poetry==1.8.3" in ci_path.read_text()
+
+    # Check CONTRIBUTING.md
+    contributing_path = project.path / "CONTRIBUTING.md"
+    assert "Poetry 1.8.3" in contributing_path.read_text()
