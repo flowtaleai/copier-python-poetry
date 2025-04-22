@@ -93,6 +93,11 @@ python_version:
   default: "3.10"
   help: "Python version to use"
 
+poetry_version:
+  type: str
+  default: "1.8.3"
+  help: "Poetry version to use across all environments"
+
 testing_framework:
   choices:
     - pytest
