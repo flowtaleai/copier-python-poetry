@@ -97,6 +97,10 @@ poetry_version:
   type: str
   default: "1.8.3"
   help: "Poetry version to use across all environments"
+  validator: >-
+    {% if not (poetry_version | regex_search('^(?P<major>0|[1-9]\d*)\.(?P<minor>0|[1-9]\d*)\.(?P<patch>0|[1-9]\d*)(?:-(?P<prerelease>(?:0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*)(?:\.(?:0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*))*))?(?:\+(?P<buildmetadata>[0-9a-zA-Z-]+(?:\.[0-9a-zA-Z-]+)*))?$')) %}
+    Poetry version must follow semantic versioning (e.g., 1.0.0, 2.1.3-alpha, 3.0.0+build123).
+    {% endif %}
 
 testing_framework:
   choices:
