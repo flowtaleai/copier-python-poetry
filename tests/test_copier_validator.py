@@ -25,6 +25,7 @@ def test_validate_author_name_invalid(tmp_path, copier, author_name):
         "valid.distribution.name",
         "valid.distribution.package_name",
         "valid_distribution.package_name",
+        "long-but-valid-distribution-name",
     ],
 )
 def test_validate_distribtuion_name_valid(tmp_path, copier, distribution_name):
@@ -43,6 +44,9 @@ def test_validate_distribtuion_name_valid(tmp_path, copier, distribution_name):
         "distribution.name.",
         "invalid.distribution.package.name",
         "distribution..name",
+        "distribution-name_",
+        "_distribution-name",
+        "distribution--name",
     ],
 )
 def test_validate_distribtuion_name_invalid(tmp_path, copier, distribution_name):
@@ -56,6 +60,7 @@ def test_validate_distribtuion_name_invalid(tmp_path, copier, distribution_name)
     [
         "validpackagename",
         "valid_package_name",
+        "valid_package_name_",
         "another.valid.packagename",
         "my_other.valid.package_name",
     ],
