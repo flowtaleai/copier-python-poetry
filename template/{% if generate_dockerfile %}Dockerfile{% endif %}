@@ -14,7 +14,7 @@ ENV PYTHONUNBUFFERED=1 \
     # pip
     PIP_DISABLE_PIP_VERSION_CHECK=on \
     PIP_DEFAULT_TIMEOUT=100 \
-    POETRY_VERSION=1.8.3 \
+    POETRY_VERSION={{ poetry_version }} \
     POETRY_VIRTUALENVS_CREATE=false \
     # virtual environment of application
     VIRTUAL_ENV="/app_venv" \

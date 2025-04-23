@@ -7,7 +7,7 @@ Thank you for considering contributing to {{ project_name if project_name else d
 ### Requirements
 
 - Python {{ python_version }}
-- [Poetry](https://python-poetry.org/docs/#installation)
+- [Poetry {{ poetry_version }}](https://python-poetry.org/docs/#installation)
 - Make (optional, for using Makefile commands)
 - Git (for version control)
 - [direnv](https://direnv.net/) (optional, for environment management)

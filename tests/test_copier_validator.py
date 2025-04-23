@@ -107,3 +107,16 @@ def test_validate_version_invalid(tmp_path, copier, version):
     custom_answers = {"version": version}
     with pytest.raises(ValidationError):
         copier.copy(tmp_path, **custom_answers)
+
+
+@pytest.mark.parametrize("poetry_version", ["1.8.3", "2.0.0-alpha", "3.1.4+build123"])
+def test_validate_poetry_version_valid(tmp_path, copier, poetry_version):
+    custom_answers = {"poetry_version": poetry_version}
+    copier.copy(tmp_path, **custom_answers)
+
+
+@pytest.mark.parametrize("poetry_version", ["", "1.8", "1.8.3.4", "invalid_version"])
+def test_validate_poetry_version_invalid(tmp_path, copier, poetry_version):
+    custom_answers = {"poetry_version": poetry_version}
+    with pytest.raises(ValidationError):
+        copier.copy(tmp_path, **custom_answers)
