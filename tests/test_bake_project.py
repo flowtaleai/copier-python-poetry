@@ -462,3 +462,7 @@ def test_poetry_version_consistency(tmp_path, copier, git_hosting):
     # Check CONTRIBUTING.md
     contributing_path = project.path / "CONTRIBUTING.md"
     assert "Poetry 1.8.3" in contributing_path.read_text()
+
+    # Check devcontainer
+    devcontainer_path = project.path / ".devcontainer" / "devcontainer.json"
+    assert 'poetry:2": { "version": "1.8.3" }' in devcontainer_path.read_text()
