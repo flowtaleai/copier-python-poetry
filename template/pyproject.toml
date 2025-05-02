@@ -2,11 +2,11 @@
 name = "{{ distribution_name }}"
 version = "{{ version }}"
 description = "{{ project_short_description }}"
-authors = [
-  "{{ author_name }} <{{ author_email }}>"
-]
+authors = ["{{ author_name }} <{{ author_email }}>"]
 license = "{{ license }}"
-packages = [{include = "{{ package_name | replace('.', _copier_conf.sep) }}", from = "src"}]
+packages = [
+  { include = "{{ package_name | replace('.', _copier_conf.sep) }}", from = "src" },
+]
 
 [tool.poetry.dependencies]
 python = "^{{ python_version }}"
@@ -42,7 +42,7 @@ nbdime = "^4.0.1"
 
 [tool.poetry.group.jupyterlab]
 optional = true
-dependencies = { jupyterlab = "^4.2.2"}
+dependencies = { jupyterlab = "^4.2.2" }
 {% endif %}
 
 [build-system]
@@ -102,7 +102,6 @@ pythonpath = "src"
 
 [tool.mypy]
 exclude = ["tests/*", "docs/*"]
-
 follow_imports = "normal"
 warn_redundant_casts = true
 warn_unused_ignores = true
