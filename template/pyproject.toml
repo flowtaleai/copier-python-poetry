@@ -68,7 +68,6 @@ select = [
     "W", # pycodestyle, basic flake8
     "F", # pyflakes, basic flake8
     "N", # pep8-naming, basic flake8
-    "C90", # maccabe, basic flake8
     "A",  # flake8-builtins,
     "D", # pydocstyle
     {% if testing_framework == "pytest" %}
@@ -78,6 +77,7 @@ select = [
     "T20", # flake8-print
     "ERA", # eradicate
     "B", # flake8-bugbear
+    "C90", # maccabe, basic flake8
     {% endif %}
     "I" # isort
 ]
