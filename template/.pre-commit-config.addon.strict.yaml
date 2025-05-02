@@ -16,6 +16,19 @@
         name: Lint files with ruff
         entry: poetry run ruff check
         language: system
+        stages: [commit]
+        require_serial: true
+        types_or: [python, pyi, jupyter]
+        args:
+          - --fix
+          - --show-fixes
+          - --force-exclude
+          - --ignore=D
+      - id: ruff-lint
+        name: Lint files with ruff
+        entry: poetry run ruff check
+        language: system
+        stages: [pre-merge-commit]
         require_serial: true
         types_or: [python, pyi, jupyter]
         args:
