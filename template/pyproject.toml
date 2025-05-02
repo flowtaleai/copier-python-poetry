@@ -83,11 +83,10 @@ select = [
 ]
 ignore = [
     # Docstring rules
-    "D100",  # Ignore missing docstring in public modules
-    "D103",  # Ignore missing docstring in public functions
-    "D104",  # Ignore missing docstring in public packages
     "D203",  # Ignore blank-line-before-class conflicting with D211
     "D213",  # Ignore multi-line-summary-second-line conflicting with D212
+    "D100",   # Ignore missing docstring in public modules
+    "D104",   # Ignore missing docstring in public packages
 ]
 
 [tool.ruff.lint.per-file-ignores]
