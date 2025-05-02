@@ -85,6 +85,9 @@ ignore = [
     # Docstring rules
     "D100",   # Ignore missing docstring in public modules
     "D104",   # Ignore missing docstring in public packages
+    "D105",   # Ignore missing docstring in magic methods
+    "D205",   # Ignore blank-line-after-function
+    "D417",   # Ignore requirement for documentation of every function parameter
 [tool.ruff.lint.pydocstyle]
 convention = "google"
 ignore-decorators = ["abc.abstractmethod"]
