@@ -103,6 +103,15 @@ ignore-var-parameters = true
 [tool.ruff.lint.pycodestyle]
 extend-immutable-calls = ["fastapi.Depends", "fastapi.Query"]
 
+[tool.ruff.lint.pep8-naming]
+classmethod_decorators = [
+    # Sqlalchemy, see FAQ here https://pypi.org/project/pep8-naming/
+    "declared_attr",
+    "expression",
+    "comparator",
+    # Pydantic
+    "model_validator"
+    "pydantic.validator",
 ]
 
 [tool.ruff.lint.per-file-ignores]
