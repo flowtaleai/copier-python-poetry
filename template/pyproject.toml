@@ -93,7 +93,7 @@ ignore = [
     # Basic flake8 rules
     "E203",   # Whitespace before colon ':';
     # Bugbear rules
-    "B904",   # Ignore exception-raises-generic
+    "B904"   # Ignore exception-raises-generic
 ]
 
 [tool.ruff.lint.pydocstyle]
@@ -101,18 +101,18 @@ convention = "google"
 ignore-decorators = ["abc.abstractmethod"]
 ignore-var-parameters = true
 
-[tool.ruff.lint.pycodestyle]
+[tool.ruff.lint.flake8-bugbear]
 extend-immutable-calls = ["fastapi.Depends", "fastapi.Query"]
 
 [tool.ruff.lint.pep8-naming]
-classmethod_decorators = [
+classmethod-decorators = [
     # Sqlalchemy, see FAQ here https://pypi.org/project/pep8-naming/
     "declared_attr",
     "expression",
     "comparator",
     # Pydantic
-    "model_validator"
-    "pydantic.validator",
+    "model_validator",
+    "pydantic.validator"
 ]
 
 [tool.ruff.lint.per-file-ignores]
