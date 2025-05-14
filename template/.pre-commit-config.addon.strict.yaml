@@ -44,4 +44,5 @@
         {% endif %}
         {% endif %}
         language: system
+        pass_filenames: false
 {% endif %}
