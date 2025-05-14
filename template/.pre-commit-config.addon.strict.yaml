@@ -23,7 +23,8 @@
           - --show-fixes
           - --force-exclude
 {% if type_checker == "mypy" %}
-  - repo: local
+  - repo: https://github.com/pre-commit/mirrors-mypy
+    rev: v1.11.2
     hooks:
       - id: mypy
         name: mypy
@@ -37,11 +38,10 @@
         {% endif %}
         {% else %}
         {% if type_checker_strictness == "strict" %}
-        args: ["--disallow-untyped-defs"]
+        args: ["--disallow-untyped-defs", "."]
+        {% else %}
+        args: ["."]
         {% endif %}
         {% endif %}
         language: system
-        types: [python]
-        require_serial: true
-        exclude: "^(tests/|docs/)"
 {% endif %}
