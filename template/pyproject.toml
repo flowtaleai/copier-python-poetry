@@ -101,7 +101,7 @@ convention = "google"
 {% if package_type == "cli" %}
 "src/{{ package_name }}/cli.py" = ["T20"]
 {% endif %}
-"__init__.py" = ["E402","F401"]
+"__init__.py" = ["F401"]
 "**/{tests}/*" = ["D"]
 "**/{docs,notebooks}/*" = ["T20", "S101", "E402", "D"]
 
