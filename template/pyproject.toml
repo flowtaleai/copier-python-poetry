@@ -86,8 +86,6 @@ ignore = [
     "D100",   # Ignore missing docstring in public modules
     "D104",   # Ignore missing docstring in public packages
     "D105",   # Ignore missing docstring in magic methods
-    "D205",   # Ignore blank-line-after-function
-    "D417",   # Ignore requirement for documentation of every function parameter
     # Annotation rules
     "ANN401", # Ignore dynamically typed expressions are disallowed (allows untyped *args and **kwargs)
     # Bugbear rules
