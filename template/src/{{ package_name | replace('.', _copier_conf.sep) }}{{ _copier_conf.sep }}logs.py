@@ -46,11 +46,13 @@ class LogLevel(str, Enum):
 
 
 def set_level(level: Optional[str]) -> None:
+    """Set the logging level."""
     if level is not None:
         LOGGING_CONFIG["loggers"][PACKAGE_LOGGER]["level"] = level.upper()
         logging.config.dictConfig(LOGGING_CONFIG)
 
 
 def get_logger(name: str) -> logging.Logger:
+    """Get the logger."""
     logging.config.dictConfig(LOGGING_CONFIG)
     return logging.getLogger(name)

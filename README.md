@@ -146,6 +146,14 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for information on how to contribute to t
 
 ## Rationale
 
+- 2025-05-15 We made the following updates to the ruff configuration:
+  - Moved maccabe into the strict linter rules
+  - Added D105 to the list of rules to ignore. The reason was as follows:
+    - D105: We decide to ignore it as we don't find it strictly necessary
+  - Not ignored
+    - ANN: We don't check for linter annotation errors anymore as we are using a type checker for that
+    - B904: Even though this has been annoying for people, it does enforce much better behavior
+
 - [2025-03-06] We swap out isort, flake8 and pydocstring for ruff. Ruff is faster and better and we can reduce the amount of dependencies and separate config files needed to achieve the same (better) functionality.
 
 - [2024-08-19] We allow for a choice between generating documentation with either MkDocs or pdoc. The former is more powerful, using mostly additional Markdown files. The latter is more straightforward and uses only the doc-strings in the code files. For both choices, the README.md files is rendered as the front page of the documentation.

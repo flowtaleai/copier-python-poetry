@@ -16,6 +16,7 @@ app = typer.Typer()
 
 
 def version_callback(value: bool) -> None:
+    """Provides a version callback for the cli."""
     if value:
         typer.echo(f"{{ package_name }} version {__version__}")
         raise typer.Exit()
