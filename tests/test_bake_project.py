@@ -466,3 +466,60 @@ def test_poetry_version_consistency(tmp_path, copier, git_hosting):
     # Check devcontainer
     devcontainer_path = project.path / ".devcontainer" / "devcontainer.json"
     assert 'poetry:2": { "version": "1.8.3" }' in devcontainer_path.read_text()
+
+
+@pytest.mark.slow()
+@pytest.mark.venv()
+def test_mypy_exclude_respected_in_pre_commit(tmp_path, copier):
+    """Test that mypy respects exclude patterns in pyproject.toml.
+
+    Creates a file with type errors and verifies pre-commit passes
+    when the file is explicitly excluded in mypy configuration.
+    """
+    custom_answers = {
+        "type_checker": "mypy",
+        "type_checker_strictness": "strict",
+        "package_name": "mypackage",  # Specify a fixed package name
+    }
+    project = copier.copy(tmp_path, **custom_answers)
+
+    project.run("git init")
+    project.run("git add .")
+    project.run("git config user.name 'User Name'")
+    project.run("git config user.email 'user@email.org'")
+    project.run("git commit -m init")
+
+    # Create a file with type errors in src directory
+    src_dir = project.path / "src" / "mypackage"
+    src_file_with_error = src_dir / "exclude_me.py"
+    src_file_with_error.write_text(
+        "def src_function_with_type_error() -> str:\n"
+        "    return 999  # Type error: Incompatible return value\n"
+    )
+
+    # Modify pyproject.toml to exclude the specific file
+    pyproject_path = project.path / "pyproject.toml"
+    pyproject_content = pyproject_path.read_text()
+    src_exclude_path = "src/mypackage/exclude_me.py"
+    updated_content = pyproject_content.replace(
+        'exclude = ["tests/*", "docs/*"]',
+        f'exclude = ["tests/*", "docs/*", "{src_exclude_path}"]',
+    )
+    pyproject_path.write_text(updated_content)
+
+    # Stage and commit the new file and changes
+    project.run(f"git add {src_exclude_path} pyproject.toml")
+    project.run(
+        "git commit -m 'Add file with type errors in src directory and update mypy"
+        " excludes'"
+    )
+
+    std_pre_commit_path = project.path / ".pre-commit-config.standard.yaml"
+    strict_pre_commit_path = project.path / ".pre-commit-config.addon.strict.yaml"
+    dst_pre_commit_path = project.path / ".pre-commit-config.yaml"
+    shutil.copy(std_pre_commit_path, dst_pre_commit_path)
+    with dst_pre_commit_path.open("a") as f:
+        f.write(strict_pre_commit_path.read_text())
+
+    project.run("poetry install")
+    project.run("poetry run pre-commit run --all-files")
