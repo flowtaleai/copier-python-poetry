@@ -9,4 +9,11 @@
     "ghcr.io/christophermacgown/devcontainer-features/direnv:1": {},
   },
   "postCreateCommand": "bash .devcontainer/post-create.sh",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "darkriszty.markdown-table-prettify"
+      ]
+    }
+  },
 }
