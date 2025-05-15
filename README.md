@@ -141,6 +141,7 @@ Strict checks:
 | generate_example_code     | true                          | If `true` generate example files and code snippets                                                                                     |
 | strip_jupyter_outputs     | true                          | If `true` strip output from Jupyter notebooks before committing                                                                        |
 | generate_docs             | mkdocs                        | Generate documentation with either `pdoc` or `mkdocs`                                                                                  |
+| lint_dockerfile           | false                         | Include a pre-commit hook for Dockerfile linting                                                                                       |
 
 See [CONTRIBUTING.md](CONTRIBUTING.md) for information on how to contribute to this project.
 

@@ -466,3 +466,29 @@ def test_poetry_version_consistency(tmp_path, copier, git_hosting):
     # Check devcontainer
     devcontainer_path = project.path / ".devcontainer" / "devcontainer.json"
     assert 'poetry:2": { "version": "1.8.3" }' in devcontainer_path.read_text()
+
+
+def test_with_hadolint(tmp_path, copier):
+    custom_answers = {
+        "lint_dockerfile": True,
+    }
+    project = copier.copy(tmp_path, **custom_answers)
+
+    pre_commit_path = project.path / ".pre-commit-config.standard.yaml"
+    devcontainer_path = project.path / ".devcontainer" / "devcontainer.json"
+
+    assert "hadolint" in pre_commit_path.read_text()
+    assert "hadolint" in devcontainer_path.read_text()
+
+
+def test_without_hadolint(tmp_path, copier):
+    custom_answers = {
+        "lint_dockerfile": False,
+    }
+    project = copier.copy(tmp_path, **custom_answers)
+
+    pre_commit_path = project.path / ".pre-commit-config.standard.yaml"
+    devcontainer_path = project.path / ".devcontainer" / "devcontainer.json"
+
+    assert "hadolint" not in pre_commit_path.read_text()
+    assert "hadolint" not in devcontainer_path.read_text()

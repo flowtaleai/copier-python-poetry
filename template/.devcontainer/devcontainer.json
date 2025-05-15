@@ -10,6 +10,9 @@
     {% if generate_dockerfile %}
     "ghcr.io/devcontainers/features/docker-in-docker": { },
     {% endif %}
+    {% if lint_dockerfile %}
+    "ghcr.io/dhoeric/features/hadolint:1": {},
+    {% endif %}
   },
   "postCreateCommand": "bash .devcontainer/post-create.sh",
 }

@@ -185,3 +185,8 @@ generate_dockerfile:
   default: false
   help: "Generate Dockerfile for containerized development/deployment"
   when: "{{ package_type == 'cli' }}"
+
+lint_dockerfile:
+  type: bool
+  default: false
+  help: "Include a pre-commit hook for Dockerfile linting"
