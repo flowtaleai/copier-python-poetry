@@ -122,4 +122,9 @@ no_implicit_reexport = true
 {% if type_checker_strictness == "strict" %}
 disallow_untyped_defs = true
 {% endif %}
+{% if "." in package_name %}
+mypy_path = "src"
+namespace_packages = true
+explicit_package_bases = true
+{% endif %}
 {% endif %}

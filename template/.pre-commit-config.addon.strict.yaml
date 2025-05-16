@@ -29,20 +29,7 @@
       - id: mypy
         name: mypy
         entry: poetry run mypy
-        {% if "." in package_name %}
-        pass_filenames: false
-        {% if type_checker_strictness == "strict" %}
-        args: ["--disallow-untyped-defs", "--namespace-packages", "-p", "{{ package_name }}"]
-        {% else %}
-        args: ["--namespace-packages", "-p", "{{ package_name }}"]
-        {% endif %}
-        {% else %}
-        {% if type_checker_strictness == "strict" %}
-        args: ["--disallow-untyped-defs", "."]
-        {% else %}
         args: ["."]
-        {% endif %}
-        {% endif %}
         language: system
         pass_filenames: false
 {% endif %}
