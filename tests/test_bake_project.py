@@ -494,7 +494,7 @@ def test_mypy_exclude_respected_in_pre_commit(tmp_path, copier):
     src_file_with_error = src_dir / "exclude_me.py"
     src_file_with_error.write_text(
         "def src_function_with_type_error() -> str:\n"
-        "    \"\"\"Add random docstring here to avoid pre-commit error.\"\"\"\n"
+        '    """Add random docstring here to avoid pre-commit error."""\n'
         "    return 999  # Type error: Incompatible return value\n"
     )
 
