@@ -23,25 +23,13 @@
           - --show-fixes
           - --force-exclude
 {% if type_checker == "mypy" %}
-  - repo: local
+  - repo: https://github.com/pre-commit/mirrors-mypy
+    rev: v1.11.2
     hooks:
       - id: mypy
         name: mypy
         entry: poetry run mypy
-        {% if "." in package_name %}
-        pass_filenames: false
-        {% if type_checker_strictness == "strict" %}
-        args: ["--disallow-untyped-defs", "--namespace-packages", "-p", "{{ package_name }}"]
-        {% else %}
-        args: ["--namespace-packages", "-p", "{{ package_name }}"]
-        {% endif %}
-        {% else %}
-        {% if type_checker_strictness == "strict" %}
-        args: ["--disallow-untyped-defs"]
-        {% endif %}
-        {% endif %}
+        args: ["."]
         language: system
-        types: [python]
-        require_serial: true
-        exclude: "^(tests/|docs/)"
+        pass_filenames: false
 {% endif %}

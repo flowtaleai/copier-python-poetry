@@ -146,13 +146,15 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for information on how to contribute to t
 
 ## Rationale
 
-- 2025-05-15 We made the following updates to the ruff configuration:
+- [2025-05-15] We made the following updates to the ruff configuration:
   - Moved maccabe into the strict linter rules
   - Added D105 to the list of rules to ignore. The reason was as follows:
     - D105: We decide to ignore it as we don't find it strictly necessary
   - Not ignored
     - ANN: We don't check for linter annotation errors anymore as we are using a type checker for that
     - B904: Even though this has been annoying for people, it does enforce much better behavior
+
+- [2025-05-14] We use mypy mirror for type checking in pre-commit ([GitHub repo](https://github.com/pre-commit/mirrors-mypy)). The original solution did not respect the exclude patterns and other configuration settings in `pyproject.toml`, [see relevant issue](https://github.com/python/mypy/issues/16403#issuecomment-1812462399) that inspired us.
 
 - [2025-03-06] We swap out isort, flake8 and pydocstring for ruff. Ruff is faster and better and we can reduce the amount of dependencies and separate config files needed to achieve the same (better) functionality.
 
