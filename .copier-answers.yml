@@ -18,5 +18,5 @@ python_version: '3.12'
 testing_framework: pytest
 type_checker: none
 use_jupyter_notebooks: false
-use_lint_strict_rules: false
+use_lint_strict_rules: true
 version: 2.1.0

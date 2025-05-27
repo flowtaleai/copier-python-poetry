@@ -55,6 +55,10 @@ select = [
     "A",  # flake8-builtins,
     "D", # pydocstyle
     "PT", # flake8-pytest-style
+    "T20", # flake8-print
+    "ERA", # eradicate
+    "B", # flake8-bugbear
+    "C90", # maccabe, basic flake8
     "I" # isort
 ]
 ignore = [
