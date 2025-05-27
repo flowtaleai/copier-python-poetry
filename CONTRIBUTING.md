@@ -1,6 +1,6 @@
 # Contributing to Copier Python Poetry
 
-This document provides guidelines for contributing to the Copier Python Poetry template project. Since this is a template generator, there are two distinct contexts to consider: the template itself and the projects generated from it.
+This document provides guidelines for contributing to the Copier Python Poetry project. Since this is a template generator, there are two distinct contexts to consider: the template itself and the projects generated from it.
 
 ## Template Development
 
@@ -330,4 +330,4 @@ This helps future contributors understand the reasoning behind design decisions.
 5. Resolve any merge conflicts that arise from the update
 6. Commit the applied changes with a message describing the update
 
-Thank you for contributing to the Copier Python Poetry template!
+Thank you for contributing to Copier Python Poetry!

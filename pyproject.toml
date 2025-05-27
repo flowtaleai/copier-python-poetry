@@ -1,7 +1,7 @@
 [tool.poetry]
-name = "copier-python-template"
+name = "copier-python-poetry"
 version = "2.1.0"
-description = "Opinionated copier template for python projects"
+description = "Opinionated copier template for python projects using poetry"
 authors = [
   "Ali Cem <ac@flowtale.ai>",
   "Anders Stendevad <as@flowtale.ai>",
