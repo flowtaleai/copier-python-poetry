@@ -4,11 +4,8 @@
     "ms-python.python",
     "ms-python.vscode-pylance",
     "ms-python.black-formatter",
-    "ms-python.isort",
-    "ms-python.flake8",
-     {% if type_checker == mypy %}
+    "charliermarsh.ruff",
     "matangover.mypy",
-     {% endif %}
     "njpwerner.autodocstring",
     "hbenl.vscode-test-explorer",
     "littlefoxteam.vscode-python-test-adapter",
