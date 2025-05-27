@@ -6,7 +6,7 @@ This document provides guidelines for contributing to the Copier Python Poetry p
 
 ### Prerequisites
 
-- Python (suggested install method: system)
+- Python 3.12 (suggested install method: system)
 - [Copier](https://copier.readthedocs.io/) (suggested install method: pipx)
 - [Poetry](https://python-poetry.org/docs#installation) 2.1.2
 - [pyenv](https://github.com/pyenv/pyenv#getting-pyenv) (recommended)

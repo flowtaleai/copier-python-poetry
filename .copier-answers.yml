@@ -14,7 +14,7 @@ package_type: library
 poetry_version: 2.1.2
 project_name: Copier Python Poetry
 project_short_description: Opinionated copier template for python projects using poetry
-python_version: '3.10'
+python_version: '3.12'
 testing_framework: pytest
 type_checker: none
 use_jupyter_notebooks: false
