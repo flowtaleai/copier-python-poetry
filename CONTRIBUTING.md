@@ -8,7 +8,7 @@ This document provides guidelines for contributing to the Copier Python Poetry t
 
 - Python (suggested install method: system)
 - [Copier](https://copier.readthedocs.io/) (suggested install method: pipx)
-- [Poetry](https://python-poetry.org/docs#installation)
+- [Poetry](https://python-poetry.org/docs#installation) 2.1.2
 - [pyenv](https://github.com/pyenv/pyenv#getting-pyenv) (recommended)
 - [direnv](https://direnv.net/) (recommended for environment management)
 - Git
