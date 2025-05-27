@@ -19,4 +19,4 @@ python_version: '3.10'
 testing_framework: pytest
 use_lint_strict_rules: false
 use_jupyter_notebooks: false
-version: 2.0.0
+version: 2.1.0
