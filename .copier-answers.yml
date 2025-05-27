@@ -16,8 +16,7 @@ project_name: Copier python template
 project_short_description: Opinionated copier template for python projects
 python_version: '3.10'
 testing_framework: pytest
-type_checker: mypy
-type_checker_strictness: gradual
+type_checker: none
 use_jupyter_notebooks: false
 use_lint_strict_rules: false
 version: 2.1.0

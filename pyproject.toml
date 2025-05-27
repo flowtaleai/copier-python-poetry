@@ -27,7 +27,6 @@ tox = "^4.11.3"
 pytest = "^7.4.2"
 ruff = "^0.9.7"
 pytest-mock = "^3.11.1"
-mypy = "^1.11.2"
 black = "^22.1.0"
 pre-commit = "^3.4.0"
 bump2version = "^1.0.1"
@@ -87,12 +86,3 @@ markers = [
     "slow: slow tests",
     "venv: tests that modify the virtual environment possibly causing interferences; should be run with tox",
 ]
-
-[tool.mypy]
-exclude = ["tests/*", "docs/*"]
-follow_imports = "normal"
-warn_redundant_casts = true
-warn_unused_ignores = true
-disallow_any_generics = true
-check_untyped_defs = true
-no_implicit_reexport = true
