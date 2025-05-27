@@ -1,8 +1,8 @@
 import pytest
 
 
-@pytest.mark.slow()
-@pytest.mark.venv()
+@pytest.mark.slow
+@pytest.mark.venv
 def test_make_build(tmp_path, copier):
     custom_answers = {"package_type": "cli"}
     project = copier.copy(tmp_path, **custom_answers)
