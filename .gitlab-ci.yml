@@ -6,7 +6,7 @@ stages:
 
 before_script:
   - apt-get update && apt-get install -y make
-  - pip install poetry
+  - pip install poetry==2.1.2
   - make setup-strict
 
 test:

@@ -5,39 +5,24 @@
         exclude: "template"
       - id: end-of-file-fixer
         exclude: "template"
-  - repo: local
-    hooks:
-      - id: flake8
-        name: flake8
-        exclude: "template"
-        language: system
-        entry: poetry run flake8
-        require_serial: true
-        types: [python]
+
   - repo: local
     hooks:
       - id: black
-        name: black
+        name: Format files with black
         exclude: "template"
         language: system
         entry: poetry run black --preview
         require_serial: true
         types_or: [python, pyi]
-  - repo: local
-    hooks:
-      - id: isort
-        name: isort
+      - id: ruff-lint
+        name: Lint files with ruff
         exclude: "template"
+        entry: poetry run ruff check
         language: system
-        entry: poetry run isort --filter-files
         require_serial: true
-        types_or: [python, pyi, cython]
-  - repo: local
-    hooks:
-      - id: pydocstyle
-        name: pydocstyle
-        exclude: "template"
-        language: system
-        entry: poetry run pydocstyle
-        require_serial: true
-        types_or: [python, pyi]
+        types_or: [python, pyi, jupyter]
+        args:
+          - --fix
+          - --show-fixes
+          - --force-exclude

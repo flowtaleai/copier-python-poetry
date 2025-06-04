@@ -113,7 +113,7 @@ Strict checks:
    Do not provide the `--skip-answered` flag if you want to change some of the original answers.
 
 2. Run `poetry lock` to regenerate the poetry lock file given that the `pyproject.toml` may have been updated
-3. Run `poetry install --sync`  to update the project dependencies
+3. Run `poetry install`  to update the project dependencies
 
 ### Copier parameters
 

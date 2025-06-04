@@ -140,8 +140,8 @@ def test_bake_gitlab_and_unittest(tmp_path, copier):
     assert "poetry run python -m unittest discover" in gitlab_ci_path.read_text()
 
 
-@pytest.mark.slow()
-@pytest.mark.venv()
+@pytest.mark.slow
+@pytest.mark.venv
 def test_bake_and_run_cli(tmp_path, copier):
     custom_answers = {"package_type": "cli"}
     project = copier.copy(tmp_path, **custom_answers)
@@ -150,7 +150,7 @@ def test_bake_and_run_cli(tmp_path, copier):
     project.run("poetry run python_boilerplate")
 
 
-@pytest.mark.venv()
+@pytest.mark.venv
 def test_bake_and_bump_version(tmp_path, copier):
     custom_answers = {"package_type": "cli"}
     project = copier.copy(tmp_path, **custom_answers)
@@ -158,8 +158,8 @@ def test_bake_and_bump_version(tmp_path, copier):
     project.run("poetry run bump2version minor")
 
 
-@pytest.mark.slow()
-@pytest.mark.venv()
+@pytest.mark.slow
+@pytest.mark.venv
 def test_bake_defaults_and_run_pre_commit(tmp_path, copier):
     custom_answers = {"package_type": "cli"}
     project = copier.copy(tmp_path, **custom_answers)
@@ -181,8 +181,8 @@ def test_bake_defaults_and_run_pre_commit(tmp_path, copier):
     project.run("poetry run pre-commit run --all-files")
 
 
-@pytest.mark.slow()
-@pytest.mark.venv()
+@pytest.mark.slow
+@pytest.mark.venv
 def test_make_bump_updates_version_in_selected_files(tmp_path, copier):
     custom_answers = {"package_name": "mypackage"}
     project = copier.copy(tmp_path, **custom_answers)
@@ -323,8 +323,8 @@ def test_bake_with_many_files(tmp_path, copier):
     assert dockerfile_path.exists() is True
 
 
-@pytest.mark.slow()
-@pytest.mark.venv()
+@pytest.mark.slow
+@pytest.mark.venv
 def test_bake_with_many_and_run_pre_commit(tmp_path, copier):
     custom_answers = {
         "use_jupyter_notebooks": True,
@@ -401,8 +401,8 @@ def test_bake_namespaced_package_with_many_files(tmp_path, copier):
     assert dockerfile_path.exists() is True
 
 
-@pytest.mark.slow()
-@pytest.mark.venv()
+@pytest.mark.slow
+@pytest.mark.venv
 def test_bake_namespaced_package_with_many_and_run_pre_commit(tmp_path, copier):
     custom_answers = {
         "package_name": "company.mypackage",
@@ -468,8 +468,8 @@ def test_poetry_version_consistency(tmp_path, copier, git_hosting):
     assert 'poetry:2": { "version": "1.8.3" }' in devcontainer_path.read_text()
 
 
-@pytest.mark.slow()
-@pytest.mark.venv()
+@pytest.mark.slow
+@pytest.mark.venv
 def test_mypy_exclude_respected_in_pre_commit(tmp_path, copier):
     """Test that mypy respects exclude patterns in pyproject.toml.
 

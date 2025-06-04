@@ -16,7 +16,7 @@ def copier_template_paths() -> list[str]:
     return ["copier.yml", "template"]
 
 
-@pytest.fixture()
+@pytest.fixture
 def copier_defaults() -> dict[str, str]:
     """Provides default Copier project configurations.
 

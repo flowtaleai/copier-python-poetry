@@ -1,21 +1,8 @@
 {
-  "notebook.formatOnSave.enabled": true,
-  "notebook.codeActionsOnSave": {
-    "source.organizeImports": "explicit"
-  },
   "black-formatter.importStrategy": "fromEnvironment",
   "black-formatter.args": [
     "--preview"
   ],
-  {% if type_checker == "mypy" %}
-   "mypy.runUsingActiveInterpreter": true ,
-  {% endif %}
-  "isort.importStrategy": "fromEnvironment",
-  "isort.args": [
-    "--profile",
-    "black"
-  ],
-  "flake8.importStrategy": "fromEnvironment",
   "json.format.keepLines": true,
   "autoDocstring.docstringFormat": "google-notypes",
   "[json]": {
@@ -27,5 +14,7 @@
     "editor.formatOnSave": true,
     "editor.codeActionsOnSave": {
       "source.organizeImports": "explicit"
+    }
   },
+  "ruff.importStrategy": "fromEnvironment",
 }

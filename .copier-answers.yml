@@ -1,4 +1,4 @@
-_commit: 1.3.0
+_commit: 2.1.0
 _src_path: git@gitlab.flowtale.ai:flowtale/internal/cookiecutter-python.git
 author_email: mtn@flowtale.ai
 author_name: Flowtale
@@ -9,14 +9,14 @@ git_hosting: gitlab
 ide: vscode
 license: MIT license
 max_line_length: 88
-type_checker: "mypy"
-type_checker_strictness: "gradual"
 package_name: template
 package_type: library
+poetry_version: 2.1.2
 project_name: Copier python template
 project_short_description: Opinionated copier template for python projects
 python_version: '3.10'
 testing_framework: pytest
-use_lint_strict_rules: false
+type_checker: none
 use_jupyter_notebooks: false
+use_lint_strict_rules: false
 version: 2.1.0
