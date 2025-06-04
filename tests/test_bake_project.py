@@ -392,7 +392,6 @@ def test_bake_namespaced_package_with_many_files(tmp_path, copier):
     # Dockerfile
     dockerfile_path = project.path / "Dockerfile"
 
-    print(main_module_example_path)
     assert main_module_example_path.exists() is True
     assert main_module_test_example_path.exists() is True
     assert jupyter_notebook_example_path.exists() is True

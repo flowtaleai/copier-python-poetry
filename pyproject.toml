@@ -1,7 +1,7 @@
 [tool.poetry]
-name = "copier-python-template"
+name = "copier-python-poetry"
 version = "2.1.0"
-description = "Opinionated copier template for python projects"
+description = "Opinionated copier template for python projects using poetry"
 authors = [
   "Ali Cem <ac@flowtale.ai>",
   "Anders Stendevad <as@flowtale.ai>",
@@ -20,7 +20,7 @@ packages = [
 ]
 
 [tool.poetry.dependencies]
-python = "^3.10"
+python = "^3.12"
 tox = "^4.11.3"
 
 [tool.poetry.group.dev.dependencies]
@@ -43,7 +43,7 @@ line-length = 88
 
 [tool.ruff]
 line-length = 88
-target-version = "py310"
+target-version = "py312"
 
 [tool.ruff.lint]
 
@@ -55,6 +55,10 @@ select = [
     "A",  # flake8-builtins,
     "D", # pydocstyle
     "PT", # flake8-pytest-style
+    "T20", # flake8-print
+    "ERA", # eradicate
+    "B", # flake8-bugbear
+    "C90", # maccabe, basic flake8
     "I" # isort
 ]
 ignore = [

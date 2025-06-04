@@ -1,6 +1,6 @@
-# Copier template for python
+# Copier Python Poetry
 
-Opinionated copier template for Flowtale python projects.
+Opinionated copier template for python projects using poetry
 
 ## Features
 
