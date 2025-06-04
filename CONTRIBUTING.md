@@ -299,6 +299,18 @@ make bump
 
 And select the version part to increment (major, minor, or patch).
 
+### VSCode
+
+- Add new extensions and settings in `template/.vscode/{extensions.json,settings.json}` not in devcontainer
+  - In this way they are available both in the devcontainer and in a vscode instance not run using devcontainer
+- Ensure that the tools used by the extensions are loaded from the environment (e.g. black, ruff) and avoid using the bundled versions
+  - In this way we ensure that the same version of the tool is used in all the places (e.g. vscode, make, and pre-commit)
+
+### pre-commit
+
+- For tools that are run in multiple places, not just pre-commit (e.g. black, ruff) use `language: system` instead of pulling a pre-commit repo, and add the dependency in `pyproject.toml`
+  - In this way we ensure that the same version of the tool is used in all the places (e.g. vscode, make, and pre-commit)
+
 ## Template Rationale Documentation
 
 When making significant changes or adding new features to the template, add an entry to the [Rationale](README.md#rationale) section of the README with:
