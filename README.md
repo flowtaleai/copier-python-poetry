@@ -1,5 +1,13 @@
 # Copier Python Poetry
 
+> [!NOTE]
+> **This project is no longer maintained.** Please use the new [copier-python-uv](https://github.com/flowtaleai/copier-python-uv) template instead.
+> 
+> **To migrate existing projects:**
+> 1. Edit your `.copier-answers.yml` file and change the `_src_path` to: `git@github.com:flowtaleai/copier-python-uv.git`
+> 2. Run `copier update`
+> 3. The update works but may require resolving multiple merge conflicts
+
 Opinionated copier template for python projects using poetry
 
 ## Features
